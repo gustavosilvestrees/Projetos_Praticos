@@ -1,0 +1,545 @@
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap');
+
+*{
+  margin: 0px;
+  overflow-x: hidden;
+}
+
+body{
+  font-family: Arial, helvetica, serif, Sans-Serif;
+  display: flex;
+  align-items: center;
+  background-color: black;
+  
+  font-size: 1.2em;
+}
+
+main{
+  width: 100%;
+  min-width: 200px;
+  max-width: 1915px;
+}
+
+.fraseIcon{
+  font-family: "Rowdies", Sans-Serif;
+  font-size: 1.8em;
+  font-style: italic;
+  font-weight: bold;
+  letter-spacing: 5px;
+  display: inline-block;
+  margin: 20px 0px 0px 0px;
+}
+
+@media (max-width: 1200px){
+  .fraseIcon{
+    font-size: 1.5em;
+    margin: 20px 0px 0px 0px;
+  }
+}
+
+@media (max-width: 600px){
+  .fraseIcon{
+    font-size: 1.5em;
+    margin: 20px 0px 0px 0px;
+  }
+}
+
+.fraseLogo{
+  position: absolute;
+  right: 0;
+  color:gray;
+  font-size: 1.2em;
+  font-style: italic;
+  display: inline-block;
+  margin: 25px 400px 0px 0px;
+  word-spacing: 10px;
+}
+
+@media  (max-width:1200px){
+  .fraseLogo{
+    margin: 30px 20px 0px 0px;
+    font-size: 1em;
+    word-spacing: 5px;
+  }
+}
+
+@media (max-width: 600px){
+  .fraseLogo{
+  margin: 35px 15px 0px 0px;
+  font-size: 0.6em;
+  word-spacing: 5px;
+  }
+}
+
+#logo{
+  background-color: black;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  flex-direction: rows;
+  padding-left: 20px;
+}
+
+@media (max-width: 600px){
+    #logo{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-direction: rows;
+    padding-left: 10px;
+}
+}
+
+nav{
+  background-color: red;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: rows;
+  justify-content: center;
+}
+
+@media(max-width:600px){
+  nav{
+    width: 100%;
+    padding-left: 10px;
+  }
+  
+}
+
+.menu{
+  font-family: "Rowdies", Sans-Serif;
+  min-width: 120px;
+  letter-spacing: 1px;
+  font-style: italic;
+  color: white;
+  font-size: 1em;
+  margin: 12px 0px 0px 0px;
+}
+
+#banner{
+  width: 100%;
+  height: 600px;
+  background-color: purple;
+  overflow: hidden;
+}
+
+@media (max-width:600px){
+  #banner{
+    height: 300px;
+  }
+}
+
+#imgbanner{
+  object-fit: cover;
+  width: 100%;
+  height: 600px;
+}
+
+@media (max-width:600px){
+  #imgbanner{
+    height: 300px;
+  }
+}
+
+#containerprincipal{
+/*  background-color: black;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 0px 30px 0px;
+}
+
+@media (max-width:1000px){
+  #containerprincipal{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+p{
+  color:white;
+}
+
+.textocentro{
+  font-size: 1.4em;
+  text-align: center;
+  margin: 70px 0px 20px 0px;
+}
+
+
+
+@media (max-width:600px){
+.textocentro{
+  text-align: center;
+  font-size: 0.8em;
+  margin: 50px 0px 0px 0px;
+}
+}
+
+.planos{
+  background-color: #242424;
+  width: 350px;
+  height: 500px;
+  border-radius: 10px;
+  margin: 50px 10px 0px 10px;
+  min-height: 300px;
+  border: 2px solid #848484;
+  padding: 10px;
+  color: whitesmoke;
+}
+
+.planos:hover{
+  border: 2px solid red;
+  transition: all 0.1s ease-out;
+}
+
+@media (max-width: 600px){
+  .planos{
+    width: 300px;
+ }
+}
+
+.tituloP{
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.descricaoP{
+  font-size: 1em;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.preco{
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.preco1{
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  margin-top: 19px;
+}
+
+.preco2{
+  margin-bottom: 10px;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.preco3{
+  margin-bottom: 20px;
+}
+
+.fidelidadePlano{
+  margin-left: 20px;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+.botaoPlano{
+  height:50px;
+  margin: auto;
+  color: black;
+  background-color: orange;
+  border-radius: 50px;
+  border: 1px solid darkorange;
+  font-size: 0.8em;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding-left: 60px;
+  padding-right: 60px;
+  margin-bottom: 10px;
+}
+
+.botaoPlano:hover{
+  border: 1px solid rgba(255, 85, 0, 0.659);
+  color: white;
+  transition: all 0.1s ease-out;
+}
+
+#container2{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+
+
+
+
+#ofertasPrincipal{
+  display:flex;
+  flex-direction: rows;
+  background-color: blue;
+  padding-left: 10%;
+}
+
+@media(max-width: 600px){
+  #ofertasPrincipal{
+  background-color: gray;
+  padding-left: 0px;
+  
+  }
+}
+
+.caixaEsquerda{
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+
+  overflow: hidden
+  
+}
+
+@media(max-width: 600px){
+  .caixaEsquerda{
+    margin-right: 30px;
+    margin:auto;
+    
+  }
+}
+
+.caixaDireita{
+  display:flex;
+  flex-direction: column;
+  
+}
+
+
+
+.produtoImg{
+  width: 500px;
+  height: 500px;
+  margin: 0px 50px 30px 30px;
+  overflow: hidden;
+  
+}
+
+
+
+@media (max-width: 600px){
+  .produtoImg{
+    width: 170px;
+    height: 150px;
+    margin: 30px 0px 0px 0px;
+  }
+}
+
+.tamanhoImg{
+  width: 600px;
+  height: 500px;
+}
+
+@media (max-width: 600px){
+  .tamanhoImg{
+  width: 170px;
+  height: 150px;
+  }
+}
+
+.legendaImg{
+  display: flex;
+  flex-direction: column;
+  width:450px ;
+  height: 180px;
+  margin: 0px 0px 30px 70px;
+  font-size: 1.4em;
+  text-align: center;
+  overflow: hidden;
+  background-color: pink;
+  
+}
+
+@media (max-width: 600px){
+  .legendaImg{
+    width:150px;
+    height: 80px;
+    text-align: center;
+    font-size: 0.5em;
+    margin-top: 10px;
+    margin-left: 8%;
+    letter-spacing: 1px;
+  }
+}
+
+footer{
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  width: 100%;
+  color: black;
+}
+
+.colecao{
+  display: flex;
+  flex-direction: rows;
+}
+
+.certificado{
+  float: left;
+  width: 178px;
+  height: 180px;
+  background-color: orange;
+  border: 1px solid white;
+  flex-direction: rows;
+}
+
+.notaSite{
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 80%;
+  border-radius: 8px;
+  margin: auto;
+  padding: 3px;
+  color: black;
+  margin-top: 30px;
+  border: 1px solid silver;
+  
+  
+}
+
+.alinhamentoN{
+  display: flex;
+  flex-direction: rows;
+  
+  
+}
+
+.notaFont1{
+  color: black;
+  font-size: 0.8em;
+  display: block;
+  margin: 20px 0px 0px 20px;
+  
+}
+
+.notaFont2{
+  color: black;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-right: 5px;
+  margin-top: 10px;
+  
+}
+
+ #star{
+   margin-top: 10px;
+   margin-left: 5px;
+   margin-right: 10px;
+ }
+
+.alinhamentoN{
+  flex-direction: rows;
+}
+
+
+#selo{
+  width: 50px;
+  height: 50px;
+  display: inline;
+  margin-bottom: 10px;
+}
+
+.formas{
+  display: flex;
+  flex-direction: rows;
+  width: 90%;
+  background-color:  whitesmoke;
+  border-radius: 10px;
+  border: 1px solid silver;
+  padding: 10px 10px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  color: black;
+  
+}
+
+.formasFont{
+  color: black;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+.formaFont2{
+  color: black;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.icon{
+  background-color: pink;
+  width: 35px;
+  height: 30px;
+  margin-left: 5px;
+  margin-right: 5px;
+  
+  
+}
+
+#Telefone{
+  display: flex;
+  flex-direction: rows;
+  width: 90%;
+  background-color:  whitesmoke;
+  border-radius: 8px;
+  border: 1px solid silver;
+  padding: 10px 10px;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+}
+
+#Email{
+  display: flex;
+  flex-direction: rows;
+  width: 90%;
+  background-color:  whitesmoke;
+  border-radius: 8px;
+  border: 1px solid silver;
+  padding: 10px 10px;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+}
+
+#empresaEnde{
+  display: flex;
+  flex-direction: rows;
+  width: 90%;
+  background-color:  whitesmoke;
+  border-radius: 8px;
+  border: 1px solid silver;
+  padding: 10px 10px;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+  font-size: 0.8em;
+}
+
+
+@media (max-width: 600px){
+  footer{
+    
+  }
+}
