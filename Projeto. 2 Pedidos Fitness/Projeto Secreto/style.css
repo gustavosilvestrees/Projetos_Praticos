@@ -1,3 +1,5 @@
+/* CONFIGURAÇÕES GLOBAIS */
+
 @charset "utf-8";
 
 @import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap');
@@ -15,6 +17,8 @@ body{
   
   font-size: 1.2em;
 }
+
+/* LOGOS INICIAIS */
 
 main{
   width: 100%;
@@ -92,6 +96,8 @@ main{
 }
 }
 
+/* MENU */
+
 nav{
   background-color: red;
   width: 100%;
@@ -119,6 +125,8 @@ nav{
   margin: 12px 0px 0px 0px;
 }
 
+/* IMG GRANDE */
+
 #banner{
   width: 100%;
   height: 600px;
@@ -144,8 +152,9 @@ nav{
   }
 }
 
+/* BANNER */
+
 #containerprincipal{
-/*  background-color: black;*/
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,7 +163,6 @@ nav{
 
 @media (max-width:1000px){
   #containerprincipal{
-    display: flex;
     flex-direction: column;
   }
 }
@@ -178,6 +186,8 @@ p{
   margin: 50px 0px 0px 0px;
 }
 }
+
+/* PLANOS */
 
 .planos{
   background-color: #242424;
@@ -277,13 +287,15 @@ p{
 
 
 
-
+/* OFERTAS E ANUNCIOS */
 
 
 #ofertasPrincipal{
   display:flex;
   flex-direction: rows;
-  background-color: blue;
+  background-image: url('suplementosbgblur.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   padding-left: 10%;
 }
 
@@ -359,7 +371,7 @@ p{
   font-size: 1.4em;
   text-align: center;
   overflow: hidden;
-  background-color: pink;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.375);
   
 }
 
@@ -375,6 +387,8 @@ p{
   }
 }
 
+/* CONTATOS E LINKS */
+
 footer{
   display: flex;
   flex-direction: column;
@@ -383,19 +397,180 @@ footer{
   color: black;
 }
 
-.colecao{
+
+
+#entreContato{
+  background-color: #484547;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+}
+
+#alinhamentoCon1{
   display: flex;
+  padding: 10px;
+  justify-content: center;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.601);
+  margin-bottom: 10px;
+}
+
+#xzinho{
+  position: absolute;
+  left: 95%;
+  color: black;
+  background-color: darkorange;
+  width: 30px;
+  height: 25px;
+  text-align: center;
+  border-radius: 20%;
+  font-weight: bold;
+  border: 1px solid rgba(120, 66, 0, 0.719);
+}
+
+@media (max-width: 800px){
+  #xzinho{
+    width: 25px;
+    height: 20px;
+    font-size: 14px;
+    padding-top: 2px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 600px){
+  #xzinho{
+    width: 18px;
+    height: 17px;
+    font-size: 12px;
+    padding-top: 1px;
+    overflow: hidden;
+  }
+}
+
+#alinhamentoCon2{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+#textBox{
+  width: 700px;
+  height: 30px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 1em;
+  border: 2px solid rgba(219, 212, 212, 0.686);
+  margin: 0px 0px 10px 0px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.453);
+}
+
+@media (max-width: 800px){
+  #textBox{
+    width: 500px;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 600px){
+  #textBox{
+    width: 350px;
+    font-size: 0.9em;
+  }
+}
+
+#textButton{
+  width: 705px;
+  height: 35px;
+  color: white;
+  background-color: rgb(255, 179, 0);
+  text-align: center;
+  border-radius: 5px;
+  font-size: 1em;
+  font-weight: bold;
+  border: 2px solid rgba(248, 121, 1, 0.83);
+  margin: 0px 0px 10px 0px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.453);
+}
+
+#textButton:active{
+  background-color: rgb(254, 205, 91);
+  border: 2px solid rgba(247, 143, 46, 0.83);
+}
+
+@media (max-width: 800px){
+  #textButton{
+    width: 505px;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 600px){
+  #textButton{
+    width: 355px;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 600px){
+
+}
+
+
+
+/* CERTIFICADO */
+
+
+#colecao{
+  background-color: white;
   flex-direction: rows;
+  padding-bottom: 30px;
 }
 
 .certificado{
   float: left;
-  width: 178px;
-  height: 180px;
-  background-color: orange;
-  border: 1px solid white;
+  width: 200px;
+  height: 200px;
   flex-direction: rows;
+  padding: 5px;
+  margin: 20px 0px 0px 35px;
+  overflow: hidden;
+  background-color: rgb(228, 228, 228);
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.373);
+  border: 1px solid rgba(178, 173, 173, 0.475);
 }
+
+@media (max-width: 500px){
+  .certificado{
+    width: 100px;
+    height: 100px;
+    margin: 20px 0px 0px 30px;
+  }
+}
+
+@media (max-width: 650px){
+  .certificado{
+    margin: 20px 0px 0px 0px;
+  }
+}
+
+@media (max-width: 760px){
+  .certificado{
+    margin: 30px 0px 0px 35px;
+  }
+}
+
+@media (max-width: 500px){
+  .imgcertificado{
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* NOTA DO SITE */
 
 .notaSite{
   background-color: whitesmoke;
@@ -409,8 +584,7 @@ footer{
   color: black;
   margin-top: 30px;
   border: 1px solid silver;
-  
-  
+  margin-bottom: 30px;
 }
 
 .alinhamentoN{
@@ -430,7 +604,7 @@ footer{
 
 .notaFont2{
   color: black;
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: bold;
   margin-left: 20px;
   margin-right: 5px;
@@ -438,11 +612,23 @@ footer{
   
 }
 
+@media (max-width: 800px){
+  .notaFont2{
+    font-size: 1.5em;
+  }
+}
+
  #star{
    margin-top: 10px;
    margin-left: 5px;
    margin-right: 10px;
  }
+
+ @media (max-width: 800px){
+  #star{
+    ;
+  }
+}
 
 .alinhamentoN{
   flex-direction: rows;
@@ -456,85 +642,121 @@ footer{
   margin-bottom: 10px;
 }
 
-.formas{
+/* REDES ENDERECO E CONTATO */
+
+#infoContato{
+  background-color: whitesmoke;
+  width: 95%;
   display: flex;
-  flex-direction: rows;
-  width: 90%;
-  background-color:  whitesmoke;
-  border-radius: 10px;
-  border: 1px solid silver;
-  padding: 10px 10px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  color: black;
-  
+  flex-direction: column;
+  border-radius: 8px;
+  margin: auto;
+}
+
+.formas{
+  width: 100%;
+  padding: 20px;
+  margin-left: 10%;
+}
+
+.barraCinza{
+  margin-right: auto;
+  margin-left: auto;
+  background-color: rgba(128, 128, 128, 0.358);
+  width: 60%;
+  height: 3px;
+  border-radius: 50px;
 }
 
 .formasFont{
-  color: black;
-  font-size: 0.8em;
-  font-weight: bold;
 }
 .formaFont2{
-  color: black;
-  font-size: 0.8em;
-  font-weight: bold;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  display: flex;
+  flex-direction: rows;
+  color: rgba(0, 0, 0, 0.805);
+  font-size: 1.2em;
+  margin-right: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#alinhamentoIcon{
+  display: flex;
+  flex-direction: row;
+  margin-left: 20%;
+}
+
+.icon0{
+  display: flex;
+  background-color: rgb(221, 220, 220);
+  color: white;
+  width: 55px;
+  height: 45px;
+  font-size: 26px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 5px;
+  padding: 2px;
+  overflow: hidden;
+  border: 1px solid #8484842d;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.434);
 }
 
 .icon{
-  background-color: pink;
-  width: 35px;
-  height: 30px;
-  margin-left: 5px;
+  display: flex;
+  background-color: red;
+  color: white;
+  width: 45px;
+  height: 40px;
+  font-size: 26px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
   margin-right: 5px;
-  
-  
+  padding: 2px;
+  box-shadow: 1px 1px 5px rgba(250, 19, 19, 0.77);
 }
 
-#Telefone{
+.icon2{
   display: flex;
-  flex-direction: rows;
-  width: 90%;
-  background-color:  whitesmoke;
-  border-radius: 8px;
-  border: 1px solid silver;
-  padding: 10px 10px;
+  background-color: red;
+  color: white;
+  width: 45px;
+  height: 40px;
+  font-size: 26px;
+  border-radius: 10px;
+  justify-content: center;
   align-items: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
   margin-left: 10px;
+  margin-right: 20px;
+  padding: 2px;
+  box-shadow: 1px 1px 5px rgba(250, 19, 19, 0.77);
+}
+
+ .icon2:hover{
+  background-color: blue;
+  box-shadow: 1px 1px 5px rgba(18, 5, 142, 0.77);
+}
+
+ .icon:hover{
+  background-color: blue;
+  box-shadow: 1px 1px 5px rgba(18, 5, 142, 0.77);
+}
+
+
+
+
+#Telefone{
 }
 
 #Email{
-  display: flex;
-  flex-direction: rows;
-  width: 90%;
-  background-color:  whitesmoke;
-  border-radius: 8px;
-  border: 1px solid silver;
-  padding: 10px 10px;
-  align-items: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  margin-left: 10px;
 }
 
 #empresaEnde{
-  display: flex;
-  flex-direction: rows;
-  width: 90%;
-  background-color:  whitesmoke;
-  border-radius: 8px;
-  border: 1px solid silver;
-  padding: 10px 10px;
-  align-items: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  margin-left: 10px;
-  font-size: 0.8em;
 }
 
 
