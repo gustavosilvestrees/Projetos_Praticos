@@ -1,14 +1,27 @@
-/*function menuShow(){
-    let menuMobile = document.querySelector('menuMobile') // Cria uma variavel que vai receber nossa classe .mobileMenu
+var radio = document.querySelector('.manual-btn')
+var cont = 1
 
-    if(menuMobile.classList.contains('open')){ //Vai checar se o conteúdo armazenado na nossa let menuMobile tem contem o elemento CSS .open, ele checa isso atraves do classList e usa o atributo contains() que checa se open está dentro do mobileMenu
-        menuMobile.classList.remove('open') // Se der verdadeiro o Open será removido do menuMobile
-        document.querySelector('.mobileMenuIcon').src = "icones/menu.svg"
-    } else {
-        menuMobile.classList.add('open') // Se der falso vai add Open dentro do menuMobile
-        document.querySelector('.mobileMenuIcon').src = "icones/close.svg"
-    } //
-}*/
+document.getElementById('radio1').checked = true        // Informo que o radio1 ou input1 esta checado(checked) vai estar marcado de inicio
+
+setInterval(() => {                                    // Crio uma arrow function que vai chamar outra function proximaImg()
+    proximaImg()
+}, 5000)                                // Estou chamando a função que criei proximaImg() e defino que ela vai ser chamada em um intervalo(setInterval) de 5 segs (5000)
+
+function proximaImg(){
+    cont++                                           // Cada vez que a função for chamada o cont ganha +1
+
+    if(cont > 3){ //Se o cont for maior(>) que 3 o contador volta a ser 1
+        cont = 1
+    }
+
+    document.getElementById('radio'+cont).checked = true // O valor do cont se junta ao valor do radio isso faz o radio se movimentar automaticamente
+}
+
+
+
+
+
+// Menu Mobile
 
 const janela = document.querySelector('.menuMobile')
 const botao = document.querySelector('.mobileMenuIcon')

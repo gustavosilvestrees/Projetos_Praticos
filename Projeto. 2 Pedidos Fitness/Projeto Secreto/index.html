@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Fit Club</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="slider.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
@@ -59,14 +60,45 @@
                 </div>
         </header>
 
+        <!-- SLIDER -->
+        
+        <section class="slider"> <!-- FAZ A COMUNICAÇÃO ENTRE CSS E O JAVASCRIPT-->
+          <div class="sliderContent">
+            <input type="radio" name="btn-radio" id="radio1">
+            <input type="radio" name="btn-radio" id="radio2">
+            <input type="radio" name="btn-radio" id="radio3">
 
-        <!--<nav>
-          <div class="menu">Produto 1</div>
-          <div class="menu">Produto 2</div>
-          <div class="menu">Produto 3</div>
-        </nav> -->
+            <div class="slide-box primeiro"> <!-- Essa div tem 2 classes SLIDE-BOX e PRIMEIRO-->
+              <div class="fotoDesktop1 desktop"></div>
+              <div class="fotoMobile1 mobal"></div>
+            </div>
 
-        <div id="banner2"></div>
+            <div class="slide-box"> 
+              <div class="fotoDesktop2 desktop"></div>
+              <div class="fotoMobile2 mobal"></div>
+            </div>
+
+            <div class="slide-box">
+              <div class="fotoDesktop3 desktop"></div>
+              <div class="fotoMobile3 mobal"></div>
+            </div>
+
+            <div class="navAuto"><!-- Navegação Automática onde os radios vão mudar automaticamente -->
+              <div class="auto-btn1"></div>
+              <div class="auto-btn2"></div>
+              <div class="auto-btn3"></div>
+            </div>
+
+            <div class="navManual"> <!-- Navegação Manual onde o usuário vai clicar nos radios-->
+              <label for="radio1" class="manual-btn"></label>
+              <label for="radio2" class="manual-btn"></label>
+              <label for="radio3" class="manual-btn"></label> <!-- Os labels fazem referencia entre os inputs e apontam para eles que são os botoes radios -->
+            </div>
+
+          </div>
+        </section>
+
+
         
         
         <p class="textocentro">Escolha um dos nossos planos e turbine o seu shape!</p>
@@ -224,7 +256,7 @@
         </footer>
       </main>
   </body>
-  <script src="script.js"></script>
+  <script src="script.js" defer></script> <!-- O defer carrega o arquivo JavaScript somente quando o site for completamente carregado ele carrega o JavaScript depois que todo o HTML e CSS carregar-->
 </html>
 
 <!--
