@@ -13,39 +13,41 @@
 
 
 .fotoDesktop1{
-  background-image: url(slider/1Academia.png);
+  background-image: url(slider/2Academia.png);
   width: 1800px;
   height: 600px;
   box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.489);
+  
 
 }
 
 .fotoMobile1{
   width: 1040px;
   height: 600px;
-  background-image: url(slider/1AcademiaMobile.png);
+  background-image: url(slider/2AcademiaMobile.png);
   box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.489);
 }
 
 .fotoDesktop2{
-  background-image: url(slider/2Esteira.png);
+  background-image: url(slider/3Esteira.png);
   width: 1800px;
   height: 600px;
   box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.489);
+
 
 }
 
 .fotoMobile2{
   width: 1040px;
   height: 600px;
-  background-image: url(slider/2EsteiraMobile.png);
+  background-image: url(slider/3EsteiraMobile.png);
   box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.489);
 }
 
 
 
 .fotoDesktop3{
-  background-image: url(slider/3Funcional.png);
+  background-image: url(slider/4Funcional.png);
   width: 1800px;
   height: 600px;
   box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.489);
@@ -55,7 +57,7 @@
 .fotoMobile3{
   width: 1040px;
   height: 600px;
-  background-image: url(slider/3FuncionalMobile.png);
+  background-image: url(slider/4FuncionalMobile.png);
   box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.489);
 }
 
@@ -75,6 +77,7 @@ section.slider{
 
 .sliderContent input, .mobal{
     display: none;
+    
 }
 
 .slide-box{
@@ -83,6 +86,7 @@ section.slider{
     position: relative;
     justify-content: center;
     transition: 1s;
+    
 }
 
 .mobal{
@@ -100,6 +104,7 @@ section.slider{
     justify-content: center;
     margin-top: 40%;
     padding: 5px 0px;
+    
 }
 
 .navManual .manual-btn, .navAuto div{
@@ -139,23 +144,19 @@ section.slider{
 }
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
   .desktop{
     display: none;
   }
 
   .mobal{
     display: block;
+    
   }
-  
-  .navManual, .navAuto {
-    margin-top: 100%;
 
-  }
   
 }
 
 
 
-
-/* Tenho de corrigir a navegação automatica */
+/* Textox */

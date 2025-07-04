@@ -38,3 +38,32 @@ let isVisible = false
      isVisible = true
 }  
     });
+
+
+
+    // Close
+        document.getElementById('xzinho').addEventListener('click', function close(){
+            document.getElementById('entreContato').style.display = 'none';
+            document.getElementById('xzinho').style.display = 'none';
+        })
+
+
+  //Blink no title
+
+let tit = document.getElementById('tituloPersonalizado')
+let alerta = false
+const frase1 = 'Fit Club'
+const frase2 = 'Hey! Continue sua compra no nosso site!'
+
+let intervalo = setInterval(function(){
+        tit.innerHTML = alerta ? frase1 : frase2
+        alerta = !alerta
+    }, 2000);
+
+
+
+  
+
+
+ 
+
