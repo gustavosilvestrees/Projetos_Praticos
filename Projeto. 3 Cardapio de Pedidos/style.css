@@ -1,0 +1,133 @@
+* {
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: sans-serif;
+}
+
+.superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: rgb(218, 1, 1);
+}
+
+.superior .esquerda {
+  display: flex;
+  align-items: center;
+}
+
+.superior .logo {
+    width: auto;
+    background-color: lightblue;
+    padding: 5px;
+}
+
+.superior .pesquisa {
+    width: 150px; /* Reduzindo a largura da barra de pesquisa */
+    padding: 5px;
+    margin-left: 10px; /* Adicionando espaço entre a logo e a barra */
+    margin-right: 10px; /* Adicionando espaço entre a barra e o botão */
+}
+
+.superior .pesquisa input {
+    width: 100%;
+    padding: 5px;
+}
+
+.superior .compartilhar {
+    width: auto;
+    background-color: lightgreen;
+    padding: 5px;
+}
+
+.principal {
+    max-width: 1000px;
+    min-width: 400px;
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+.banner-container{
+  text-align: center;
+}
+
+.banner {
+    max-width: 90%;
+    margin-bottom: 20px;
+}
+
+.banner img {
+    max-width: 100%;
+}
+
+.navegacao {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: lightcoral;
+    padding: 10px;
+}
+
+.navegacao .simbolo {
+    width: auto;
+    border-radius: 10px;
+    background-color: lightsalmon;
+    padding: 5px;
+}
+
+.navegacao .nome {
+    width: auto;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.navegacao .estrelas {
+    width: auto;
+    margin-left: auto;
+}
+
+.cardapio {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.cardapio .item {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 48%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.cardapio .item .imagem {
+    background-color: rgb(238, 146, 16);
+    text-align: center;
+    padding: 10px;
+}
+
+.cardapio .item .texto {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.inferior {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f0f0f0;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+}
+
+.inferior .botao {
+    width: auto;
+    padding: 5px 10px;
+}
