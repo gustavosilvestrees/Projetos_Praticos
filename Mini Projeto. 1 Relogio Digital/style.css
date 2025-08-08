@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(129, 252, 252);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+.relogio{
+
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.display{
+    background-color: blue; /* Por background color e imagem de frutiger aero */
+  
+    width: 450px;
+    height: 210px;
+    text-align: center;
+    line-height: 200px;
+    border-radius: 10px;
+    color: black;
+    font-size: 7em;
+
+}
+
+footer{
+    font-size: 1.5em;
+    margin-top: 10px;
+    color: #333;
+}
