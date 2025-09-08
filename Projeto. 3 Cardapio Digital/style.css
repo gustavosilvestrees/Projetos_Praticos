@@ -301,6 +301,19 @@ body {
     border-radius: 3px;
     padding: 10px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.295);
+    transition: 0.5s;
+}
+
+
+.cardapio .item:hover{
+    transform: scale(1.02);
+    transition: all 0.5s;
+}
+
+.cardapio .item:active{
+    background-color: rgba(207, 206, 206, 0.592);
+    transform: scale(0.98);
+    transition: all 0.1s;
 }
 
 @media screen and (max-width: 980px) {
@@ -335,6 +348,7 @@ body {
     max-height: 100%;
     border-radius: 5px;
 }
+
 
 
 /* Menu Inferior */

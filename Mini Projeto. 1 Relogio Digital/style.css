@@ -5,11 +5,27 @@ html, body{
     padding: 0;
     background-color: rgb(129, 252, 252);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url(over-50-frutiger-aero-wallpapers-2008ify-your-pc-v0-sokqnpc2nz9b1.jpg);
     
 }
 
-.relogio{
+#browser{
+    display: flex;
+    backdrop-filter: blue(10px);
+    background: radial-gradient(circle, rgba(41, 194, 255, 0.322) 0%, rgba(121, 232, 247, 0.255) 22%, rgba(114, 244, 177, 0.244) 39%, rgba(113, 245, 168, 0.237) 41%, rgba(130, 255, 182, 0.252) 73%, rgba(252, 252, 252, 0.366) 99%, rgba(252, 252, 252, 0.262) 100%);
+    width: 32%;
+    height: 40%;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.512);
 
+}
+
+.relogio{
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -18,8 +34,11 @@ html, body{
 }
 
 .display{
-    background-color: blue; /* Por background color e imagem de frutiger aero */
-  
+    background-color: transparent; /* Por background color e imagem de frutiger aero */
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(245, 245, 245, 0.641);
+    border-radius: 5px;
+
     width: 450px;
     height: 210px;
     text-align: center;
