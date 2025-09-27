@@ -21,16 +21,26 @@ body {
 
 /* HEADER SUPERIOR */
 .superior {
-    display: flex; /* */
-    justify-content: space-between; /* */
-    align-items: center; /* */
-    padding: 10px; /* */
-    background-color: rgb(218, 1, 1); /* */
-    flex-wrap: nowrap; /* */
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave para o header */
-    z-index: 100; /* Garante que o header fique acima de outros conteúdos */
-    position: sticky; /* Faz o header ficar fixo ao rolar */
-    top: 0; /* Fixa no topo */
+    display: flex;
+    /* */
+    justify-content: space-between;
+    /* */
+    align-items: center;
+    /* */
+    padding: 10px;
+    /* */
+    background-color: rgb(218, 1, 1);
+    /* */
+    flex-wrap: nowrap;
+    /* */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    /* Sombra suave para o header */
+    z-index: 100;
+    /* Garante que o header fique acima de outros conteúdos */
+    position: sticky;
+    /* Faz o header ficar fixo ao rolar */
+    top: 0;
+    /* Fixa no topo */
 
 }
 
@@ -41,38 +51,49 @@ body {
 }
 
 .superior .logo {
-    width: 80px; 
+    width: 80px;
     height: 80px;
     border-radius: 50%;
     background-color: lightblue;
     background-image: url('trattoriapizzeria.png');
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center; 
+    background-position: center;
     padding: 5px;
-    margin-right: 15px; /* Ajusta a margem para o nome do restaurante */
-    margin-left: 10px; /* Mantém o alinhamento com a borda */
+    margin-right: 15px;
+    /* Ajusta a margem para o nome do restaurante */
+    margin-left: 10px;
+    /* Mantém o alinhamento com a borda */
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.355);
-    flex-shrink: 0; /* Garante que o logo não encolha */
+    flex-shrink: 0;
+    /* Garante que o logo não encolha */
 }
 
 .nome-restaurante-header {
-    width: auto; /* Deixa a largura se ajustar ao conteúdo */
+    width: auto;
+    /* Deixa a largura se ajustar ao conteúdo */
     color: white;
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.467);
     font-weight: bold;
     font-size: 1.2em;
-    margin-right: auto; /* Empurra a pesquisa e compartilhar para a direita */
+    margin-right: auto;
+    /* Empurra a pesquisa e compartilhar para a direita */
     padding: 0 5px;
-    white-space: nowrap; /* Impede que o texto quebre linha */
-    flex-shrink: 0; /* Garante que o nome não encolha */
+    white-space: nowrap;
+    /* Impede que o texto quebre linha */
+    flex-shrink: 0;
+    /* Garante que o nome não encolha */
 }
 
 .superior .pesquisa {
-    width: auto; /* Permite que a largura seja flexível */
-    flex-grow: 1; /* Permite que a pesquisa ocupe o espaço restante */
-    flex-shrink: 1; /* Permite que ela encolha */
-    max-width: 400px; /* Limita a largura máxima em telas grandes */
+    width: auto;
+    /* Permite que a largura seja flexível */
+    flex-grow: 1;
+    /* Permite que a pesquisa ocupe o espaço restante */
+    flex-shrink: 1;
+    /* Permite que ela encolha */
+    max-width: 400px;
+    /* Limita a largura máxima em telas grandes */
     padding: 5px;
     margin-left: 10px;
     margin-right: 10px;
@@ -97,9 +118,12 @@ body {
     color: whitesmoke;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.448);
     padding: 5px;
-    margin-right: 10px; /* Alinha com a borda direita */
-    flex-shrink: 0; /* Garante que o ícone não encolha */
-    white-space: nowrap; /* Impede que o conteúdo do compartilhar quebre */
+    margin-right: 10px;
+    /* Alinha com a borda direita */
+    flex-shrink: 0;
+    /* Garante que o ícone não encolha */
+    white-space: nowrap;
+    /* Impede que o conteúdo do compartilhar quebre */
 }
 
 /* MEDIA QUERIES PARA O HEADER */
@@ -107,72 +131,85 @@ body {
 /* Para telas até 800px (tablets e menores) */
 @media screen and (max-width: 800px) {
     .superior {
-        padding: 8px; /* Ajusta o padding do header */
+        padding: 8px;
+        /* Ajusta o padding do header */
         box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.458);
     }
 
     .superior .logo {
-        width: 70px; /* Reduz o logo um pouco */
+        width: 70px;
+        /* Reduz o logo um pouco */
         height: 70px;
         margin-right: 10px;
     }
 
     .nome-restaurante-header {
-        font-size: 1.1em; /* Reduz o tamanho da fonte */
+        font-size: 1.1em;
+        /* Reduz o tamanho da fonte */
         padding: 0 3px;
     }
 
     .superior .pesquisa {
-        max-width: 250px; /* Limita a largura da pesquisa para tablet */
+        max-width: 250px;
+        /* Limita a largura da pesquisa para tablet */
         margin-left: 8px;
         margin-right: 8px;
     }
 
     .superior .pesquisa input {
-        padding: 10px; /* Reduz o padding do input */
+        padding: 10px;
+        /* Reduz o padding do input */
     }
 
     .superior .compartilhar {
-        font-size: 1.8em; /* Reduz o tamanho do ícone */
+        font-size: 1.8em;
+        /* Reduz o tamanho do ícone */
         margin-right: 8px;
     }
 }
 
-    .compartilhar:hover{
-        color:white;
-    }
+.compartilhar:hover {
+    color: white;
+}
 
 
 /* Para telas até 520px (smartphones e menores) */
 @media screen and (max-width: 520px) {
     .superior {
-        padding: 5px; /* Mais ajuste no padding do header */
+        padding: 5px;
+        /* Mais ajuste no padding do header */
     }
 
     .superior .logo {
-        width: 50px; /* Logo menor */
+        width: 50px;
+        /* Logo menor */
         height: 50px;
         margin-right: 8px;
     }
 
     .nome-restaurante-header {
-        font-size: 0.9em; /* Fonte ainda menor */
+        font-size: 0.9em;
+        /* Fonte ainda menor */
         padding: 0 2px;
     }
 
     .superior .pesquisa {
-        max-width: 120px; /* Limita bem a largura da pesquisa */
+        max-width: 120px;
+        /* Limita bem a largura da pesquisa */
         margin-left: 5px;
         margin-right: 5px;
     }
 
     .superior .pesquisa input {
-        padding: 8px; /* Padding mínimo no input */
-        font-size: 0.8em; /* Fonte do placeholder menor */
+        padding: 8px;
+        /* Padding mínimo no input */
+        font-size: 0.8em;
+        /* Fonte do placeholder menor */
     }
 
     .superior .compartilhar {
-        font-size: 1.4em; /* Ícone bem menor */
+        font-size: 1.4em;
+        /* Ícone bem menor */
         margin-right: 5px;
     }
 
@@ -184,7 +221,8 @@ body {
 
 .principal {
     max-width: 1500px;
-    min-width: 400px; /* Certifique-se que o conteúdo mínimo ainda caiba aqui */
+    min-width: 400px;
+    /* Certifique-se que o conteúdo mínimo ainda caiba aqui */
     margin-top: 20px;
     margin-bottom: 110px;
     padding: 0 10px;
@@ -193,8 +231,10 @@ body {
 }
 
 .principal-sacola {
-    max-width: 800px; /* Largura ideal para a sacola */
-    margin: 20px auto 100px auto; /* Centraliza e adiciona margem inferior para o footer */
+    max-width: 800px;
+    /* Largura ideal para a sacola */
+    margin: 20px auto 100px auto;
+    /* Centraliza e adiciona margem inferior para o footer */
     padding: 20px;
     background-color: #f8f8f8;
     border-radius: 8px;
@@ -203,21 +243,47 @@ body {
 
 .banner-com-navegacao {
     position: relative;
-    max-width: 90%; /* Continua ajustável em relação ao principal */
+    max-width: 90%;
+    /* Continua ajustável em relação ao principal */
     margin: 20px auto;
     overflow: hidden;
     /* Adicione uma altura mínima para evitar que a div encolha demais */
-    min-height: 150px; /* Ajuste conforme necessário para garantir que o overlay sempre tenha espaço */
+    min-height: 150px;
+    /* Ajuste conforme necessário para garantir que o overlay sempre tenha espaço */
 }
 
 .banner-img {
     width: 100%;
-    height: 250px; /* Altura fixa para o banner */
+    height: 250px;
+    /* Altura fixa para o banner */
     display: block;
-    object-fit: cover; /* Recorta a imagem para preencher o container */
-    object-position: center center; /* Tenta manter o centro da imagem (onde a logo deve estar) visível */
+    object-fit: cover;
+    /* Recorta a imagem para preencher o container */
+    object-position: center center;
+    /* Tenta manter o centro da imagem (onde a logo deve estar) visível */
     /* Você pode ajustar o object-position para 'top center', 'bottom center', etc.,
        dependendo de onde sua logo está na imagem 'banner_lojaF3.png' */
+}
+
+#bannerTratoria{
+    width: 100%;
+    height: 250px;
+    /* Altura fixa para o banner */
+    display: block;
+    /* Recorta a imagem para preencher o container */
+    background-image: url('bannerG.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    /* Tenta manter o centro da imagem (onde a logo deve estar) visível */
+    /* Você pode ajustar o object-position para 'top center', 'bottom center', etc.,
+       dependendo de onde sua logo está na imagem 'banner_lojaF3.png' */
+}
+
+@media screen and (max-width: 600px) {
+    #bannerTratoria{
+        background-image: url('bannerM.png');
+    }
 }
 
 .navegacao-overlay {
@@ -234,10 +300,11 @@ body {
 }
 
 .navegacao-overlay .simbolo {
-    width: auto;
-    border-radius: 10px;
-    background-color: lightsalmon;
-    padding: 5px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: rgb(255, 255, 255);
+    padding: 2px;
 }
 
 .navegacao-overlay .nome {
@@ -254,19 +321,22 @@ body {
 
 /* CARDÁPIO - Ajustes de texto e remoção de background */
 
-.strongRed{
+.strongRed {
     font-weight: 700;
     color: var(--marromavermelhado);
 }
+
 .cardapio .item .texto {
-    text-align: left; /* ALINHA O TEXTO À ESQUERDA */
+    text-align: left;
+    /* ALINHA O TEXTO À ESQUERDA */
     /* background-color: green; /* REMOVIDO */
 }
 
 .cardapio .item p {
     padding: 3px;
     height: 50%;
-    font-weight: bold; /* ADICIONA NEGRITO AO PARÁGRAFO */
+    font-weight: bold;
+    /* ADICIONA NEGRITO AO PARÁGRAFO */
     /* background-color: pink; /* REMOVIDO */
 }
 
@@ -274,7 +344,8 @@ body {
     color: rgba(0, 0, 0, 0.682);
     padding: 3px;
     height: 50%;
-    text-align: left; /* ALINHA O TEXTO À ESQUERDA */
+    text-align: left;
+    /* ALINHA O TEXTO À ESQUERDA */
     /* background-color: magenta; /* REMOVIDO */
 }
 
@@ -305,12 +376,12 @@ body {
 }
 
 
-.cardapio .item:hover{
+.cardapio .item:hover {
     transform: scale(1.02);
     transition: all 0.5s;
 }
 
-.cardapio .item:active{
+.cardapio .item:active {
     background-color: rgba(207, 206, 206, 0.592);
     transform: scale(0.98);
     transition: all 0.1s;
@@ -375,15 +446,24 @@ body {
 }
 
 
-.inferior { /* */
-    display: flex; /* */
-    justify-content: space-around; /* */
-    background-color: var(--vermelho); /* */
-    padding: 0px; /* */
-    position: fixed; /* */
-    bottom: 0; /* */
-    z-index: 99; /* Para ficar acima de outros conteúdos, mas abaixo do header */
-    width: 100%; /* Garante que o footer ocupe toda a largura */
+.inferior {
+    /* */
+    display: flex;
+    /* */
+    justify-content: space-around;
+    /* */
+    background-color: var(--vermelho);
+    /* */
+    padding: 0px;
+    /* */
+    position: fixed;
+    /* */
+    bottom: 0;
+    /* */
+    z-index: 99;
+    /* Para ficar acima de outros conteúdos, mas abaixo do header */
+    width: 100%;
+    /* Garante que o footer ocupe toda a largura */
 }
 
 .inferior .botao {
@@ -412,16 +492,19 @@ body {
 }
 
 .titulo-sacola-container .tituloMenu {
-    width: auto; /* Ajusta ao conteúdo */
+    width: auto;
+    /* Ajusta ao conteúdo */
     margin: auto;
     font-size: 2em;
     font-weight: bold;
     color: var(--vermelho);
-    text-align: left; /* Alinha o texto do título à esquerda */
+    text-align: left;
+    /* Alinha o texto do título à esquerda */
 }
 
 .close-sacola {
-    width: auto; /* Ajusta ao conteúdo */
+    width: auto;
+    /* Ajusta ao conteúdo */
     font-size: 1.8em;
     color: #666;
     cursor: pointer;
@@ -448,22 +531,27 @@ body {
 }
 
 .item-sacola-img {
-    width: 100px; /* Largura fixa para a imagem do item */
-    height: 100px; /* Altura fixa para a imagem do item */
+    width: 100px;
+    /* Largura fixa para a imagem do item */
+    height: 100px;
+    /* Altura fixa para a imagem do item */
     margin-right: 15px;
     border-radius: 6px;
     overflow: hidden;
-    flex-shrink: 0; /* Garante que a imagem não encolha */
+    flex-shrink: 0;
+    /* Garante que a imagem não encolha */
 }
 
 .item-sacola-img img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    object-fit: cover;
+    /* Garante que a imagem preencha o espaço sem distorcer */
 }
 
 .item-info {
-    flex-grow: 1; /* Permite que as informações ocupem o espaço restante */
+    flex-grow: 1;
+    /* Permite que as informações ocupem o espaço restante */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -474,30 +562,38 @@ body {
     font-size: 1.1em;
     color: #333;
     margin-bottom: 5px;
-    width: auto; /* Ajusta ao conteúdo */
-    white-space: nowrap; /* Impede que o nome da pizza quebre */
-    overflow: hidden; /* Esconde o excesso se o nome for muito longo */
-    text-overflow: ellipsis; /* Adiciona "..." se o nome for muito longo */
+    width: auto;
+    /* Ajusta ao conteúdo */
+    white-space: nowrap;
+    /* Impede que o nome da pizza quebre */
+    overflow: hidden;
+    /* Esconde o excesso se o nome for muito longo */
+    text-overflow: ellipsis;
+    /* Adiciona "..." se o nome for muito longo */
 }
 
 .item-preco {
     font-size: 1.05em;
     color: var(--vermelho);
     font-weight: bold;
-    width: auto; /* Ajusta ao conteúdo */
+    width: auto;
+    /* Ajusta ao conteúdo */
     margin-bottom: 10px;
 }
 
 .item-quantidade-controle {
     display: flex;
     align-items: center;
-    width: auto; /* Ajusta ao conteúdo */
+    width: auto;
+    /* Ajusta ao conteúdo */
 }
 
 .btn-quantidade-diminuir,
 .btn-quantidade-aumentar {
-    width: 30px; /* Largura fixa para os botões */
-    height: 30px; /* Altura fixa para os botões */
+    width: 30px;
+    /* Largura fixa para os botões */
+    height: 30px;
+    /* Altura fixa para os botões */
     background-color: var(--amarelo);
     color: white;
     border: none;
@@ -513,37 +609,41 @@ body {
 
 .btn-quantidade-diminuir:hover,
 .btn-quantidade-aumentar:hover {
-    background-color: #d69f00; /* Tom mais escuro do amarelo no hover */
+    background-color: #d69f00;
+    /* Tom mais escuro do amarelo no hover */
 }
 
 .item-quantidade {
-    width: 50px; /* Largura para o campo de quantidade */
+    width: 50px;
+    /* Largura para o campo de quantidade */
     padding: 5px;
     text-align: center;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin: 0 8px;
     font-size: 1em;
-    -moz-appearance: textfield; /* Remove setas padrão do Firefox */
     flex-shrink: 0;
 }
 
 /* Esconde setas padrão em navegadores WebKit (Chrome, Safari) */
 .item-quantidade::-webkit-outer-spin-button,
 .item-quantidade::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 
 .item-lixeira {
-    width: auto; /* Ajusta ao conteúdo */
-    margin-left: 15px; /* Espaço entre o controle de quantidade e a lixeira */
+    width: auto;
+    /* Ajusta ao conteúdo */
+    margin-left: 15px;
+    /* Espaço entre o controle de quantidade e a lixeira */
     font-size: 1.5em;
     color: #999;
     cursor: pointer;
     transition: color 0.2s ease;
-    flex-shrink: 0; /* Garante que a lixeira não encolha */
+    flex-shrink: 0;
+    /* Garante que a lixeira não encolha */
 }
 
 .item-lixeira:hover {
@@ -571,7 +671,8 @@ body {
     font-size: 1em;
     margin-top: 20px;
     transition: background-color 0.2s ease;
-    width: auto; /* Ajusta o botão ao conteúdo */
+    width: auto;
+    /* Ajusta o botão ao conteúdo */
 }
 
 .btn-voltar-cardapio:hover {
@@ -593,17 +694,20 @@ body {
     margin-bottom: 10px;
     font-size: 1.1em;
     color: #555;
-    width: auto; /* Deixa p se ajustar ao conteúdo */
+    width: auto;
+    /* Deixa p se ajustar ao conteúdo */
 }
 
 .resumo-alinhamento p span {
     font-weight: bold;
     color: #333;
-    width: auto; /* Deixa span se ajustar ao conteúdo */
+    width: auto;
+    /* Deixa span se ajustar ao conteúdo */
 }
 
 .resumo-total {
-    font-size: 1.3em !important; /* Mais destaque */
+    font-size: 1.3em !important;
+    /* Mais destaque */
     font-weight: bold;
     color: var(--vermelho) !important;
     border-top: 1px solid #eee;
@@ -622,18 +726,51 @@ body {
     font-weight: bold;
     margin-top: 20px;
     transition: background-color 0.2s ease;
-    width: 100%; /* Ocupa a largura total */
+    width: 100%;
+    /* Ocupa a largura total */
+}
+
+#novoAlign {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.numP {
+    font-weight: bold;
+}
+
+.btn-finalizar-pedido2 {
+    background-color: var(--vermelho);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background-color 0.2s ease;
+    width: 30%;
+    /* Ocupa a largura total */
 }
 
 .btn-finalizar-pedido:hover {
-    background-color: #c91a1a; /* Tom mais escuro do vermelho no hover */
+    background-color: #c91a1a;
+    /* Tom mais escuro do vermelho no hover */
+}
+
+.btn-finalizar-pedido2:hover {
+    background-color: #c91a1a;
+    /* Tom mais escuro do vermelho no hover */
 }
 
 /* MEDIA QUERIES PARA A PÁGINA DA SACOLA */
 @media screen and (max-width: 600px) {
     .principal-sacola {
         padding: 15px;
-        margin: 10px auto 80px auto; /* Ajusta margem inferior para o footer */
+        margin: 10px auto 80px auto;
+        /* Ajusta margem inferior para o footer */
     }
 
     .titulo-sacola-container .tituloMenu {
@@ -645,30 +782,54 @@ body {
     }
 
     .item-sacola {
-        flex-direction: column; /* Empilha a imagem e as informações */
+        flex-direction: column;
+        /* Empilha a imagem e as informações */
         text-align: center;
         padding: 10px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+
+    /* Estado ativo para a animação de entrada essa classe sera ativada no codigo */
+    .item-sacola.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Animação para a remoção */
+    .item-sacola.hide {
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
 
     .item-sacola-img {
         width: 80px;
         height: 80px;
         margin-right: 0;
-        margin-bottom: 10px; /* Espaço entre imagem e texto */
+        margin-bottom: 10px;
+        /* Espaço entre imagem e texto */
     }
 
     .item-info {
-        align-items: center; /* Centraliza o texto quando empilhado */
+        align-items: center;
+        /* Centraliza o texto quando empilhado */
     }
 
-    .item-nome, .item-preco {
-        white-space: normal; /* Permite que o texto do nome e preço quebrem */
-        text-overflow: unset; /* Remove "..." */
+    .item-nome,
+    .item-preco {
+        white-space: normal;
+        /* Permite que o texto do nome e preço quebrem */
+        text-overflow: unset;
+        /* Remove "..." */
     }
 
     .item-lixeira {
         margin-left: 0;
-        margin-top: 15px; /* Espaço acima da lixeira */
+        margin-top: 15px;
+        /* Espaço acima da lixeira */
     }
 
     .btn-finalizar-pedido {
@@ -714,14 +875,15 @@ body {
 }
 
 
-::-webkit-scrollbar{ /* Barra de Scrollagem */
+::-webkit-scrollbar {
+    /* Barra de Scrollagem */
     background-color: whitesmoke;
     width: 8px;
-    
+
 }
 
-::-webkit-scrollbar-thumb{ /* Scroll */
+::-webkit-scrollbar-thumb {
+    /* Scroll */
     background-color: var(--amarelo);
 
 }
-

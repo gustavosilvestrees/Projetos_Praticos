@@ -63,6 +63,48 @@ if (itensCardapio.length > 0) { //se tiver no itensCardapio for diferente de 0 o
 }
 
 // ------------------------------------------------
+// Lógica para a página do carrinho (2pedidos.html)
+// ------------------------------------------------
+function criarTarefa(){
+    let containerPedidos = document.querySelector('.itens-sacola'); // puxa a section itens sacola
+    let novoPedido = document.createElement("div");  //cria div vazia e armazena
+
+    novoPedido.classList.add('item-sacola'); //cria a class dessa div nova todas as divs criadas terão essa classe
+    novoPedido.innerHTML = `
+        <p class="numP">Número do pedido: <span>#${gerarNumeroPedido()}</span></p>
+    `; // cria o conteudo da div
+
+
+    
+
+    containerPedidos.appendChild(novoPedido); //add novoPedido como filho da section
+
+
+}
+
+function gerarNumeroPedido() {
+  return Math.floor(Math.random() * 100000) + 10000;
+} // funçao que gera numero aleatorio
+
+
+
+
+function deletarPedido() {
+  let containerPedidos = document.querySelector('.itens-sacola') // encontra aonde estão os;
+
+  // 2. Pega o último pedido na lista, se houver
+  let ultimoPedido = containerPedidos.lastElementChild;
+
+  // 3. Verifica se existe um último pedido e o remove
+  if (ultimoPedido) {
+    containerPedidos.removeChild(ultimoPedido);
+  }
+}
+
+
+
+
+// ------------------------------------------------
 // Lógica para a página do carrinho (3carrinho.html)
 // ------------------------------------------------
 

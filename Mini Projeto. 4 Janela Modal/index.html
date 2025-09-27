@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Janela Modal</title>
+    <style>
+        body{
+            background-color: sandybrown;
+        }
+        .btn{
+            padding: 25px 60px;
+            display: inline;
+            background-color: tomato;
+            border-radius: 20px;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.5s;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .btn:hover{
+            border: solid 1px rgb(29, 29, 168);
+            background-color: rgb(70, 70, 241);
+        }
+
+        .janelaModal{
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            
+        }
+        
+        .modal{
+            width: 60%;
+            min-width: 400px;
+            min-height: 200px;
+            background-color: #ffffff7b;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 20px;
+        }
+        
+        .close{
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 0;
+            background-color: red;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <button class="btn">Clique Aqui</button>
+
+    <div class="janelaModal" id="janelaModal"> <!-- Deixa fundo do site escuro -->
+        <div class="modal"> <!-- A janela e o conteudo -->
+            <button class="close" id="close">X</button>
+            <h1>Janela Modal</h1>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, voluptate similique deserunt nam ut adipisci ipsam hic neque ea voluptas dolores placeat sunt doloremque. Cumque nam accusamus odit minus ullam.</p>
+        </div>
+    </div>
+</body>
+</html>
