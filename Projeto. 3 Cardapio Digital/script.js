@@ -89,6 +89,8 @@ function criarPedido(){
     let containerPedidos = document.querySelector('.itens-sacola'); // puxa a section itens sacola
     let novoPedido = document.createElement("div");  //cria div vazia e armazena
 
+    const numeroUnico = gerarNumeroPedido();
+
     novoPedido.classList.add('item-sacola'); //cria a class dessa div nova todas as divs criadas terão essa classe
     novoPedido.innerHTML = `
         <p class="numP">Número do pedido: <span>#${numeroUnico}</span></p>
@@ -128,16 +130,34 @@ function gerarNumeroPedido() {
 
 
 
-function deletarPedido() {
-  let containerPedidos = document.querySelector('.itens-sacola') // encontra aonde estão os;
+function deletarPedido() { //remove o numero do pedido do html e do localStorage
+    let containerPedidos = document.querySelector('.itens-sacola'); // encontra aonde estão os pedidos
+    
+    // 1. Pega o último pedido na lista, se houver
+    let ultimoPedido = containerPedidos.lastElementChild;
 
-  // 2. Pega o último pedido na lista, se houver
-  let ultimoPedido = containerPedidos.lastElementChild;
+    // 2. Verifica se existe um último pedido
+    if (ultimoPedido) {
+        
+        // 3. Extrai o número do pedido do HTML
 
-  // 3. Verifica se existe um último pedido e o remove
-  if (ultimoPedido) {
-    containerPedidos.removeChild(ultimoPedido);
-  }
+        const numPedidoElement = ultimoPedido.querySelector('.numP span'); // localiza a tag <span> dentro do último pedido, que é onde o número único (#${numeroUnico}) está.
+        if (numPedidoElement) {
+            // Remove o '#' e converte para número inteiro
+            const numeroParaDeletar = parseInt(numPedidoElement.textContent.replace('#', ''));
+            
+            // 4. Remove o número do array 'numerosDePedidos'
+            const index = numerosDePedidos.indexOf(numeroParaDeletar);
+            if (index > -1) {
+                numerosDePedidos.splice(index, 1); // Remove 1 elemento na posição 'index' e Usa o método splice para remover o número da lista.
+                salvarPedidos(); // Salva o array atualizado no localStorage
+                console.log(`Número de pedido #${numeroParaDeletar} deletado e removido do localStorage.`);
+            }
+        }
+
+        // 5. Remove o pedido da tela (Elemento HTML)
+        containerPedidos.removeChild(ultimoPedido);
+    }
 }
 
 
@@ -147,12 +167,43 @@ function deletarPedido() {
 // Lógica para a página do carrinho (3carrinho.html)
 // ------------------------------------------------
 
+function mudarQuantidade(botaoClicado, mudanca) { // Aumenta/Diminui a quantidade de um item no carrinho e tem 2 parametros
+    // 1. Encontra o container pai do botão clicado
+    const container = botaoClicado.parentElement;
+    
+    // 2. Encontra o input dentro desse container
+    const input = container.querySelector('.input-quantidade');
+    
+    // 3. valor atual obtem o valor atual do input e garante que é um número inteiro
+    let valorAtual = parseInt(input.value);
+    
+    // 4. Calcula o novo valor que pode ser +1 ou -1 dependendo do botão clicado
+    let novoValor = valorAtual + mudanca;
+    
+    // 5. Garante que o valor mínimo é 1 (nunca negativo ou zero, a não ser que você queira permitir a remoção)
+    if (novoValor < 1) {
+        novoValor = 1;
+    }
+    
+    // 6. Atualiza o input com o novo valor
+    input.value = novoValor;
+    
+    // NOTA: Futuramente, aqui será onde você vai chamar a função para:
+    // a) Atualizar o preço total daquele item.
+    // b) Recalcular o Total Geral do Carrinho.
+    // c) Atualizar o localStorage para persistir a nova quantidade.
+}
+
+
+
+
 // A função exibirTotalCarrinho() precisa ser chamada também
 // quando a página do carrinho é carregada.
     
 carregarCarrinho();
 carregarPedidos(); // NOVO: Carrega os números de pedidos existentes ao iniciar
 exibirTotalCarrinho();
+
 
 
 

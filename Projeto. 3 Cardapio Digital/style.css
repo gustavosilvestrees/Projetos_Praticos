@@ -590,8 +590,7 @@ body {
     /* Ajusta ao conteúdo */
 }
 
-.btn-quantidade-diminuir,
-.btn-quantidade-aumentar {
+.btn-quantidade {
     width: 30px;
     /* Largura fixa para os botões */
     height: 30px;
@@ -609,13 +608,12 @@ body {
     flex-shrink: 0;
 }
 
-.btn-quantidade-diminuir:hover,
-.btn-quantidade-aumentar:hover {
+.btn-quantidade-diminuir:hover {
     background-color: #d69f00;
     /* Tom mais escuro do amarelo no hover */
 }
 
-.item-quantidade {
+.input-quantidade {
     width: 50px;
     /* Largura para o campo de quantidade */
     padding: 5px;
@@ -628,8 +626,8 @@ body {
 }
 
 /* Esconde setas padrão em navegadores WebKit (Chrome, Safari) */
-.item-quantidade::-webkit-outer-spin-button,
-.item-quantidade::-webkit-inner-spin-button {
+.input-quantidade::-webkit-outer-spin-button,
+.input-quantidade::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
