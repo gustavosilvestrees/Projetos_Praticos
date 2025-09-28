@@ -1,5 +1,25 @@
+
+// Variaveis Globais
 let precos = [];
 let totalCarrinho = 0;
+let numerosDePedidos = [];  // <-- NOVO: Array para armazenar todos os números de pedidos
+
+
+
+function salvarPedidos() { // --- Nova Função: Salva os números de pedidos no localStorage
+    localStorage.setItem('numerosDePedidos', JSON.stringify(numerosDePedidos));
+}
+
+
+// --- Nova Função: Puxa os números de pedidos do localStorage
+function carregarPedidos() {
+    const pedidosSalvos = localStorage.getItem('numerosDePedidos');
+    if (pedidosSalvos) {
+        numerosDePedidos = JSON.parse(pedidosSalvos);
+    }
+}
+
+
 
 
 const mostra = document.querySelector('.special3'); // Exibe o total do carrinho
@@ -55,7 +75,7 @@ if (itensCardapio.length > 0) { //se tiver no itensCardapio for diferente de 0 o
             const precoNumero = parseFloat(precoLimpo); // Add decimais em precoLimpo
 
             precos.push(precoNumero); // Add cada valor add dentro do array
-            alert(`Preço adicionado: R$${precoNumero.toFixed(2).replace('.', ',')}`); // alert mostra o que você add e o toFixed() define quantos decimais cada numero
+            //alert(`Preço adicionado: R$${precoNumero.toFixed(2).replace('.', ',')}`); // alert mostra o que você add e o toFixed() define quantos decimais cada numero
 
             exibirTotalCarrinho(); //Exibe tudo que convertemos ate agora
         });
@@ -65,13 +85,13 @@ if (itensCardapio.length > 0) { //se tiver no itensCardapio for diferente de 0 o
 // ------------------------------------------------
 // Lógica para a página do carrinho (2pedidos.html)
 // ------------------------------------------------
-function criarTarefa(){
+function criarPedido(){
     let containerPedidos = document.querySelector('.itens-sacola'); // puxa a section itens sacola
     let novoPedido = document.createElement("div");  //cria div vazia e armazena
 
     novoPedido.classList.add('item-sacola'); //cria a class dessa div nova todas as divs criadas terão essa classe
     novoPedido.innerHTML = `
-        <p class="numP">Número do pedido: <span>#${gerarNumeroPedido()}</span></p>
+        <p class="numP">Número do pedido: <span>#${numeroUnico}</span></p>
     `; // cria o conteudo da div
 
 
@@ -82,9 +102,28 @@ function criarTarefa(){
 
 }
 
+// cria numero do pedido
+
 function gerarNumeroPedido() {
-  return Math.floor(Math.random() * 100000) + 10000;
-} // funçao que gera numero aleatorio
+    let novoNumero;
+    let numeroEhDuplicado = false;
+
+    do {
+        // Gera um número aleatório de 5 dígitos (entre 10000 e 99999)
+        novoNumero = Math.floor(Math.random() * 90000) + 10000; 
+        
+        // Verifica se o número já existe no array
+        // A função .includes() é ideal para essa checagem rápida.
+        numeroEhDuplicado = numerosDePedidos.includes(novoNumero);
+        
+    } while (numeroEhDuplicado); // Repete se o número gerado já existir no array
+
+    // Adiciona o novo número único ao array de controle
+    numerosDePedidos.push(novoNumero);
+    salvarPedidos(); // Salva o array atualizado no localStorage
+
+    return novoNumero;
+} // funçao que gera numero aleatorio e agora checa duplicidade
 
 
 
@@ -112,4 +151,39 @@ function deletarPedido() {
 // quando a página do carrinho é carregada.
     
 carregarCarrinho();
+carregarPedidos(); // NOVO: Carrega os números de pedidos existentes ao iniciar
 exibirTotalCarrinho();
+
+
+
+
+
+
+
+
+// ------------------------------------------------
+// Janela Modal
+// ------------------------------------------------
+
+
+function abrirModal(){
+            const modal = document.getElementById('janelaModal');
+            
+            modal.classList.add('abrir');
+            
+        modal.addEventListener('click', (e) => { // o E é um parametro
+            if(e.target.id == 'close' || e.target.id == 'janelaModal'){ //vai procurar o id close ou janelaModal como alvo(target)
+                
+                // Lógica de Fechamento (Animação de Saída)
+                modal.classList.remove('abrir') // Remove a classe 'abrir', o CSS fará a opacidade ir para 0 em 0.3s
+                
+                // Oculta completamente o elemento após a animação de 0.3s
+                setTimeout(() => {
+                    // Sem a classe 'abrir', o CSS fará com que a modal volte a ter:
+                    // opacity: 0;
+                    // visibility: hidden;
+                    // display: none; // O display: none deve estar no CSS base da .janelaModal para funcionar
+                }, 3000); // 300 milissegundos é o tempo da nossa transition no CSS
+            }
+        }, { once: true }) // Adiciona o { once: true } para que o listener só seja ativado uma vez
+    }

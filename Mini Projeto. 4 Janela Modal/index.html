@@ -8,7 +8,7 @@
         body{
             background-color: sandybrown;
         }
-        .btn{
+        .btn{       
             padding: 25px 60px;
             display: inline;
             background-color: tomato;
@@ -35,7 +35,7 @@
             position: relative;
             top: 0;
             left: 0;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             z-index: 999;
@@ -66,10 +66,31 @@
             cursor: pointer;
         }
 
+        .janelaModal.abrir{ /* Quando a janela modal tiver a classe abrir dentro de se acontece algo */
+         display: flex;
+    
+        }
+
+        @keyframes abrirmodal { /* Cria animação para janela modal */
+            from{ /* Define o inicio */
+                opacity: 0;
+                transform: translate3d(0, -20px, 5px);
+            }
+            to{ /* Define onde parar */
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    
+    .abrir .modal{ /* Define que a animação vai ser invocado alem da velocidade que vai acontecer a animaçao e somente quando tiver a classe abrir e class modal  */
+        animation: abrirmodal 0.2s;
+
+    }
+
     </style>
 </head>
 <body>
-    <button class="btn">Clique Aqui</button>
+    <button onclick="abrirModal()" class="btn">Clique Aqui</button>
 
     <div class="janelaModal" id="janelaModal"> <!-- Deixa fundo do site escuro -->
         <div class="modal"> <!-- A janela e o conteudo -->
@@ -78,5 +99,22 @@
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, voluptate similique deserunt nam ut adipisci ipsam hic neque ea voluptas dolores placeat sunt doloremque. Cumque nam accusamus odit minus ullam.</p>
         </div>
     </div>
+
+    <script>
+        function abrirModal(){
+            const modal = document.getElementById('janelaModal');
+            modal.classList.add('abrir'); //add uma classe adicional em modal
+
+            
+        modal.addEventListener('click', (e) => { // o E é um parametro
+            if(e.target.id == 'close' || e.target.id == 'janelaModal'){ //vai procurar o id close ou janelaModal como alvo(target)
+                modal.classList.remove('abrir') // remove  aclasse abrir para fechar a janela
+            }
+        })
+
+    }
+
+
+    </script>
 </body>
 </html>
