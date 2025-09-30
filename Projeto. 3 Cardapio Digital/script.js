@@ -1,9 +1,9 @@
 
 // Variaveis Globais
-let precos = [];
+// let precos = [];
 let totalCarrinho = 0;
 let numerosDePedidos = [];  // <-- NOVO: Array para armazenar todos os números de pedidos
-
+let carrinhoItens = []; // NOVO: Armazenará os objetos do carrinho (ID, QTD, Preço Total)
 
 
 function salvarPedidos() { // --- Nova Função: Salva os números de pedidos no localStorage
@@ -25,17 +25,15 @@ function carregarPedidos() {
 const mostra = document.querySelector('.special3'); // Exibe o total do carrinho
 
 // --- Nova Função: Salva os preços no localStorage
-function salvarCarrinho() {
-    localStorage.setItem('carrinhoPrecos', JSON.stringify(precos));
-     /* usa o localStorage para guardar let precos que vai ficar em carrinhosPrecos
-        usa o JSON.stringfy para converter precos de array para string para poder navegar entre paginas sem resetar let precos  */
+function salvarItensCarrinho() {
+    localStorage.setItem('carrinhoItens', JSON.stringify(carrinhoItens));
 }
 
 // --- Nova Função: Puxa os preços do localStorage e joga no carrinho
-function carregarCarrinho() {
-    const carrinhoSalvo = localStorage.getItem('carrinhoPrecos'); // puxa o valor guaraddo em localStorage
-    if (carrinhoSalvo) { // se tiver valor salvo no carrinho(ou seja se for diferente de 0) 
-        precos = JSON.parse(carrinhoSalvo); // converte o valor em carrinhoSalvo de volta para array
+function carregarItensCarrinho() {
+    const itensSalvos = localStorage.getItem('carrinhoItens');
+    if (itensSalvos) {
+        carrinhoItens = JSON.parse(itensSalvos);
     }
 }
 
@@ -196,11 +194,46 @@ function mudarQuantidade(botaoClicado, mudanca) { // Aumenta/Diminui a quantidad
 
 
 
+function adicionarAoCarrinho(pizzaId) {
+    const itemExistente = carrinhoItens.find(item => item.id === pizzaId); // find procura o primeiro item que satisfaça a condiçao e retorna true ou false
+
+    const pizza = CATALOGO_PIZZAS[pizzaId];
+
+    if (!pizza) {
+        console.error(`Pizza com ID ${pizzaId} não encontrada no catálogo.`);
+        return;
+    }
+
+    if (itemExistente) {
+        // Se já existe, apenas aumenta a quantidade e recalcula o preço total
+        itemExistente.quantidade++;
+        itemExistente.precoTotal = pizza.preco * itemExistente.quantidade;
+    } else {
+        // Se é novo, adiciona o objeto completo ao carrinho
+        carrinhoItens.push({
+            id: pizza.id,
+            nome: pizza.nome,
+            precoUnitario: pizza.preco,
+            quantidade: 1,
+            precoTotal: pizza.preco // Inicia com o preço unitário
+        });
+    }
+
+    salvarItensCarrinho(); // Salva a nova estrutura de itens
+    // Não precisa atualizar a tela de pedidos, apenas o carrinho precisa ser atualizado na sua página
+    alert(`${pizza.nome} adicionada(o) ao carrinho!`);
+}
+
+
+
+
+
+
 
 // A função exibirTotalCarrinho() precisa ser chamada também
 // quando a página do carrinho é carregada.
     
-carregarCarrinho();
+carregarItensCarrinho();
 carregarPedidos(); // NOVO: Carrega os números de pedidos existentes ao iniciar
 exibirTotalCarrinho();
 

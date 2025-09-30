@@ -36,7 +36,9 @@
 
 
         <section class="cardapio"> <!-- Cardapio -->
-            <div class="item" onclick="abrirModal()">
+
+            <div class="item" id="pizza-1" data-id-pizza="1" onclick="adicionarAoCarrinho(1)">
+
                 <div class="imagem"><img class="miniImg" src="cardapio/1calabresa.png" alt="Pizza de Calabresa"></div>
                 <div class="texto">
                     <p>Pizza de Calabresa<br><strong class="strongRed">R$31,90</strong></p>
@@ -45,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="item">
+            <div class="item" id="pizza-2" data-id-pizza="2" onclick="adicionarAoCarrinho(2)"> <!-- O numero dentro dos parenteses significa o numero do id que a função vai passar como parametro-->
                 <div class="imagem"><img class="miniImg" src="cardapio/2mussarela.png" alt="Pizza de Mussarela"></div>
                 <div class="texto">
                     <p>Pizza de Mussarela<br><strong class="strongRed">R$31,90</strong></p>
@@ -183,6 +185,7 @@
     </section>
 
     <script src="script.js" defer></script>
+    <script src="pizzas.js" defer></script>
 </body>
 
 </html>
@@ -238,6 +241,15 @@
    DIA 06:
         1. Garantir que o Criar Pedido e Deletar Pedido add e deletem tanto do html quanto do local storage ✅
         2. Add Janela Modal ✅
+        3. Add funcionalidade de add e sub nos botoes da pag 3 carrinho
+
+    DIA 07:
+    
+    1. Reformular a arquitetura da pagina add ID nas pizzas
+    2. Criar arquivo a parte para ser banco de dados de pizzas
+    3. fazer pag buscar os produtos desejados e exibir no carrinho
+    4. add funcionalidade de excluir os intens do carrinho
+    5. add funcionalidade de add e sub os preços do carrinho
 
       
  -->
