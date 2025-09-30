@@ -37,6 +37,69 @@ function carregarItensCarrinho() {
     }
 }
 
+function exibirItensCarrinho() {
+    const container = document.querySelector('.itens-sacola');
+    
+    // Verifica se o container existe (para evitar erros em outras páginas)
+    if (!container) return; 
+
+    // Limpa o conteúdo (importante para recarregar após um clique de +/- ou exclusão)
+    container.innerHTML = ''; 
+
+    // Se o carrinho estiver vazio, exibe a mensagem de carrinho vazio (opcional)
+    if (carrinhoItens.length === 0) {
+        container.innerHTML = `
+            <div class="carrinho-vazio">
+                <p>Sua sacola está vazia. Adicione algumas pizzas deliciosas!</p>
+                <a href="1pedidos_principais.html">
+                    <button class="btn-voltar-cardapio">Voltar ao Cardápio</button>
+                </a>
+            </div>
+        `;
+        return;
+    }
+
+
+    carrinhoItens.forEach(item => {
+        // Usa o ID para buscar os detalhes fixos (nome, foto) no CATALOGO_PIZZAS
+        const pizzaInfo = CATALOGO_PIZZAS[item.id]; 
+
+        // Se por algum motivo o ID não existir mais no catálogo (pizzas.js), ignora o item
+        if (!pizzaInfo) return; 
+
+        // Formata o preço total do item para exibição (R$ X,XX)
+        const precoFormatado = item.precoTotal.toFixed(2).replace('.', ',');
+
+        const novoItemHTML = `
+            <div class="item-sacola" data-id-pizza="${item.id}">
+                <div class="item-sacola-img">
+                    <img src="${pizzaInfo.foto}" alt="${pizzaInfo.nome}">
+                </div>
+                <div class="item-info">
+                    <div class="nome-e-preco">
+                        <p class="item-nome">${pizzaInfo.nome}</p>
+                        <p class="item-preco">R$ ${precoFormatado}</p>
+                    </div>
+                    
+                    <div class="quantidade-container">
+                        <button class="btn-quantidade btn-menos" onclick="mudarQuantidade(${item.id}, -1)">-</button>
+                        <input type="number" class="input-quantidade" value="${item.quantidade}" min="1" readonly>
+                        <button class="btn-quantidade btn-mais" onclick="mudarQuantidade(${item.id}, 1)">+</button>
+                    </div>
+                    
+                    <div class="btn-excluir" onclick="removerItem(${item.id})">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </div>
+                </div>
+            </div>
+        `;
+        container.innerHTML += novoItemHTML;
+    });
+}
+
+
+
+
 // --- Nova Função: Atualiza o display do total na tela
 function atualizaDisplayTotal() {
     if (mostra) { // Garante que o elemento existe antes de tentar manipulá-lo
@@ -51,9 +114,28 @@ function atualizaDisplayTotal() {
 
 // --- Nova Função: Calcula e exibe o total cada vez que dar um clique vai atualizar todas as funçoes anteriores
 function exibirTotalCarrinho() {
-    totalCarrinho = precos.reduce((resultado, precoAtual) => resultado + precoAtual, 0);
-    salvarCarrinho(); // Ativa a função salvando os dados no localStorage após cada atualização
-    atualizaDisplayTotal(); // Após salvar o preço em salvarCarrinho atualiza a div na pagina de pedidos
+    //  vamos calcular na hora
+    let subtotal = 0; 
+    
+    // Soma os precoTotal de todos os itens no novo array
+    carrinhoItens.forEach(item => {
+        subtotal += item.precoTotal;
+    });
+
+    const taxaEntrega = 10.00; // Valor fixo da taxa de entrega
+    const totalGeral = subtotal + taxaEntrega;
+    
+    // Atualiza os displays
+    const subtotalDisplay = document.querySelector('.resumo-subtotal span');
+    const totalGeralDisplay = document.querySelector('.resumo-total .special3');
+    
+    if (subtotalDisplay) {
+        subtotalDisplay.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    }
+    
+    if (totalGeralDisplay) {
+        totalGeralDisplay.textContent = `R$ ${totalGeral.toFixed(2).replace('.', ',')}`;
+    }
 }
 
 // ------------------------------------------------
@@ -165,31 +247,31 @@ function deletarPedido() { //remove o numero do pedido do html e do localStorage
 // Lógica para a página do carrinho (3carrinho.html)
 // ------------------------------------------------
 
-function mudarQuantidade(botaoClicado, mudanca) { // Aumenta/Diminui a quantidade de um item no carrinho e tem 2 parametros
-    // 1. Encontra o container pai do botão clicado
-    const container = botaoClicado.parentElement;
+function mudarQuantidade(pizzaId, mudanca) {
+    // 1. Encontra o objeto do item no array
+    const item = carrinhoItens.find(i => i.id === pizzaId);
     
-    // 2. Encontra o input dentro desse container
-    const input = container.querySelector('.input-quantidade');
-    
-    // 3. valor atual obtem o valor atual do input e garante que é um número inteiro
-    let valorAtual = parseInt(input.value);
-    
-    // 4. Calcula o novo valor que pode ser +1 ou -1 dependendo do botão clicado
-    let novoValor = valorAtual + mudanca;
-    
-    // 5. Garante que o valor mínimo é 1 (nunca negativo ou zero, a não ser que você queira permitir a remoção)
+    if (!item) return;
+
+    // 2. Aplica a Regra de Negócio (mínimo de 1)
+    let novoValor = item.quantidade + mudanca;
     if (novoValor < 1) {
         novoValor = 1;
     }
     
-    // 6. Atualiza o input com o novo valor
-    input.value = novoValor;
+    // Se a quantidade não mudou (clicou '-' quando já era 1), apenas retorna
+    if (novoValor === item.quantidade) return; 
+
+    // 3. Atualiza a quantidade e recalcula o preço total do item
+    item.quantidade = novoValor;
+    item.precoTotal = item.precoUnitario * novoValor;
+
+    // 4. Salva o array modificado no localStorage
+    salvarItensCarrinho();
     
-    // NOTA: Futuramente, aqui será onde você vai chamar a função para:
-    // a) Atualizar o preço total daquele item.
-    // b) Recalcular o Total Geral do Carrinho.
-    // c) Atualizar o localStorage para persistir a nova quantidade.
+    // 5. ATUALIZA A TELA (Recarrega o HTML e o Total)
+    exibirItensCarrinho(); 
+    exibirTotalCarrinho();
 }
 
 
@@ -233,9 +315,11 @@ function adicionarAoCarrinho(pizzaId) {
 // A função exibirTotalCarrinho() precisa ser chamada também
 // quando a página do carrinho é carregada.
     
-carregarItensCarrinho();
-carregarPedidos(); // NOVO: Carrega os números de pedidos existentes ao iniciar
+carregarItensCarrinho(); // NOVO: Carrega o array 'carrinhoItens'
+exibirItensCarrinho();   // NOVO: Exibe o HTML dos itens
 exibirTotalCarrinho();
+carregarPedidos(); // NOVO: Carrega os números de pedidos existentes ao iniciar
+
 
 
 
