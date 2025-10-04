@@ -37,112 +37,136 @@
 
         <section class="cardapio"> <!-- Cardapio -->
 
-            <div class="item" id="pizza-1" data-id-pizza="1" onclick="adicionarAoCarrinho(1)">
+            <div class="card-pizzas" id="pizza-1" data-id-pizza="1" onclick="adicionarAoCarrinho(1)">
 
                 <div class="imagem"><img class="miniImg" src="cardapio/1calabresa.png" alt="Pizza de Calabresa"></div>
-                <div class="texto">
-                    <p>Pizza de Calabresa<br><strong class="strongRed">R$31,90</strong></p>
-                    <div class="legendaImg">Um clássico irresistível com rodelas de calabresa e cebola. Sabor que agrada
+                <div class="pizza-dados">
+                    <p class="pizza-nome">Pizza de Calabresa<br>
+                        <strong class="pizza-preco">R$31,90</strong>
+                    </p>
+                    <div class="pizza-info">Um clássico irresistível com rodelas de calabresa e cebola. Sabor que agrada
                         a todos!</div>
                 </div>
             </div>
 
-            <div class="item" id="pizza-2" data-id-pizza="2" onclick="adicionarAoCarrinho(2)"> <!-- O numero dentro dos parenteses significa o numero do id que a função vai passar como parametro-->
+            <div class="card-pizzas" id="pizza-2" data-id-pizza="2" onclick="adicionarAoCarrinho(2)"> <!-- O numero dentro dos parenteses significa o numero do id que a função vai passar como parametro-->
                 <div class="imagem"><img class="miniImg" src="cardapio/2mussarela.png" alt="Pizza de Mussarela"></div>
-                <div class="texto">
-                    <p>Pizza de Mussarela<br><strong class="strongRed">R$31,90</strong></p>
-                    <div class="legendaImg">A simplicidade que encanta: queijo mussarela derretido e um toque de
+                <div class="pizza-dados">
+                    <p class="pizza-nome">Pizza de Mussarela<br>
+                        <strong class="pizza-preco">R$31,90</strong>
+                    </p>
+                    <div class="pizza-info">A simplicidade que encanta: queijo mussarela derretido e um toque de
                         orégano. Pura cremosidade!</div>
                 </div>
             </div>
 
-            <div class="item">
+            <div class="card-pizzas">
                 <div class="imagem"><img class="miniImg" src="cardapio/3siciliana.png" alt="Pizza Siciliana"></div>
-                <div class="texto">
-                    <p>Pizza Siciliana<br><strong class="strongRed">R$35,90</strong></p>
-                    <div class="legendaImg">Uma explosão de sabores com champignon, bacon crocante e mussarela.
+                <div class="pizza-dados">
+                    <p class="pizza-nome">Pizza Siciliana<br>
+                        <strong class="pizza-preco">R$35,90</strong>
+                    </p>
+                    <div class="pizza-info">Uma explosão de sabores com champignon, bacon crocante e mussarela.
                         Experimente essa delícia!</div>
                 </div>
             </div>
 
-            <div class="item">
+            <div class="card-pizzas">
                 <div class="imagem"><img class="miniImg" src="cardapio/4escarola.png" alt="Pizza de Escarola"></div>
-                <div class="texto">
-                    <p>Pizza de Escarola<br><strong class="strongRed">R$34,90</strong></p>
-                    <div class="legendaImg">Leve e saborosa, com escarola refogada e um toque de alho. Uma opção fresca
+                <div class="pizza-dados">
+                    <p class="pizza-nome">Pizza de Escarola<br>
+                        <strong class="pizza-preco">R$34,90</strong>
+                    </p>
+                    <div class="pizza-info">Leve e saborosa, com escarola refogada e um toque de alho. Uma opção fresca
                         e deliciosa.</div>
                 </div>
             </div>
 
-            <div class="item">
+            <div class="card-pizzas">
                 <div class="imagem"><img class="miniImg" src="cardapio/5quatro_queijos.png" alt="Pizza 4 Queijos"></div>
-                <div class="texto">
-                    <p>Pizza 4 Queijos<br><strong class="strongRed">R$39,90</strong></p>
-                    <div class="legendaImg">A perfeita combinação de quatro queijos especiais. Cremosa e irresistível a
+                <div class="pizza-dados">
+                    <p class="pizza-nome">Pizza 4 Queijos<br>
+                        <strong class="pizza-preco">R$39,90</strong>
+                    </p>
+                    <div class="pizza-info">A perfeita combinação de quatro queijos especiais. Cremosa e irresistível a
                         cada mordida.</div>
                 </div>
             </div>
 
-            <div class="item">
+            <div class="card-pizzas">
                 <div class="imagem"><img class="miniImg" src="cardapio/6baiana.png" alt="Pizza Baiana"></div>
-                <div class="texto">
-                    <p>Pizza Baiana<br><strong class="strongRed">R$35,90</strong></p>
-                    <div class="legendaImg">Para quem ama um toque de pimenta! Calabresa moída, ovos e muito sabor, tudo
+                <div class="pizza-dados">
+                    <p class="pizza-nome">Pizza Baiana<br>
+                        <strong class="pizza-preco">R$35,90</strong>
+                    </p>
+                    <div class="pizza-info">Para quem ama um toque de pimenta! Calabresa moída, ovos e muito sabor, tudo
                         bem picante.</div>
                 </div>
             </div>
 
-            <div class="item">
+            <div class="card-pizzas">
                 <div class="imagem"><img class="miniImg" src="cardapio/7bacon_e_mussarela.png"
                         alt="Pizza Bacon e Mussarela"></div>
-                <div class="texto">
-                    <p>Pizza Bacon e Mussarela<br><strong class="strongRed">R$31,90</strong></p>
-                    <div class="legendaImg">A combinação perfeita de bacon crocante e a cremosidade da mussarela. Sabor
+                <div class="pizza-dados">
+                    <p class="pizza-nome">Pizza Bacon e Mussarela<br>
+                        <strong class="pizza-preco">R$31,90</strong>
+                    </p>
+                    <div class="pizza-info">A combinação perfeita de bacon crocante e a cremosidade da mussarela. Sabor
                         que vicia!</div>
                 </div>
             </div>
 
-            <div class="item">
+            <div class="card-pizzas">
                 <div class="imagem"><img class="miniImg" src="cardapio/8toscana.png" alt="Pizza Toscana"></div>
-                <div class="texto">
-                    <p>Pizza Toscana<br><strong class="strongRed">R$35,90</strong></p>
-                    <div class="legendaImg">Muita calabresa moída e queijo mussarela derretido. Simples e direto ao
+                <div class="pizza-dados">
+                    <p class="pizza-nome">Pizza Toscana<br>
+                        <strong class="pizza-preco">R$35,90</strong>
+                    </p>
+                    <div class="pizza-info">Muita calabresa moída e queijo mussarela derretido. Simples e direto ao
                         ponto.</div>
                 </div>
             </div>
 
-            <div class="item">
+            <div class="card-pizzas">
                 <div class="imagem"><img class="miniImg" src="cardapio/9portuguesa.png" alt="Pizza Portuguesa"></div>
-                <div class="texto">
-                    <p>Pizza Portuguesa<br><strong class="strongRed">R$41,90</strong></p>
-                    <div class="legendaImg">Um festival de sabores com presunto, ovos, cebola, azeitonas e mussarela. O
+                <div class="pizza-dados">
+                    <p class="pizza-nome">Pizza Portuguesa<br>
+                        <strong class="pizza-preco">R$41,90</strong>
+                    </p>
+                    <div class="pizza-info">Um festival de sabores com presunto, ovos, cebola, azeitonas e mussarela. O
                         clássico que nunca falha.</div>
                 </div>
             </div>
 
-            <div class="item">
+            <div class="card-pizzas">
                 <div class="imagem"><img class="miniImg" src="cardapio/10bigmac.png" alt="Pizza Big Mac"></div>
-                <div class="texto">
-                    <p>Pizza Big Mac<br><strong class="strongRed">R$45,90</strong></p>
-                    <div class="legendaImg">Experimente a lenda em forma de pizza! Carne, molho especial e queijo, uma
+                <div class="pizza-dados">
+                    <p class="pizza-nome">Pizza Big Mac<br>
+                        <strong class="pizza-preco">R$45,90</strong>
+                    </p>
+                    <div class="pizza-info">Experimente a lenda em forma de pizza! Carne, molho especial e queijo, uma
                         experiência única.</div>
                 </div>
             </div>
 
-            <div class="item">
+            <div class="card-pizzas">
                 <div class="imagem"><img class="miniImg" src="cardapio/11pepperoni.png" alt="Pizza de Pepperoni"></div>
-                <div class="texto">
-                    <p>Pizza de Pepperoni<br><strong class="strongRed">R$45,90</strong></p>
-                    <div class="legendaImg">O sabor marcante do pepperoni com queijo mussarela. Deliciosa e com um toque
+                <div class="pizza-dados">
+                    <p class="pizza-nome">Pizza de Pepperoni<br>
+                        <strong class="pizza-preco">R$45,90</strong>
+                    </p>
+                    <div class="pizza-info">O sabor marcante do pepperoni com queijo mussarela. Deliciosa e com um toque
                         picante na medida certa.</div>
                 </div>
             </div>
-            <div class="item">
+            <div class="card-pizzas">
                 <div class="imagem"><img class="miniImg" src="cardapio/12frango_catupiry.png"
                         alt="Pizza de Frango com Catupiry"></div>
-                <div class="texto">
-                    <p>Pizza de Frango com Catupiry<br><strong class="strongRed">R$39,90</strong></p>
-                    <div class="legendaImg">Cremosa combinação de frango desfiado com o autêntico Catupiry. Um dos
+                <div class="pizza-dados">
+                    <p class="pizza-nome">Pizza de Frango com Catupiry<br>
+                        <strong class="pizza-preco">R$39,90</strong>
+                    </p>
+                    <div class="pizza-info">Cremosa combinação de frango desfiado com o autêntico Catupiry. Um dos
                         sabores mais amados!</div>
                 </div>
             </div>

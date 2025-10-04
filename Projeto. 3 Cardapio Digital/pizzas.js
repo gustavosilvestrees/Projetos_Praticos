@@ -1,4 +1,4 @@
-// pizzas.js
+
 
 const CATALOGO_PIZZAS = {
     // ID 1

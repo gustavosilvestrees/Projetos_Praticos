@@ -312,21 +312,23 @@ function adicionarAoCarrinho(pizzaId) {
 
 // --- NOVA Função: Adiciona um item ao carrinho ou aumenta a quantidade
 function adicionarAoCarrinho(pizzaId) {
-    // 1. Encontra o objeto da pizza no catálogo (do pizzas.js)
-    const pizza = CATALOGO_PIZZAS[pizzaId];
+    // 1. Converte o ID, se necessário (o catálogo usa números como chaves, mas o HTML passa string)
+    const idNumerico = Number(pizzaId);
+
+    // 2. Encontra o objeto da pizza no catálogo (do pizzas.js)
+    const pizza = CATALOGO_PIZZAS[idNumerico];
 
     if (!pizza) {
-        console.error('Pizza com ID ' + pizzaId + ' não encontrada.');
+        console.error('Pizza com ID ' + idNumerico + ' não encontrada no catálogo.');
         return;
     }
 
-    // 2. Procura se o item já existe no carrinhoItens
-    const itemExistente = carrinhoItens.find(item => item.id === pizzaId);
+    // 3. Procura se o item já existe no carrinhoItens
+    const itemExistente = carrinhoItens.find(item => item.id === idNumerico);
 
     if (itemExistente) {
         // Se existir, apenas aumenta a quantidade e recalcula o preço total
         itemExistente.quantidade++;
-        // itemExistente.precoUnitario (não muda)
         itemExistente.precoTotal = itemExistente.quantidade * itemExistente.precoUnitario;
     } else {
         // Se não existir, adiciona o novo item ao array
@@ -338,62 +340,26 @@ function adicionarAoCarrinho(pizzaId) {
         });
     }
 
-    // 3. Salva o carrinho atualizado no localStorage
+    // 4. Salva o carrinho atualizado no localStorage
     salvarItensCarrinho();
 
-    // Opcional: Pode usar a Janela Modal para dar um feedback ao usuário aqui
-    // abrirModal(`"${pizza.nome}" adicionada à sacola!`); 
-    console.log(`Pizza ${pizza.nome} adicionada ao carrinho!`);
+    // OPCIONAL: Abrir a Janela Modal para dar feedback
+    // if (typeof abrirModal === 'function') {
+    //     abrirModal(`"${pizza.nome}" adicionada à sacola!`);
+    // }
+
+    console.log(`Pizza ID ${idNumerico} adicionada. Carrinho atual:`, carrinhoItens);
 }
 
+// Sua função salvarItensCarrinho() já existe:
 
-// --- NOVA Função: Renderiza as pizzas na página 1pedidos_principais.html
-function renderizarPizzas() {
-    // Busca o container onde as pizzas serão exibidas
-    const containerPizzas = document.getElementById('container-pizzas');
-    
-    // Se o container não existir (ex: estamos na página do carrinho), a função não faz nada
-    if (!containerPizzas) return;
-
-    containerPizzas.innerHTML = ''; 
-
-    // Itera sobre o catálogo de pizzas (CATALOGO_PIZZAS)
-    for (const id in CATALOGO_PIZZAS) {
-        const pizza = CATALOGO_PIZZAS[id];
-        
-        // Formata o preço para R$ X,XX (usando , como separador decimal)
-        const precoFormatado = pizza.preco.toFixed(2).replace('.', ',');
-
-        // O botão ADD agora chama adicionarAoCarrinho(ID DA PIZZA)
-        const cardHtml = `
-            <div class="card-pizzas">
-                <img src="${pizza.foto}" alt="${pizza.nome}" class="imagem-pizza">
-                <div class="pizza-info">
-                    <p class="pizza-nome">${pizza.nome}</p>
-                    <p class="pizza-preco">R$ ${precoFormatado}</p>
-                    <button class="btn-add-sacola" onclick="adicionarAoCarrinho(${pizza.id})">
-                        <i class="fa-solid fa-cart-shopping"></i> Adicionar
-                    </button>
-                </div>
-            </div>
-        `;
-
-        containerPizzas.innerHTML += cardHtml;
-    }
+function salvarItensCarrinho() {
+    localStorage.setItem('carrinhoItens', JSON.stringify(carrinhoItens));
 }
 
 
 
 
-
-
-// Lógica para a página principal (1pedidos_principais.html)
-if (document.title === 'Página de Pedidos') {
-    // 1. Carrega o carrinho existente (se houver)
-    carregarItensCarrinho(); 
-    // 2. Renderiza as pizzas na tela
-    renderizarPizzas();      
-}
 
 // Lógica para a página do carrinho (3carrinho.html)
 if (document.title === 'Minha Sacola - Trattoria Pizzaria') {

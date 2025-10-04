@@ -126,9 +126,7 @@ body {
     /* Impede que o conteúdo do compartilhar quebre */
 }
 
-/* MEDIA QUERIES PARA O HEADER */
 
-/* Para telas até 800px (tablets e menores) */
 @media screen and (max-width: 800px) {
     .superior {
         padding: 8px;
@@ -323,18 +321,18 @@ body {
 
 /* CARDÁPIO - Ajustes de texto e remoção de background */
 
-.strongRed {
+.pizza-preco {
     font-weight: 700;
     color: var(--marromavermelhado);
 }
 
-.cardapio .item .texto {
+.cardapio .card-pizzas .texto {
     text-align: left;
     /* ALINHA O TEXTO À ESQUERDA */
     /* background-color: green; /* REMOVIDO */
 }
 
-.cardapio .item p {
+.cardapio .card-pizzas .pizza-nome {
     padding: 3px;
     height: 50%;
     font-weight: bold;
@@ -342,7 +340,7 @@ body {
     /* background-color: pink; /* REMOVIDO */
 }
 
-.cardapio .item .legendaImg {
+.cardapio .card-pizzas .pizza-info {
     color: rgba(0, 0, 0, 0.682);
     padding: 3px;
     height: 50%;
@@ -364,7 +362,7 @@ body {
     }
 }
 
-.cardapio .item {
+.cardapio .card-pizzas {
     display: flex;
     flex-direction: row-reverse;
     width: 48%;
@@ -378,19 +376,19 @@ body {
 }
 
 
-.cardapio .item:hover {
+.cardapio .card-pizzas:hover {
     transform: scale(1.02);
     transition: all 0.5s;
 }
 
-.cardapio .item:active {
+.cardapio .card-pizzas:active {
     background-color: rgba(207, 206, 206, 0.592);
     transform: scale(0.98);
     transition: all 0.1s;
 }
 
 @media screen and (max-width: 980px) {
-    .cardapio .item {
+    .cardapio .card-pizzas {
         display: flex;
         flex-direction: row-reverse;
         width: 100%;
@@ -404,12 +402,12 @@ body {
 }
 
 @media screen and (max-width: 870px) {
-    .cardapio .item .imagem {
+    .cardapio .card-pizzas .imagem {
         width: 20vh;
     }
 }
 
-.cardapio .item .imagem {
+.cardapio .card-pizzas .imagem {
     text-align: center;
     width: 30vh;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.34);
