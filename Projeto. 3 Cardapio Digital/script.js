@@ -1,17 +1,18 @@
 
-// Variaveis Globais
-// let precos = [];
+    // Variaveis Globais
+    
 let totalCarrinho = 0;
-let numerosDePedidos = [];  // <-- NOVO: Array para armazenar todos os números de pedidos
-let carrinhoItens = []; // NOVO: Armazenará os objetos do carrinho (ID, QTD, Preço Total)
+let numerosDePedidos = [];
+let carrinhoItens = []; // Array que armazena os objetos do carrinho
 
+const TAXA_ENTREGA = 10.00; // Valor fixo da taxa de entrega
 
-function salvarPedidos() { // --- Nova Função: Salva os números de pedidos no localStorage
+// --- Funções de Pedidos (Mantidas do seu código original) ---
+
+function salvarPedidos() {
     localStorage.setItem('numerosDePedidos', JSON.stringify(numerosDePedidos));
 }
 
-
-// --- Nova Função: Puxa os números de pedidos do localStorage
 function carregarPedidos() {
     const pedidosSalvos = localStorage.getItem('numerosDePedidos');
     if (pedidosSalvos) {
@@ -19,17 +20,36 @@ function carregarPedidos() {
     }
 }
 
+// ------------------------------------------------
+// Lógica para a página de pedidos (1pedidos_principais.html)
+// ------------------------------------------------
 
+// 1. Seleciona todas as divs de pizzas (usando a classe que você indicou: .card-pizzas)
+const itensCardapio = document.querySelectorAll('.card-pizzas');
 
+// 2. Adiciona o Event Listener para adicionar ao carrinho
+if (itensCardapio.length > 0) {
+    itensCardapio.forEach(card => {
+        card.addEventListener('click', () => {
+            // Pega o ID da pizza usando o atributo 'data-id'
+            const pizzaId = card.dataset.id;
+            
+            // Chama a função centralizada de adicionar ao carrinho
+            adicionarAoCarrinho(pizzaId);
+        });
+    });
+}
 
-const mostra = document.querySelector('.special3'); // Exibe o total do carrinho
+// ------------------------------------------------------------------
+// --- LÓGICA DO CARRINHO ---
+// ------------------------------------------------------------------
 
-// --- Nova Função: Salva os preços no localStorage
+// --- Funções de Salvar/Carregar Itens do Carrinho (Adaptadas) ---
+
 function salvarItensCarrinho() {
     localStorage.setItem('carrinhoItens', JSON.stringify(carrinhoItens));
 }
 
-// --- Nova Função: Puxa os preços do localStorage e joga no carrinho
 function carregarItensCarrinho() {
     const itensSalvos = localStorage.getItem('carrinhoItens');
     if (itensSalvos) {
@@ -37,136 +57,280 @@ function carregarItensCarrinho() {
     }
 }
 
-function exibirItensCarrinho() {
-    const container = document.querySelector('.itens-sacola');
+// --- 1. Lógica para Adicionar/Atualizar Item no Carrinho ---
+
+function adicionarAoCarrinho(pizzaId) {
+    // 1. Converte o ID para número (se necessário, mas é melhor garantir)
+    const id = Number(pizzaId);
+
+    // 2. Procura se o item já existe no carrinho
+    const itemExistente = carrinhoItens.find(item => item.id === id);
     
-    // Verifica se o container existe (para evitar erros em outras páginas)
-    if (!container) return; 
-
-    // Limpa o conteúdo (importante para recarregar após um clique de +/- ou exclusão)
-    container.innerHTML = ''; 
-
-    // Se o carrinho estiver vazio, exibe a mensagem de carrinho vazio (opcional)
-    if (carrinhoItens.length === 0) {
-        container.innerHTML = `
-            <div class="carrinho-vazio">
-                <p>Sua sacola está vazia. Adicione algumas pizzas deliciosas!</p>
-                <a href="1pedidos_principais.html">
-                    <button class="btn-voltar-cardapio">Voltar ao Cardápio</button>
-                </a>
-            </div>
-        `;
+    // 3. Busca os dados da pizza no catálogo (do pizzas.js)
+    const pizzaSelecionada = CATALOGO_PIZZAS[id];
+    
+    if (!pizzaSelecionada) {
+        console.error('Pizza não encontrada no catálogo:', id);
         return;
     }
 
+    if (itemExistente) {
+        // Item já existe: Aumenta a quantidade
+        itemExistente.quantidade++;
+        // Recalcula o preço total do item
+        itemExistente.precoTotalItem = itemExistente.quantidade * pizzaSelecionada.preco;
+    } else {
+        // Novo item: Adiciona ao carrinho
+        carrinhoItens.push({
+            id: id,
+            nome: pizzaSelecionada.nome,
+            foto: pizzaSelecionada.foto,
+            precoUnitario: pizzaSelecionada.preco,
+            quantidade: 1,
+            precoTotalItem: pizzaSelecionada.preco
+        });
+    }
+
+    // Salva a alteração no Local Storage
+    salvarItensCarrinho();
+    
+    // Se for clicado na página principal, não precisa renderizar o carrinho imediatamente
+    // (a menos que você queira um feedback visual).
+    // O item estará lá quando o usuário navegar para 3carrinho.html.
+}
+
+
+// --- 2. Lógica de Alteração de Quantidade e Exclusão ---
+
+function aumentarQuantidade(itemId) {
+    const itemIndex = carrinhoItens.findIndex(item => item.id === itemId);
+    
+    if (itemIndex > -1) {
+        const item = carrinhoItens[itemIndex];
+        const pizzaData = CATALOGO_PIZZAS[itemId];
+
+        item.quantidade++;
+        item.precoTotalItem = item.quantidade * pizzaData.preco;
+        
+        salvarItensCarrinho();
+        renderizarItensCarrinho(); // Atualiza a visualização em tempo real
+    }
+}
+
+function diminuirQuantidade(itemId) {
+    const itemIndex = carrinhoItens.findIndex(item => item.id === itemId);
+    
+    if (itemIndex > -1) {
+        const item = carrinhoItens[itemIndex];
+        const pizzaData = CATALOGO_PIZZAS[itemId];
+
+        if (item.quantidade > 1) {
+            item.quantidade--;
+            item.precoTotalItem = item.quantidade * pizzaData.preco;
+            
+            salvarItensCarrinho();
+            renderizarItensCarrinho(); // Atualiza a visualização em tempo real
+        } else {
+            // Se a quantidade for 1, o botão '-' deve excluir o item
+            excluirItemCarrinho(itemId);
+        }
+    }
+}
+
+function excluirItemCarrinho(itemId) {
+    // Filtra o array, removendo o item com o ID correspondente
+    carrinhoItens = carrinhoItens.filter(item => item.id !== itemId);
+    
+    salvarItensCarrinho();
+    renderizarItensCarrinho(); // Atualiza a visualização em tempo real
+}
+
+
+// --- 3. Lógica para Calcular e Exibir os Totais ---
+
+function exibirTotalCarrinho() {
+    // Calcula o subtotal (soma dos precosTotalItem)
+    const subtotal = carrinhoItens.reduce((acc, item) => acc + item.precoTotalItem, 0);
+    const totalComEntrega = subtotal + TAXA_ENTREGA;
+    
+    // Elementos de exibição em 3carrinho.html
+    const spanSubtotal = document.querySelector('.resumo-subtotal span');
+    const spanTotal = document.querySelector('.resumo-total .special3');
+    const spanEntrega = document.querySelector('.resumo-entrega span');
+    
+    // Atualiza a taxa de entrega (pode ser útil se ela não estiver fixa)
+    if (spanEntrega) {
+        spanEntrega.textContent = `R$ ${TAXA_ENTREGA.toFixed(2).replace('.', ',')}`;
+    }
+
+    if (spanSubtotal) {
+        spanSubtotal.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    }
+    
+    if (spanTotal) {
+        spanTotal.textContent = `R$ ${totalComEntrega.toFixed(2).replace('.', ',')}`;
+    }
+}
+
+function mudarQuantidade(pizzaId, mudanca) {
+    const item = carrinhoItens.find(i => i.id === pizzaId);
+    if (!item) return;
+
+    let novoValor = item.quantidade + mudanca;
+    
+    // Se o novo valor for 0 (clicou '-' com QTD=1), REMOVE o item
+    if (novoValor < 1) {
+        excluirItemCarrinho(pizzaId); // Chama a função de remoção
+        return;
+    }
+    
+    // Atualiza a quantidade e recalcula o preço total do item
+    item.quantidade = novoValor;
+    item.precoTotal = item.precoUnitario * novoValor;
+
+    salvarItensCarrinho();
+    exibirItensCarrinho(); 
+    exibirTotalCarrinho();
+}
+
+
+// --- 4. Lógica para Renderizar (Desenhar) os Itens no Carrinho ---
+
+function renderizarItensCarrinho() {
+    const containerItensSacola = document.querySelector('.itens-sacola');
+    if (!containerItensSacola) return;
+    
+    containerItensSacola.innerHTML = ''; // Limpa o carrinho
+    carregarItensCarrinho(); // Garante que os itens mais recentes estão no array
+    
+    if (carrinhoItens.length === 0) {
+        containerItensSacola.innerHTML = '<p style="text-align: center; margin-top: 20px; color: var(--marrom);">Sua sacola está vazia. Adicione algumas pizzas!</p>';
+        exibirTotalCarrinho();
+        return;
+    }
 
     carrinhoItens.forEach(item => {
-        // Usa o ID para buscar os detalhes fixos (nome, foto) no CATALOGO_PIZZAS
-        const pizzaInfo = CATALOGO_PIZZAS[item.id]; 
+        const precoUnitarioFormatado = item.precoUnitario.toFixed(2).replace('.', ',');
+        const precoTotalItemFormatado = item.precoTotalItem.toFixed(2).replace('.', ',');
 
-        // Se por algum motivo o ID não existir mais no catálogo (pizzas.js), ignora o item
-        if (!pizzaInfo) return; 
-
-        // Formata o preço total do item para exibição (R$ X,XX)
-        const precoFormatado = item.precoTotal.toFixed(2).replace('.', ',');
-
-        const novoItemHTML = `
-            <div class="item-sacola" data-id-pizza="${item.id}">
+        // Usa a estrutura do 3carrinho.html, substituindo os valores dinamicamente
+        const itemHTML = `
+            <div class="item-sacola" data-id="${item.id}">
                 <div class="item-sacola-img">
-                    <img src="${pizzaInfo.foto}" alt="${pizzaInfo.nome}">
+                    <img src="${item.foto}" alt="${item.nome}">
                 </div>
+
                 <div class="item-info">
-                    <div class="nome-e-preco">
-                        <p class="item-nome">${pizzaInfo.nome}</p>
-                        <p class="item-preco">R$ ${precoFormatado}</p>
-                    </div>
+                    <p class="item-nome">${item.nome}</p>
+                    <p class="item-preco">R$ ${precoTotalItemFormatado}</p>
                     
-                    <div class="quantidade-container">
-                        <button class="btn-quantidade btn-menos" onclick="mudarQuantidade(${item.id}, -1)">-</button>
-                        <input type="number" class="input-quantidade" value="${item.quantidade}" min="1" readonly>
-                        <button class="btn-quantidade btn-mais" onclick="mudarQuantidade(${item.id}, 1)">+</button>
+
+                    <div class="item-quantidade-controle">
+                        <button class="btn-quantidade btn-menos" onclick="diminuirQuantidade(${item.id})">-</button>
+                        <span class="input-quantidade">${item.quantidade}</span>
+                        <button class="btn-quantidade btn-mais" onclick="aumentarQuantidade(${item.id})">+</button>
                     </div>
-                    
-                    <div class="btn-excluir" onclick="removerItem(${item.id})">
-                        <i class="fa-solid fa-trash-can"></i>
+                </div>
+                    <div class="item-lixeira" onclick="excluirItemCarrinho(${item.id})"><i class="fa-solid fa-trash-can"></i></div>
+            </div>
+        `;
+        containerItensSacola.innerHTML += itemHTML;
+    });
+
+    exibirTotalCarrinho();
+}
+
+
+// --- 5. Lógica para Renderizar os Cards de Pizza na Pagina Principal ---
+
+function renderizarCatalogo() {
+    // Procura o container onde as pizzas serão exibidas (apenas em 1pedidos_principais.html)
+    const container = document.querySelector('.secao-cardapio-pizzas'); 
+
+    if (!container) return; // Sai se não encontrar o container
+
+    for (const pizzaId in CATALOGO_PIZZAS) {
+        const pizza = CATALOGO_PIZZAS[pizzaId];
+        
+        const precoFormatado = pizza.preco.toFixed(2).replace('.', ',');
+
+        // Estrutura do Card (certifique-se de que o CSS para .card-pizzas funciona)
+        const cardHTML = `
+            <div class="card-pizzas" data-id="${pizza.id}">
+                <div class="card-pizzas-img">
+                    <img src="${pizza.foto}" alt="${pizza.nome}">
+                </div>
+                <div class="card-pizzas-info">
+                    <p class="card-pizzas-titulo">${pizza.nome}</p>
+                    <p class="card-pizzas-descricao">Ingredientes deliciosos...</p>
+                    <div class="card-pizzas-preco">
+                        <p>R$ ${precoFormatado}</p>
                     </div>
                 </div>
             </div>
         `;
-        container.innerHTML += novoItemHTML;
-    });
-}
-
-
-
-
-// --- Nova Função: Atualiza o display do total na tela
-function atualizaDisplayTotal() {
-    if (mostra) { // Garante que o elemento existe antes de tentar manipulá-lo
-        mostra.textContent = `R$${totalCarrinho.toFixed(2).replace('.', ',')}`; // converte o valor que vai aparecer na div trocando a acentuaçao apra virgula
+        
+        container.innerHTML += cardHTML;
     }
-}
 
-
-
-
-
-
-// --- Nova Função: Calcula e exibe o total cada vez que dar um clique vai atualizar todas as funçoes anteriores
-function exibirTotalCarrinho() {
-    //  vamos calcular na hora
-    let subtotal = 0; 
-    
-    // Soma os precoTotal de todos os itens no novo array
-    carrinhoItens.forEach(item => {
-        subtotal += item.precoTotal;
-    });
-
-    const taxaEntrega = 10.00; // Valor fixo da taxa de entrega
-    const totalGeral = subtotal + taxaEntrega;
-    
-    // Atualiza os displays
-    const subtotalDisplay = document.querySelector('.resumo-subtotal span');
-    const totalGeralDisplay = document.querySelector('.resumo-total .special3');
-    
-    if (subtotalDisplay) {
-        subtotalDisplay.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-    }
-    
-    if (totalGeralDisplay) {
-        totalGeralDisplay.textContent = `R$ ${totalGeral.toFixed(2).replace('.', ',')}`;
-    }
-}
-
-// ------------------------------------------------
-// Lógica para a página de pedidos (1pedidos_principais.html)
-// ------------------------------------------------
-
-// Seleciona todas as divs de pizzas
-const itensCardapio = document.querySelectorAll('.item');
-
-// Verifica se estamos na página de pedidos e adiciona os event listeners
-if (itensCardapio.length > 0) { //se tiver no itensCardapio for diferente de 0 ou seja se tiver conteudo
-    itensCardapio.forEach(item => {
-        item.addEventListener('click', () => { // Add evento de clique e cria as variaveis abaixo
-            const precoElemento = item.querySelector('.strongRed'); // seleciona o span com preço
-            const precoString = precoElemento.textContent;  // pega o texto somente que esta em precoElemento
-            const precoLimpo = precoString.replace('R$', '').replace(',', '.').trim(); // converte o texto em precoString para R$ trocando virgula para ponto
-            const precoNumero = parseFloat(precoLimpo); // Add decimais em precoLimpo
-
-            precos.push(precoNumero); // Add cada valor add dentro do array
-            //alert(`Preço adicionado: R$${precoNumero.toFixed(2).replace('.', ',')}`); // alert mostra o que você add e o toFixed() define quantos decimais cada numero
-
-            exibirTotalCarrinho(); //Exibe tudo que convertemos ate agora
+    // Adiciona o Evento de Clique para CADA CARD
+    document.querySelectorAll('.card-pizzas').forEach(card => {
+        card.addEventListener('click', (event) => {
+            // event.currentTarget é o elemento .card-pizzas clicado
+            const pizzaId = event.currentTarget.dataset.id;
+            adicionarAoCarrinho(pizzaId);
         });
     });
 }
 
-// ------------------------------------------------
-// Lógica para a página do carrinho (2pedidos.html)
-// ------------------------------------------------
-function criarPedido(){
-    let containerPedidos = document.querySelector('.itens-sacola'); // puxa a section itens sacola
+
+// ------------------------------------------------------------------
+// --- INICIALIZAÇÃO AO CARREGAR A PÁGINA ---
+// ------------------------------------------------------------------
+
+// Executa a lógica de acordo com a página atual
+carregarPedidos(); // Carrega os números de pedidos existentes
+
+if (document.URL.includes('1pedidos_principais.html')) {
+    // Se estiver na página do menu (1pedidos_principais.html), renderiza os cards
+    renderizarCatalogo();
+}
+
+if (document.URL.includes('3carrinho.html')) {
+    // Se estiver na página do carrinho (3carrinho.html), carrega e renderiza os itens
+    carregarItensCarrinho();
+    renderizarItensCarrinho();
+}
+
+
+// ------------------------------------------------------------------
+// Janela Modal (Deixei o código original da modal que estava no seu script.js)
+// ------------------------------------------------------------------
+
+function abrirModal(){
+            const modal = document.getElementById('janelaModal');
+            
+            modal.classList.add('abrir');
+            
+        modal.addEventListener('click', (e) => { // o E é um parametro
+            if(e.target.id == 'close' || e.target.id == 'janelaModal'){ //vai procurar o id close ou janelaModal como alvo(target)
+                
+                // Lógica de Fechamento (Animação de Saída)
+                modal.classList.remove('abrir') // Remove a classe 'abrir', o CSS fará a opacidade ir para 0 em 0.3s
+                
+                // Oculta completamente o elemento após a animação de 0.3s
+                setTimeout(() => {
+                    // Sem a classe 'abrir', o CSS fará com que a modal volte a ter:
+                    // opacity: 0;
+                    // visibility: hidden;
+                    // display: none; // O display: none deve estar no CSS base da .janelaModal para funcionar
+                }, 3000); // 300 milissegundos é o tempo da nossa transition no CSS
+            }
+        }, { once: true }) // Adiciona o { once: true } para que o listener só seja ativado uma vez
+    }
+
+function criarPedido() {
+        let containerPedidos = document.querySelector('.itens-sacola'); // puxa a section itens sacola
     let novoPedido = document.createElement("div");  //cria div vazia e armazena
 
     const numeroUnico = gerarNumeroPedido();
@@ -180,38 +344,10 @@ function criarPedido(){
     
 
     containerPedidos.appendChild(novoPedido); //add novoPedido como filho da section
-
-
 }
 
-// cria numero do pedido
-
-function gerarNumeroPedido() {
-    let novoNumero;
-    let numeroEhDuplicado = false;
-
-    do {
-        // Gera um número aleatório de 5 dígitos (entre 10000 e 99999)
-        novoNumero = Math.floor(Math.random() * 90000) + 10000; 
-        
-        // Verifica se o número já existe no array
-        // A função .includes() é ideal para essa checagem rápida.
-        numeroEhDuplicado = numerosDePedidos.includes(novoNumero);
-        
-    } while (numeroEhDuplicado); // Repete se o número gerado já existir no array
-
-    // Adiciona o novo número único ao array de controle
-    numerosDePedidos.push(novoNumero);
-    salvarPedidos(); // Salva o array atualizado no localStorage
-
-    return novoNumero;
-} // funçao que gera numero aleatorio e agora checa duplicidade
-
-
-
-
-function deletarPedido() { //remove o numero do pedido do html e do localStorage
-    let containerPedidos = document.querySelector('.itens-sacola'); // encontra aonde estão os pedidos
+function deletarPedido() {
+     let containerPedidos = document.querySelector('.itens-sacola'); // encontra aonde estão os pedidos
     
     // 1. Pega o último pedido na lista, se houver
     let ultimoPedido = containerPedidos.lastElementChild;
@@ -239,173 +375,3 @@ function deletarPedido() { //remove o numero do pedido do html e do localStorage
         containerPedidos.removeChild(ultimoPedido);
     }
 }
-
-
-
-
-// ------------------------------------------------
-// Lógica para a página do carrinho (3carrinho.html)
-// ------------------------------------------------
-
-function mudarQuantidade(pizzaId, mudanca) {
-    // 1. Encontra o objeto do item no array
-    const item = carrinhoItens.find(i => i.id === pizzaId);
-    
-    if (!item) return;
-
-    // 2. Aplica a Regra de Negócio (mínimo de 1)
-    let novoValor = item.quantidade + mudanca;
-    if (novoValor < 1) {
-        novoValor = 1;
-    }
-    
-    // Se a quantidade não mudou (clicou '-' quando já era 1), apenas retorna
-    if (novoValor === item.quantidade) return; 
-
-    // 3. Atualiza a quantidade e recalcula o preço total do item
-    item.quantidade = novoValor;
-    item.precoTotal = item.precoUnitario * novoValor;
-
-    // 4. Salva o array modificado no localStorage
-    salvarItensCarrinho();
-    
-    // 5. ATUALIZA A TELA (Recarrega o HTML e o Total)
-    exibirItensCarrinho(); 
-    exibirTotalCarrinho();
-}
-
-
-
-function adicionarAoCarrinho(pizzaId) {
-    const itemExistente = carrinhoItens.find(item => item.id === pizzaId); // find procura o primeiro item que satisfaça a condiçao e retorna true ou false
-
-    const pizza = CATALOGO_PIZZAS[pizzaId];
-
-    if (!pizza) {
-        console.error(`Pizza com ID ${pizzaId} não encontrada no catálogo.`);
-        return;
-    }
-
-    if (itemExistente) {
-        // Se já existe, apenas aumenta a quantidade e recalcula o preço total
-        itemExistente.quantidade++;
-        itemExistente.precoTotal = pizza.preco * itemExistente.quantidade;
-    } else {
-        // Se é novo, adiciona o objeto completo ao carrinho
-        carrinhoItens.push({
-            id: pizza.id,
-            nome: pizza.nome,
-            precoUnitario: pizza.preco,
-            quantidade: 1,
-            precoTotal: pizza.preco // Inicia com o preço unitário
-        });
-    }
-
-    salvarItensCarrinho(); // Salva a nova estrutura de itens
-    // Não precisa atualizar a tela de pedidos, apenas o carrinho precisa ser atualizado na sua página
-    alert(`${pizza.nome} adicionada(o) ao carrinho!`);
-}
-
-
-// script.js (Adicionar em qualquer lugar antes das chamadas de inicialização)
-
-
-// --- NOVA Função: Adiciona um item ao carrinho ou aumenta a quantidade
-function adicionarAoCarrinho(pizzaId) {
-    // 1. Converte o ID, se necessário (o catálogo usa números como chaves, mas o HTML passa string)
-    const idNumerico = Number(pizzaId);
-
-    // 2. Encontra o objeto da pizza no catálogo (do pizzas.js)
-    const pizza = CATALOGO_PIZZAS[idNumerico];
-
-    if (!pizza) {
-        console.error('Pizza com ID ' + idNumerico + ' não encontrada no catálogo.');
-        return;
-    }
-
-    // 3. Procura se o item já existe no carrinhoItens
-    const itemExistente = carrinhoItens.find(item => item.id === idNumerico);
-
-    if (itemExistente) {
-        // Se existir, apenas aumenta a quantidade e recalcula o preço total
-        itemExistente.quantidade++;
-        itemExistente.precoTotal = itemExistente.quantidade * itemExistente.precoUnitario;
-    } else {
-        // Se não existir, adiciona o novo item ao array
-        carrinhoItens.push({
-            id: pizza.id,
-            quantidade: 1,
-            precoUnitario: pizza.preco, // Preço unitário (importante para o cálculo)
-            precoTotal: pizza.preco // Preço inicial (1 * preco)
-        });
-    }
-
-    // 4. Salva o carrinho atualizado no localStorage
-    salvarItensCarrinho();
-
-    // OPCIONAL: Abrir a Janela Modal para dar feedback
-    // if (typeof abrirModal === 'function') {
-    //     abrirModal(`"${pizza.nome}" adicionada à sacola!`);
-    // }
-
-    console.log(`Pizza ID ${idNumerico} adicionada. Carrinho atual:`, carrinhoItens);
-}
-
-// Sua função salvarItensCarrinho() já existe:
-
-function salvarItensCarrinho() {
-    localStorage.setItem('carrinhoItens', JSON.stringify(carrinhoItens));
-}
-
-
-
-
-
-// Lógica para a página do carrinho (3carrinho.html)
-if (document.title === 'Minha Sacola - Trattoria Pizzaria') {
-    // Carrega o carrinho para garantir que os dados de persistência estejam prontos
-    carregarItensCarrinho(); 
-    // Exibe o HTML dos itens
-    exibirItensCarrinho();   
-    // Calcula e exibe o total
-    exibirTotalCarrinho();   
-}
-
-
-carregarPedidos(); // NOVO: Carrega os números de pedidos existentes ao iniciar
-
-
-
-
-
-
-
-
-
-
-// ------------------------------------------------
-// Janela Modal
-// ------------------------------------------------
-
-
-function abrirModal(){
-            const modal = document.getElementById('janelaModal');
-            
-            modal.classList.add('abrir');
-            
-        modal.addEventListener('click', (e) => { // o E é um parametro
-            if(e.target.id == 'close' || e.target.id == 'janelaModal'){ //vai procurar o id close ou janelaModal como alvo(target)
-                
-                // Lógica de Fechamento (Animação de Saída)
-                modal.classList.remove('abrir') // Remove a classe 'abrir', o CSS fará a opacidade ir para 0 em 0.3s
-                
-                // Oculta completamente o elemento após a animação de 0.3s
-                setTimeout(() => {
-                    // Sem a classe 'abrir', o CSS fará com que a modal volte a ter:
-                    // opacity: 0;
-                    // visibility: hidden;
-                    // display: none; // O display: none deve estar no CSS base da .janelaModal para funcionar
-                }, 3000); // 300 milissegundos é o tempo da nossa transition no CSS
-            }
-        }, { once: true }) // Adiciona o { once: true } para que o listener só seja ativado uma vez
-    }
