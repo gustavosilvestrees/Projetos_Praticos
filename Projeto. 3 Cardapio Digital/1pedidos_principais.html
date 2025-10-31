@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="card-pizzas">
+            <div class="card-pizzas" id="pizza-3" data-id-pizza="3" onclick="adicionarAoCarrinho(3)">
                 <div class="imagem"><img class="miniImg" src="cardapio/3siciliana.png" alt="Pizza Siciliana"></div>
                 <div class="pizza-dados">
                     <p class="pizza-nome">Pizza Siciliana<br>
@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="card-pizzas">
+            <div class="card-pizzas" id="pizza-4" data-id-pizza="4" onclick="adicionarAoCarrinho(4)">
                 <div class="imagem"><img class="miniImg" src="cardapio/4escarola.png" alt="Pizza de Escarola"></div>
                 <div class="pizza-dados">
                     <p class="pizza-nome">Pizza de Escarola<br>
@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="card-pizzas">
+            <div class="card-pizzas" id="pizza-5" data-id-pizza="5" onclick="adicionarAoCarrinho(5)">
                 <div class="imagem"><img class="miniImg" src="cardapio/5quatro_queijos.png" alt="Pizza 4 Queijos"></div>
                 <div class="pizza-dados">
                     <p class="pizza-nome">Pizza 4 Queijos<br>
@@ -93,7 +93,7 @@
                 </div>
             </div>
 
-            <div class="card-pizzas">
+            <div class="card-pizzas" id="pizza-6" data-id-pizza="6" onclick="adicionarAoCarrinho(6)">
                 <div class="imagem"><img class="miniImg" src="cardapio/6baiana.png" alt="Pizza Baiana"></div>
                 <div class="pizza-dados">
                     <p class="pizza-nome">Pizza Baiana<br>
@@ -104,11 +104,11 @@
                 </div>
             </div>
 
-            <div class="card-pizzas">
+            <div class="card-pizzas" id="pizza-7" data-id-pizza="7" onclick="adicionarAoCarrinho(7)">
                 <div class="imagem"><img class="miniImg" src="cardapio/7bacon_e_mussarela.png"
                         alt="Pizza Bacon e Mussarela"></div>
                 <div class="pizza-dados">
-                    <p class="pizza-nome">Pizza Bacon e Mussarela<br>
+                    <p class="pizza-nome">Pizza de Bacon e Mussarela<br>
                         <strong class="pizza-preco">R$31,90</strong>
                     </p>
                     <div class="pizza-info">A combinação perfeita de bacon crocante e a cremosidade da mussarela. Sabor
@@ -116,7 +116,7 @@
                 </div>
             </div>
 
-            <div class="card-pizzas">
+            <div class="card-pizzas" id="pizza-8" data-id-pizza="8" onclick="adicionarAoCarrinho(8)">
                 <div class="imagem"><img class="miniImg" src="cardapio/8toscana.png" alt="Pizza Toscana"></div>
                 <div class="pizza-dados">
                     <p class="pizza-nome">Pizza Toscana<br>
@@ -127,7 +127,7 @@
                 </div>
             </div>
 
-            <div class="card-pizzas">
+            <div class="card-pizzas" id="pizza-9" data-id-pizza="9" onclick="adicionarAoCarrinho(9)">
                 <div class="imagem"><img class="miniImg" src="cardapio/9portuguesa.png" alt="Pizza Portuguesa"></div>
                 <div class="pizza-dados">
                     <p class="pizza-nome">Pizza Portuguesa<br>
@@ -138,7 +138,7 @@
                 </div>
             </div>
 
-            <div class="card-pizzas">
+            <div class="card-pizzas" id="pizza-10" data-id-pizza="10" onclick="adicionarAoCarrinho(10)">
                 <div class="imagem"><img class="miniImg" src="cardapio/10bigmac.png" alt="Pizza Big Mac"></div>
                 <div class="pizza-dados">
                     <p class="pizza-nome">Pizza Big Mac<br>
@@ -149,7 +149,7 @@
                 </div>
             </div>
 
-            <div class="card-pizzas">
+            <div class="card-pizzas" id="pizza-11" data-id-pizza="11" onclick="adicionarAoCarrinho(11)">
                 <div class="imagem"><img class="miniImg" src="cardapio/11pepperoni.png" alt="Pizza de Pepperoni"></div>
                 <div class="pizza-dados">
                     <p class="pizza-nome">Pizza de Pepperoni<br>
@@ -159,7 +159,7 @@
                         picante na medida certa.</div>
                 </div>
             </div>
-            <div class="card-pizzas">
+            <div class="card-pizzas" id="pizza-12" data-id-pizza="12" onclick="adicionarAoCarrinho(12)">
                 <div class="imagem"><img class="miniImg" src="cardapio/12frango_catupiry.png"
                         alt="Pizza de Frango com Catupiry"></div>
                 <div class="pizza-dados">
@@ -202,9 +202,30 @@
     <section id="idModal">
         <div class="janelaModal" id="janelaModal"> <!-- Deixa fundo do site escuro -->
         <div class="modal"> <!-- A janela e o conteudo -->
+            <div id="tituloModal">
                 <button class="close" id="close">X</button>
-                <h1>Janela Modal</h1>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, voluptate similique deserunt nam ut adipisci ipsam hic neque ea voluptas dolores placeat sunt doloremque. Cumque nam accusamus odit minus ullam.</p>
+                    <h1>Titulo da Pizza</h1>
+                </div>
+
+                <div id="descrioModal">
+                    <div id="imgModal1"><img id="imgModal2" src="cardapio/10bigmac.png" alt=""></div>
+
+                    <p id="descrioModal">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, voluptate similique deserunt nam ut adipisci ipsam hic neque ea voluptas dolores placeat sunt doloremque. Cumque nam accusamus odit minus ullam.</p>
+
+                    <p id="pPreco">21,90</p>
+
+                    <input type="text" name="Observação" id="observação" placeholder="Descrição">
+                </div>
+                <div id="barracinza"></div>
+                
+                <div id="quantidadeModal">
+                    <div id="AlinhamentoModalInf">
+                        <button class="btn-quantidade2">+</button>
+                        <div class="quantidadeInput">1</div>
+                        <button class="btn-quantidade2">-</button>
+                    </div>
+                    <button class="btn-finalizar2">Adicionar</button>
+                </div>
             </div>
         </div>
     </section>
@@ -270,11 +291,20 @@
 
     DIA 07:
     
-    1. Reformular a arquitetura da pagina add ID nas pizzas 🟦
+    1. Reformular a arquitetura da pagina add ID nas pizzas ✅
     2. Criar arquivo a parte para ser banco de dados de pizzas ✅
-    3. fazer pag buscar os produtos desejados e exibir no carrinho
-    4. add funcionalidade de excluir os intens do carrinho
-    5. add funcionalidade de add e sub os preços do carrinho
+    3. fazer pag buscar os produtos desejados e exibir no carrinho ✅
+    4. add funcionalidade de excluir os intens do carrinho ✅
+    5. add funcionalidade de add e sub os preços do carrinho ✅
+
+        DIA 08:
+
+    1. Corrigir funcionalidades de sacola ✅
+
+    DIA 09:
+
+    1. Colocar dados na janela modal 
+    2. Reformular a arquitetura da pagina add ID nas pizzas ✅
 
       
  -->

@@ -912,7 +912,7 @@ body {
         }
         
         .modal{
-            width: 60%;
+            width: 50%;
             min-width: 400px;
             min-height: 200px;
             background-color: #ffffffb2;
@@ -957,3 +957,120 @@ body {
         animation: abrirmodal 0.2s;
 
     }
+    #idModal h1{
+        display: flex;
+        justify-content: center;
+        padding: 3px;
+        border-bottom: solid 2px gray;
+    }
+
+     #imgModal1{
+        display: flex;
+        justify-content: center;
+     }
+
+    #imgModal2{
+        display: flex;
+        width: 400px;
+        height: 300px;
+        border-radius: 10px;
+        justify-content: center;
+    }
+
+    #quantidadeModal{   
+        margin-top: 20px;
+        height: 60px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #barracinza{
+        border-top: 2px solid gray;
+    }
+
+
+    #descrioModal{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #pPreco{
+        font-weight: bold;
+        font-size: 1.5em;
+        color: var(--vermelho);
+    }
+    
+    #observação{
+        display: flex;
+        border: 1px solid gray;
+        border-radius: 5px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        width: 100%;
+        height: 80px;
+        font-size: 1em;
+
+    }
+    
+    .quantidadeInput{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.101);
+        backdrop-filter: blur(2px);
+        border-radius: 5px;
+        width: 80px;
+        height: 100%;
+        font-size: 2em;
+        margin-right: 8%;
+        margin-left: 8%;
+    }
+
+    #AlinhamentoModalInf{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 350px;
+
+    }
+
+    #addCarrinho{
+        width: 400px;
+        height: 100%;
+    }
+
+    .btn-quantidade2 {
+    width: 60px;
+    height: 60px;
+    background-color: var(--amarelo);
+    border: 2px solid orange;
+    border-radius: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.btn-finalizar2 {
+    background-color: var(--vermelho);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    width: 40%;
+    /* Ocupa a largura total */
+}
+
+
+.btn-finalizar2:hover {
+    background-color: #c91a1a;
+    /* Tom mais escuro do vermelho no hover */
+}

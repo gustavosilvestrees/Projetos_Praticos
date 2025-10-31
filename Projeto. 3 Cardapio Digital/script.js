@@ -1,4 +1,4 @@
-
+abrirModal()
     // Variaveis Globais
     
 let totalCarrinho = 0;
@@ -35,6 +35,7 @@ if (itensCardapio.length > 0) {
             const pizzaId = card.dataset.id;
             
             // Chama a função centralizada de adicionar ao carrinho
+            abrirModal();
             adicionarAoCarrinho(pizzaId);
         });
     });
@@ -50,53 +51,68 @@ function salvarItensCarrinho() {
     localStorage.setItem('carrinhoItens', JSON.stringify(carrinhoItens));
 }
 
+// --- Função: Puxa os itens do localStorage e joga no carrinho ---
 function carregarItensCarrinho() {
     const itensSalvos = localStorage.getItem('carrinhoItens');
     if (itensSalvos) {
-        carrinhoItens = JSON.parse(itensSalvos);
+        // Converte de volta para objeto JavaScript (carrinhoItens deve ter IDs como number)
+        carrinhoItens = JSON.parse(itensSalvos); 
+        
+        // CORREÇÃO DE TIPO (Caso o JSON.parse não mantenha os IDs como Number)
+        // Isso garante que os IDs sejam numéricos, evitando o erro de não encontrar o item.
+        carrinhoItens = carrinhoItens.map(item => ({
+            ...item,
+            id: Number(item.id) 
+        }));
+    } else {
+        carrinhoItens = []; // Garante que é um array vazio se não houver nada salvo
     }
 }
 
 // --- 1. Lógica para Adicionar/Atualizar Item no Carrinho ---
 
 function adicionarAoCarrinho(pizzaId) {
-    // 1. Converte o ID para número (se necessário, mas é melhor garantir)
+    // 1. OBRIGATÓRIO: Carrega os itens existentes do Local Storage. 
+    // Se não fizer isso, o 'carrinhoItens' estará vazio e a nova pizza SOBRESCREVERÁ a anterior no localStorage.
+    carregarItensCarrinho(); 
+    
+    // 2. Converte o ID (que vem do HTML como string) para número, garantindo a correspondência
     const id = Number(pizzaId);
 
-    // 2. Procura se o item já existe no carrinho
+    // 3. Procura se o item já existe no carrinho (com o ID numérico)
     const itemExistente = carrinhoItens.find(item => item.id === id);
     
-    // 3. Busca os dados da pizza no catálogo (do pizzas.js)
-    const pizzaSelecionada = CATALOGO_PIZZAS[id];
+    // 4. Busca os dados da pizza no catálogo (do pizzas.js)
+    // Certifique-se de que a busca use a string do ID, se o CATALOGO_PIZZAS for um objeto JS:
+    const pizzaSelecionada = CATALOGO_PIZZAS[pizzaId]; // Usa pizzaId (string) como chave do objeto
     
     if (!pizzaSelecionada) {
-        console.error('Pizza não encontrada no catálogo:', id);
+        console.error('Pizza não encontrada no catálogo:', pizzaId);
         return;
     }
 
     if (itemExistente) {
         // Item já existe: Aumenta a quantidade
         itemExistente.quantidade++;
-        // Recalcula o preço total do item
         itemExistente.precoTotalItem = itemExistente.quantidade * pizzaSelecionada.preco;
     } else {
         // Novo item: Adiciona ao carrinho
         carrinhoItens.push({
-            id: id,
+            id: id, // Armazena o ID como número
             nome: pizzaSelecionada.nome,
             foto: pizzaSelecionada.foto,
             precoUnitario: pizzaSelecionada.preco,
             quantidade: 1,
-            precoTotalItem: pizzaSelecionada.preco
+            precoTotalItem: pizzaSelecionada.preco // Preço unitário, pois QTD=1
         });
     }
 
-    // Salva a alteração no Local Storage
+    // 5. Salva a alteração (agora com todos os itens) no Local Storage
     salvarItensCarrinho();
     
-    // Se for clicado na página principal, não precisa renderizar o carrinho imediatamente
-    // (a menos que você queira um feedback visual).
-    // O item estará lá quando o usuário navegar para 3carrinho.html.
+    // Opcional: Se você quiser uma atualização visual imediata (ex: um contador) na página principal
+    // Você pode chamar renderizarItensCarrinho(); se o usuário estiver na página 3carrinho.html, 
+    // mas geralmente é melhor deixar a renderização para quando a página do carrinho carrega.
 }
 
 
@@ -196,25 +212,31 @@ function mudarQuantidade(pizzaId, mudanca) {
 
 // --- 4. Lógica para Renderizar (Desenhar) os Itens no Carrinho ---
 
+
+
 function renderizarItensCarrinho() {
     const containerItensSacola = document.querySelector('.itens-sacola');
     if (!containerItensSacola) return;
     
-    containerItensSacola.innerHTML = ''; // Limpa o carrinho
-    carregarItensCarrinho(); // Garante que os itens mais recentes estão no array
-    
+    // 1. Limpa o container
+    containerItensSacola.innerHTML = ''; 
+    carregarItensCarrinho(); // Garante que o array está carregado
+
     if (carrinhoItens.length === 0) {
         containerItensSacola.innerHTML = '<p style="text-align: center; margin-top: 20px; color: var(--marrom);">Sua sacola está vazia. Adicione algumas pizzas!</p>';
         exibirTotalCarrinho();
         return;
     }
-
+    
+    // 2. Constrói o HTML de todos os itens
+    let htmlContent = '';
+    
     carrinhoItens.forEach(item => {
-        const precoUnitarioFormatado = item.precoUnitario.toFixed(2).replace('.', ',');
+        // ATENÇÃO: Verifique se 'precoTotalItem' ou 'precoTotal' é o nome correto no seu objeto
         const precoTotalItemFormatado = item.precoTotalItem.toFixed(2).replace('.', ',');
 
-        // Usa a estrutura do 3carrinho.html, substituindo os valores dinamicamente
-        const itemHTML = `
+        // Estrutura HTML de CADA item (certifique-se de que corresponde ao seu CSS)
+        htmlContent += `
             <div class="item-sacola" data-id="${item.id}">
                 <div class="item-sacola-img">
                     <img src="${item.foto}" alt="${item.nome}">
@@ -224,19 +246,21 @@ function renderizarItensCarrinho() {
                     <p class="item-nome">${item.nome}</p>
                     <p class="item-preco">R$ ${precoTotalItemFormatado}</p>
                     
-
                     <div class="item-quantidade-controle">
                         <button class="btn-quantidade btn-menos" onclick="diminuirQuantidade(${item.id})">-</button>
                         <span class="input-quantidade">${item.quantidade}</span>
                         <button class="btn-quantidade btn-mais" onclick="aumentarQuantidade(${item.id})">+</button>
                     </div>
                 </div>
-                    <div class="item-lixeira" onclick="excluirItemCarrinho(${item.id})"><i class="fa-solid fa-trash-can"></i></div>
+                <div class="item-lixeira" onclick="excluirItemCarrinho(${item.id})"><i class="fa-solid fa-trash-can"></i></div>
             </div>
         `;
-        containerItensSacola.innerHTML += itemHTML;
     });
 
+    // 3. Adiciona todo o HTML de uma vez ao container
+    containerItensSacola.innerHTML = htmlContent;
+
+    // 4. Atualiza os totais
     exibirTotalCarrinho();
 }
 
@@ -307,10 +331,14 @@ if (document.URL.includes('3carrinho.html')) {
 // Janela Modal (Deixei o código original da modal que estava no seu script.js)
 // ------------------------------------------------------------------
 
+
+
+
+
 function abrirModal(){
-            const modal = document.getElementById('janelaModal');
+        const modal = document.getElementById('janelaModal');
             
-            modal.classList.add('abrir');
+        modal.classList.add('abrir');
             
         modal.addEventListener('click', (e) => { // o E é um parametro
             if(e.target.id == 'close' || e.target.id == 'janelaModal'){ //vai procurar o id close ou janelaModal como alvo(target)
@@ -330,7 +358,7 @@ function abrirModal(){
     }
 
 function criarPedido() {
-        let containerPedidos = document.querySelector('.itens-sacola'); // puxa a section itens sacola
+    let containerPedidos = document.querySelector('.itens-sacola'); // puxa a section itens sacola
     let novoPedido = document.createElement("div");  //cria div vazia e armazena
 
     const numeroUnico = gerarNumeroPedido();
