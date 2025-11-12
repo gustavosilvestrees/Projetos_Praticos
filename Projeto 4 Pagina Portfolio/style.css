@@ -1,117 +1,90 @@
-/* Estilos globais e reset básico */
-body {
-    margin: 0;
-    font-family: sans-serif; /* Apenas para visualização */
+@charset "UTF-8";
+
+*{
+    margin: 0px;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #101010;
+}
+
+#logoSite{
+    background-color: green;
+    width: 20%;
     color: white;
-    background-color: #0d0d1e; /* Um fundo escuro para simular o tema */
-    padding: 20px;
-}
-
-h1, h2, h3 {
+    font-size: 2em;
     text-align: center;
+    
 }
 
-/* 1. BLOCO 1: CABEÇALHO/INTRODUÇÃO (ROXO/LARANJA) */
-.header {
-    min-height: 400px;
-    background-color: #ff8c00; /* LARANJA - Cor da marcação externa */
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-}
-
-.perfil-card {
-    min-height: 350px;
-    background-color: #9400d3; /* ROXO - Cor da marcação interna */
-    padding: 15px;
-    border-radius: 8px;
+#alinhamentoNav{
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-/* 2. BLOCO 2: SOBRE MIM (ROSA NEON) */
-.sobre-mim {
-    min-height: 300px;
-    background-color: #ff00ff; /* ROSA NEON - Cor da marcação */
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-}
-
-.bio-container {
-    background-color: rgba(255, 0, 255, 0.4); /* Uma variação do rosa para o fundo */
-    padding: 15px;
-    border-radius: 8px;
-}
-
-/* 3. BLOCO 3: SKILLS/HABILIDADES (CIANO/AZUL CLARO) */
-.tech-skills {
-    min-height: 350px;
-    background-color: #00ffff; /* CIANO/AZUL CLARO - Cor da marcação */
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-}
-
-.skills-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
-
-.skill-item {
-    padding: 15px 25px;
-    background-color: rgba(0, 255, 255, 0.3);
-    border: 1px solid #00ffff;
-    border-radius: 5px;
-    text-align: center;
-}
-
-/* 4. BLOCO 4: PROJETOS (VERDE NEON) */
-.projetos {
-    min-height: 450px;
-    background-color: #00ff00; /* VERDE NEON - Cor da marcação */
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-}
-
-.projetos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    justify-content: center;
-}
-
-.projeto-card {
-    min-height: 150px;
-    background-color: rgba(0, 255, 0, 0.3);
-    border: 1px solid #00ff00;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-/* 5. BLOCO 5: CONTATO (AZUL ESCURO) */
-.contato-rodape {
-    min-height: 300px;
-    background-color: #00008b; /* AZUL ESCURO - Cor da marcação principal */
-    padding: 20px 20px 0; /* Padding no topo e laterais */
-    border-radius: 10px 10px 0 0;
-}
-
-.contato-container {
-    display: flex;
-    justify-content: space-around;
-}
-
-.direitos-autorais {
-    background-color: #4b0082; /* ROXO ESCURO - Cor da marcação do rodapé inferior */
-    text-align: center;
     padding: 10px;
-    margin-top: 20px;
-    border-radius: 0 0 8px 8px;
+}
+
+.botaoNav{
+    width: 120px;
+    height: 50px;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 80px;
+}
+
+#Perfil{
+    background-color: brown;
+    width: 100%;
+    display: flex;
+}
+
+#Avatar{
+    background-color: red;
+    height: 500px;
+    width: 40%;
+
+}
+
+#quadradoBG{
+    background-color: aqua;
+    height: 500px;
+    width: 55%;
+    margin-left: 20px;
+}
+
+#Sobre{
+    background-color: pink;
+    width: 100%;
+    height: 300px;
+}
+
+#techSkills{
+    background-color: yellow;
+    width: 100%;
+    height: 300px;
+}
+
+#projects{
+    background-color: magenta;
+    width: 100%;
+    height: 300px;
+}
+
+.Contato{
+    background-color: sandybrown;
+    width: 100%;
+    height: 300px;
+}
+
+#footer{
+    background-color: blueviolet;
+    width: 100%;
+    height: 300px;
 }
