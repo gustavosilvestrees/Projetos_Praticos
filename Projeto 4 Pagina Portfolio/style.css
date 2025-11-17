@@ -2,6 +2,7 @@
 
 *{
     margin: 0px;
+    box-sizing: border-box;
 }
 
 body{
@@ -62,7 +63,16 @@ nav{
 #Sobre{
     background-color: pink;
     width: 100%;
-    height: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#containerSobre{
+    display: flex;
+    flex: 1;
+    gap: 10px;
 }
 
 #techSkills{
@@ -81,6 +91,25 @@ nav{
     background-color: sandybrown;
     width: 100%;
     height: 300px;
+}
+
+#pesquisaFake{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blue;
+    width: 100%;
+    height: 50px;
+}
+
+#alinhamentoSobre{
+    background-color: yellow;
+    flex: 1;
+}
+
+#asideSobre{
+    background-color: orange;
+    flex: 1;
 }
 
 #footer{
