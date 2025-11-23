@@ -10,35 +10,73 @@ body{
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #101010;
+    overflow-x: hidden;
 }
 
 #logoSite{
     background-color: green;
-    width: 20%;
     color: white;
     font-size: 2em;
     text-align: center;
-    
+    white-space: nowrap;
 }
+
 
 #alinhamentoNav{
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 10px;
+    margin-left: auto;
+    padding: 10px 20px; /* Controla o espaço */
+    min-width: 0; /* Controla o espaço */
+    flex-shrink: 1; /* Controla o espaço */
+    overflow: hidden; /* Tira rolagem */
+}
+
+#alinhamentoB{
+    display: flex;
+    gap: 8px;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .botaoNav{
-    width: 120px;
-    height: 50px;
+    width: auto;
+    min-width: 90px;
+    height: 40px;
+    background-color: transparent;
+    font-size: 0.95em;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    padding: 0 20px;
+    white-space: nowrap;
 }
 
-nav{
+.botaoNav:hover{
+    cursor: pointer;
+    background-color: #0AB8D6;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0px 0px 8px whitesmoke;
+    transition:  0.5s;
+}
+
+nav#menu{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 80px;
+    background-color: #1a1a1a;
+    overflow: hidden;
+    border-bottom: 2px solid #282828;
 }
+
+/* HOME PAGE  */
+
 
 #Perfil{
     background-color: brown;
@@ -55,9 +93,13 @@ nav{
 
 #quadradoBG{
     background-color: aqua;
-    height: 500px;
+    height: 550px;
     width: 55%;
     margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    clip-path: polygon(50px 0, calc(100% - 50px) 0, 100% 50px, 100% calc(100% - 50px), calc(100% - 50px) 100%, 50px 100%, 0 calc(100% - 50px), 0 50px);
+    border: 1px solid #0A3D66;
 }
 
 #Sobre{
