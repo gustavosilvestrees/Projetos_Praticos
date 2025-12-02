@@ -222,14 +222,176 @@ nav#menu{
     gap: 10px;
 }
 
+#pesquisaFake{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: blue;
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+#pesquisaFake p{
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+#lupa{
+    background-color: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+#alinhamentoAside{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: 600px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#alinhamentoSobre{
+    background-color: #FFFF00;
+    flex: 1;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+#textoFake1{
+    background-color: #FF4444;
+    width: 100%;
+    height: 80px;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #0AB8D6;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+#textoSobre{
+    background-color: #FF9500;
+    width: 100%;
+    height: 300px;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: white;
+    font-size: 0.9em;
+    line-height: 1.6;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+#asideSobre{
+    background-color: #FF1493;
+    flex: 1;
+    width: 50%;
+    height: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+
+/* TECNOLOGIAS  */
+
+
+
+
+
 #techSkills{
     background-color: yellow;
     width: 100%;
-    height: 300px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#projects{
+#techSkills h1{
+    text-align: center;
+    color: #333;
+    font-size: 2em;
+    margin: 0 0 30px 0;
+}
+
+#alinhamentoTech{
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+    min-width: 200px;
+    justify-content: center;
+    align-items: center;
+}
+
+.col h2{
+    color: #333;
+    font-size: 1.3em;
+    margin: 0;
+}
+
+.hexagonoId{
+    position: relative;
+    width: 10em;
+    height: 6.1em;
     background-color: magenta;
+    margin: 20% auto 10% auto;
+    border-radius: 1em / 0.577em;
+}
+
+.hexagonoId::before, .hexagonoId::after{
+    content: '';
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background: inherit;
+    border-radius: 0.5em;
+}
+
+.hexagonoId::before{
+    transform: rotate(60deg);
+}
+
+.hexagonoId::after{
+    transform: rotate(-60deg);
+}
+
+.HCol{
+    background-color: lightgray;
+}
+
+
+/* PROJETOS  */
+
+
+
+#projects{
+    background-color: lightseagreen;
     width: 100%;
     height: 300px;
 }
@@ -240,24 +402,7 @@ nav#menu{
     height: 300px;
 }
 
-#pesquisaFake{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: blue;
-    width: 100%;
-    height: 50px;
-}
 
-#alinhamentoSobre{
-    background-color: yellow;
-    flex: 1;
-}
-
-#asideSobre{
-    background-color: orange;
-    flex: 1;
-}
 
 #footer{
     background-color: blueviolet;
