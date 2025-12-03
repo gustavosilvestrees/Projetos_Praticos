@@ -393,25 +393,273 @@ nav#menu{
 #projects{
     background-color: lightseagreen;
     width: 100%;
+
 }
 
 .containerProject{
     background-color: coral;
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 300px;
     border: 2px solid rgb(16, 9, 93);
+    box-sizing: border-box; /* Garante que a borda e o padding (se houver) não aumentem o tamanho total de 400x400 */
 }
 
-.Contato{
-    background-color: sandybrown;
+#alinhamentoContainer{
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center; 
+    padding: 20px;
+}
+
+#contact {
+    background-color: #0d1117; /* Fundo escuro */
+    padding: 50px 0;
     width: 100%;
-    height: 300px;
+    min-height: 80vh; /* Altura mínima para visualização */
+}
+
+/* alignEffect: Contêiner principal que coloca as duas colunas lado a lado */
+.alignEffect {
+    /* 1. Alinha as colunas lado a lado (curriculoCon e formContatos) */
+    display: flex;
+    /* 2. Cria espaçamento entre as colunas */
+    gap: 40px;
+    /* 3. Centraliza o bloco inteiro horizontalmente */
+    justify-content: center;
+    /* 4. Permite que o contêiner interno tenha um tamanho definido */
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ------------------ COLUNA ESQUERDA (CURRÍCULO) ------------------ */
+
+.curriculoCon {
+    /* Largura e altura aproximadas da imagem de referência */
+    width: 450px;
+    height: 600px;
+    
+    /* Layout interno da coluna (elementos empilhados) */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    /* Estilo de borda neon da referência */
+    border: 3px solid #00ffff; 
+    box-shadow: 0 0 15px #00ffff;
+    padding: 20px;
+    background-color: #161b22;
+}
+
+.curriculoImg {
+    /* Div da imagem de monitor/celular */
+    height: 200px; 
+    /* Coloque a imagem de fundo aqui: */
+    /* background-image: url('caminho-para-sua-imagem'); */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #333; /* Apenas para visualização */
+}
+
+.contactLinks, .bannerC {
+    color: #00ffff; /* Texto azul neon */
+    font-family: monospace;
+    padding: 10px;
+}
+
+.bannerC {
+    height: 80px;
+    border: 2px solid #ff4500; /* Borda cor de destaque */
+    box-shadow: 0 0 10px #ff4500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+/* ------------------ COLUNA DIREITA (FORMULÁRIO) ------------------ */
+
+.formContatos {
+    /* Largura e altura aproximadas da imagem de referência */
+    width: 550px;
+    height: 600px;
+    
+    /* Estilo de borda neon da referência */
+    border: 3px solid #ff00ff; /* Cor magenta/roxo para o formulário */
+    box-shadow: 0 0 15px #ff00ff;
+    padding: 20px;
+    background-color: #161b22;
+}
+
+.formContatos form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empurra o botão 'ENVIAR' para baixo */
+}
+
+.formC {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre os campos */
+}
+
+.formC label {
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.formC input[type="text"], 
+.formC input[type="email"], 
+.formC textarea {
+    background-color: #24292e; /* Fundo dos campos escuro */
+    color: #fff;
+    border: 2px solid #ff4500; /* Borda laranja de destaque */
+    padding: 10px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.formContatos textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+    height: 100px;
+}
+
+/* Botão Enviar */
+.enviar {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fff;
+    /* Gradiente para replicar o efeito da imagem */
+    background: linear-gradient(90deg, #ff00ff, #00ffff); 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 20px; /* Garante que haja espaço */
+}
+
+.enviar:hover {
+    box-shadow: 0 0 15px #ff00ff, 0 0 15px #00ffff;
+    transform: scale(1.02);
 }
 
 
+/* FOOTER */
 
-#footer{
-    background-color: blueviolet;
+footer {
+    background-color: #0d1117; /* Fundo escuro (mesmo da seção de contato) */
     width: 100%;
-    height: 300px;
+    /* Altura ajustada para o conteúdo */
+    padding: 30px 0 0 0; 
+    box-sizing: border-box;
+}
+
+/* alinhaFooter: Contêiner da linha superior (f1 e f2) */
+#alinhaFooter {
+    display: flex;
+    justify-content: space-around; /* Distribui f1 e f2 */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border-bottom: 2px solid #24292e; /* Linha divisória fina */
+}
+
+/* ------------------ f1: Direitos Autorais ------------------ */
+
+#f1 {
+    width: 300px;
+    height: 150px;
+    border: 1px solid #00ffff; /* Borda azul clara */
+    box-shadow: 0 0 8px #00ffff;
+    padding: 15px;
+    background-color: #161b22;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+#f1 .copyright, #f1 .tech-uiux {
+    color: #fff;
+    font-size: 0.9em;
+    margin: 0;
+}
+
+/* ------------------ f2: Feito com React e Redes Sociais ------------------ */
+
+#f2 {
+    /* Ocupa o espaço central */
+    flex-grow: 1; 
+    max-width: 600px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+#f2 .feito-com {
+    /* Estilo do balão de React */
+    background: #161b22;
+    color: #00ffff;
+    border: 3px solid #ff00ff; /* Borda roxa/magenta */
+    box-shadow: 0 0 15px #ff00ff, 0 0 5px #00ffff;
+    border-radius: 40px;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons .icon {
+    /* Placeholder para os ícones */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #00ffff;
+    background-color: transparent;
+    box-shadow: 0 0 5px #00ffff;
+}
+
+/* ------------------ f3: Mensagem Final ------------------ */
+
+#f3 {
+    background-color: #24292e; /* Fundo mais escuro para a linha inferior */
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 3px solid #ff4500; /* Borda cor de destaque */
+}
+
+#f3 p {
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 500;
+    margin: 0;
+}
+
+#f3 p span {
+    /* Para a palavra "incrível" em neon */
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+/* Removendo a div de direitos autorais duplicada */
+.direitos-autorais {
+    display: none; 
 }
