@@ -9,9 +9,11 @@ body{
     width: 100%;
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #101010;
+    background-color: #151B42;
     overflow-x: hidden;
 }
+
+/* MENU */
 
 .logoSite{
     background-color: green;
@@ -19,6 +21,7 @@ body{
     font-size: 2em;
     text-align: center;
     white-space: nowrap;
+    margin-left: 20px;
 }
 
 
@@ -70,18 +73,22 @@ nav#menu{
     align-items: center;
     width: 100%;
     height: 80px;
-    background-color: #1a1a1a;
+    background-color: #00000077;
     overflow: hidden;
     border-bottom: 2px solid #282828;
+}
+
+strong.strongBlue{
+    color: #0AB8D6
 }
 
 /* HOME PAGE  */
 
 
 #Perfil{
-    background-color: brown;
     width: 100%;
     display: flex;
+    position: relative;
 }
 
 #Avatar{
@@ -92,15 +99,43 @@ nav#menu{
 
 }
 
+#quadradoBG2{
+    /* POSIÇÃO: Fica no mesmo local do #quadradoBG (40% é a largura do #Avatar) */
+    position: absolute;
+    left: calc(40% + 26px); 
+    top: 23px; 
+    z-index: 1; /* Fica atrás do conteúdo */
+
+    /* Dimensões e forma */
+    height: 545px;
+    width: 54.2%; 
+    clip-path: polygon(50px 0, calc(100% - 50px) 0, 100% 50px, 100% calc(100% - 50px), calc(100% - 50px) 100%, 50px 100%, 0 calc(100% - 50px), 0 50px);
+    
+    /* ESTILO DA BORDA */
+    /* Fundo sólido vermelho, que será a borda visível */
+    background-color: gray; 
+    box-shadow: 0 0 15px rgb(0, 0, 0); /* Efeito neon */
+    
+    /* ESCALA: Torna o elemento ligeiramente maior que o #quadradoBG */
+    transform: scale(1.02); 
+}
+
 #quadradoBG{
-    background-color: aqua;
+/* Fundo preto cobre o #quadradoBG2, deixando apenas a borda vermelha visível */
+    background-color: rgba(0, 0, 0, 0.556);
     height: 550px;
     width: 55%;
-    margin-left: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    
+    /* NOVO POSICIONAMENTO para sobreposição perfeita */
+    position: absolute; 
+    left: calc(40% + 20px); 
+    top: 20px; 
+    z-index: 2; /* Fica em cima de #quadradoBG2 */
+    
+    /* A forma deve ser mantida para recortar o conteúdo */
     clip-path: polygon(50px 0, calc(100% - 50px) 0, 100% 50px, 100% calc(100% - 50px), calc(100% - 50px) 100%, 50px 100%, 0 calc(100% - 50px), 0 50px);
-    border: 1px solid #0A3D66;
+    
+    /* Manter estilos de conteúdo */
     display: flex;
     flex-direction: column;
     padding: 30px;
@@ -208,7 +243,6 @@ nav#menu{
 
 
 #Sobre{
-    background-color: pink;
     width: 100%;
     padding: 20px;
     display: flex;
