@@ -121,8 +121,10 @@ strong.strongBlue{
 }
 
 #quadradoBG{
-/* Fundo preto cobre o #quadradoBG2, deixando apenas a borda vermelha visível */
-    background-color: rgba(0, 0, 0, 0.556);
+/* Fundo preto que será substituído pelo SVG */
+    /* background-color: rgba(0, 0, 0, 0.556); <--- REMOVIDO */
+    background-color: transparent; /* Permite que o SVG seja visto */
+    
     height: 550px;
     width: 55%;
     
@@ -130,16 +132,48 @@ strong.strongBlue{
     position: absolute; 
     left: calc(40% + 20px); 
     top: 20px; 
-    z-index: 2; /* Fica em cima de #quadradoBG2 */
+    z-index: 2; /* Mantido em z-index 2 */
     
-    /* A forma deve ser mantida para recortar o conteúdo */
-    clip-path: polygon(50px 0, calc(100% - 50px) 0, 100% 50px, 100% calc(100% - 50px), calc(100% - 50px) 100%, 50px 100%, 0 calc(100% - 50px), 0 50px);
+    /* ADICIONADO: Necessário para posicionar o SVG absolutamente */
+    position: relative;
+    
+    /* CLIP-PATH: REMOVIDO */
+    /* clip-path: polygon(50px 0, calc(100% - 50px) 0, 100% 50px, 100% calc(100% - 50px), calc(100% - 50px) 100%, 50px 100%, 0 calc(100% - 50px), 0 50px); */
     
     /* Manter estilos de conteúdo */
     display: flex;
     flex-direction: column;
     padding: 30px;
     gap: 5px;
+}
+
+#fundoForma {
+    /* Ocupa 100% do #quadradoBG */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Garante que fique atrás do conteúdo do #quadradoBG */
+    overflow: hidden; /* Opcional, mas útil */
+}
+
+/* Estilos para a forma Polygon (o elemento de desenho) */
+#fundoForma polygon {
+    fill: green; /* Cor de fundo solicitada */
+}
+
+/* Opcional: Para garantir que todos os elementos de conteúdo 
+   fiquem acima do z-index: 1 do SVG. */
+#quadradoBG > .logoSite, 
+#quadradoBG > .tituloDev,
+#quadradoBG > .subDev,
+#quadradoBG > .legDev1,
+#quadradoBG > .legDev2,
+#quadradoBG > .Explorar,
+#quadradoBG > .legDiv5 {
+    position: relative;
+    z-index: 3;
 }
 
 #logoSite2{
