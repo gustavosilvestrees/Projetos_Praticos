@@ -87,8 +87,10 @@ strong.strongBlue{
 
 #Perfil{
     width: 100%;
+    height: 590px;
     display: flex;
     position: relative;
+    background-color: blue;
 }
 
 #Avatar{
@@ -97,27 +99,6 @@ strong.strongBlue{
     width: 40%;
     margin-top: 20px;
 
-}
-
-#quadradoBG2{
-    /* POSIÇÃO: Fica no mesmo local do #quadradoBG (40% é a largura do #Avatar) */
-    position: absolute;
-    left: calc(40% + 26px); 
-    top: 23px; 
-    z-index: 1; /* Fica atrás do conteúdo */
-
-    /* Dimensões e forma */
-    height: 545px;
-    width: 54.2%; 
-    clip-path: polygon(50px 0, calc(100% - 50px) 0, 100% 50px, 100% calc(100% - 50px), calc(100% - 50px) 100%, 50px 100%, 0 calc(100% - 50px), 0 50px);
-    
-    /* ESTILO DA BORDA */
-    /* Fundo sólido vermelho, que será a borda visível */
-    background-color: gray; 
-    box-shadow: 0 0 15px rgb(0, 0, 0); /* Efeito neon */
-    
-    /* ESCALA: Torna o elemento ligeiramente maior que o #quadradoBG */
-    transform: scale(1.02); 
 }
 
 #quadradoBG{
@@ -130,15 +111,12 @@ strong.strongBlue{
     
     /* NOVO POSICIONAMENTO para sobreposição perfeita */
     position: absolute; 
-    left: calc(40% + 20px); 
+    left: 40px; 
     top: 20px; 
     z-index: 2; /* Mantido em z-index 2 */
     
     /* ADICIONADO: Necessário para posicionar o SVG absolutamente */
     position: relative;
-    
-    /* CLIP-PATH: REMOVIDO */
-    /* clip-path: polygon(50px 0, calc(100% - 50px) 0, 100% 50px, 100% calc(100% - 50px), calc(100% - 50px) 100%, 50px 100%, 0 calc(100% - 50px), 0 50px); */
     
     /* Manter estilos de conteúdo */
     display: flex;
@@ -156,11 +134,13 @@ strong.strongBlue{
     height: 100%;
     z-index: 1; /* Garante que fique atrás do conteúdo do #quadradoBG */
     overflow: hidden; /* Opcional, mas útil */
+    filter: drop-shadow(0 0 8px rgba(128, 128, 128, 0.8));
 }
 
 /* Estilos para a forma Polygon (o elemento de desenho) */
 #fundoForma polygon {
     fill: green; /* Cor de fundo solicitada */
+    
 }
 
 /* Opcional: Para garantir que todos os elementos de conteúdo 
@@ -176,6 +156,14 @@ strong.strongBlue{
     z-index: 3;
 }
 
+#fundoForma polygon {
+    fill: rgba(52, 52, 52, 0.447); /* Cor de fundo solicitada */
+    
+    /* ADICIONE ESTAS DUAS LINHAS PARA A BORDA */
+    stroke: rgba(123, 120, 120, 0.781); /* Cor cinza para a borda */
+    stroke-width: 0.5px; /* Espessura de 2px para a borda */
+}
+
 #logoSite2{
     background-color: blue;
     color: white;
@@ -187,7 +175,6 @@ strong.strongBlue{
 
 
 .tituloDev{
-    background-color: white;
     color: black;
     font-size: 3em;
     font-weight: bold;
@@ -201,7 +188,7 @@ strong.strongBlue{
 
 
 .subDev{
-    background-color: white;
+
     color: black;
     font-size: 2.1em;
     font-weight: 600;
@@ -214,7 +201,6 @@ strong.strongBlue{
 }
 
 .legDev1{
-    background-color: white;
     color: #FF1493;
     font-size: 1.2em;
     font-weight: bold;
@@ -228,7 +214,7 @@ strong.strongBlue{
 }
 
 .legDev2{
-    background-color: white;
+
     color: black;
     font-size: 0.95em;
     line-height: 1.6;
@@ -263,7 +249,6 @@ strong.strongBlue{
 }
 
 .legDiv5{
-    background-color: white;
     color: #00BFFF;
     font-size: 0.9em;
     font-weight: 600;
@@ -450,34 +435,33 @@ strong.strongBlue{
     margin: 0;
 }
 
-.hexagonoId{
-    position: relative;
-    width: 10em;
-    height: 6.1em;
-    background-color: magenta;
-    margin: 20% auto 10% auto;
-    border-radius: 1em / 0.577em;
-    border: 3px solid red;
+.hexagono-container {
+    /* NOVO: TAMANHO AJUSTADO PARA HARMONIA COM A COLUNA (100px de largura é adequado para um min-width de 200px) */
+    width: 160px;
+    /* Altura proporcional ao viewBox="0 0 100 115" para manter a forma correta do hexágono */
+    height: 175px; 
+    
+    /* Garante que o container se comporte como um bloco */
+    display: block; 
 }
 
-.hexagonoId::before, .hexagonoId::after{
-    content: '';
-    position: absolute;
-    width: inherit;
-    height: inherit;
-    background: inherit;
-    border-radius: 0.5em;
-    
+.hexagono-svg {
+    width: 100%;
+    height: 100%;
+    /* Pode ser necessário um display: block aqui se houver problemas de alinhamento */
+    display: block; 
 }
 
-.hexagonoId::before{
-    transform: rotate(60deg);
+/* Opcional: Para evitar quebras de layout, adicione isto ao corpo do polígono */
+.hexagono-svg polygon {
+    fill: magenta; 
     
-}
+    /* ADICIONANDO BORDA PARA VISUALIZAR O ARREDONDAMENTO */
+    stroke: white; /* Borda branca para contraste */
+    stroke-width: 9px; /* Espessura da borda */
 
-.hexagonoId::after{
-    transform: rotate(-60deg);
-    
+    /* NOVO: PROPRIEDADE PARA ARREDONDAR OS CANTOS DA BORDA */
+    stroke-linejoin: round; 
 }
 
 .HCol{
