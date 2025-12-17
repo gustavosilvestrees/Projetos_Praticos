@@ -8,20 +8,60 @@
 body{
     width: 100%;
     height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
     background-color: #151B42;
     overflow-x: hidden;
+}
+
+/* FONTES */
+
+@font-face {
+    font-family: "JetBrain Mono";
+    src: url(fontes/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf);
+    src: url(fontes/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: "Bebas Neue";
+    src: url(fontes/Bebas_Neue/BebasNeue-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url(fontes/Montserrat/Montserrat-VariableFont_wght.ttf);
+
+}
+
+@font-face {
+    font-family: "Consolas Mono";
+    src: url(fontes/consola_mono/ConsolaMono-Bold.ttf);
+    src: url(fontes/consola_mono/ConsolaMono-Book.ttf);
+
+}
+
+@font-face {
+    font-family: "Roboto Mono";
+    src: url(fontes/Roboto_Mono/RobotoMono-Italic-VariableFont_wght.ttf);
+    src: url(fontes/Roboto_Mono/RobotoMono-VariableFont_wght.ttf);
+
+}
+
+@font-face {
+    font-family: "Roboto Slab";
+    src: url(fontes/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf);
+
 }
 
 /* MENU */
 
 .logoSite{
-    background-color: green;
     color: white;
     font-size: 2em;
     text-align: center;
     white-space: nowrap;
     margin-left: 20px;
+    font-family: "JetBrain Mono", Arial, Helvetica, sans-serif;
+    letter-spacing: -2px;
+    
 }
 
 
@@ -37,10 +77,11 @@ body{
 
 #alinhamentoB{
     display: flex;
-    gap: 8px;
+    gap: 10px;
     box-sizing: border-box;
     flex-wrap: nowrap;
     align-items: center;
+    margin-right: 2%;
 }
 
 .botaoNav{
@@ -48,14 +89,18 @@ body{
     min-width: 90px;
     height: 40px;
     background-color: transparent;
-    font-size: 0.95em;
+    font-size: 1.15em;
+     transform: scaleY(1.2);
     border-radius: 20px;
     color: white;
     font-weight: bold;
-    letter-spacing: 1px;
     border: none;
     padding: 0 20px;
     white-space: nowrap;
+    font-family: "JetBrain Mono", Arial, Helvetica, sans-serif;
+    -webkit-transform: scaleY(1.2);
+    -moz-transform: scaleY(1.2);
+    -o-transform: scaleY(1.2);
 }
 
 .botaoNav:hover{
@@ -90,7 +135,6 @@ strong.strongBlue{
     height: 590px;
     display: flex;
     position: relative;
-    background-color: blue;
 }
 
 #Avatar{
@@ -134,7 +178,7 @@ strong.strongBlue{
     height: 100%;
     z-index: 1; /* Garante que fique atrás do conteúdo do #quadradoBG */
     overflow: hidden; /* Opcional, mas útil */
-    filter: drop-shadow(0 0 8px rgba(128, 128, 128, 0.8));
+    filter: drop-shadow(0 0 8px rgba(42, 42, 42, 0.433));
 }
 
 /* Estilos para a forma Polygon (o elemento de desenho) */
@@ -157,7 +201,7 @@ strong.strongBlue{
 }
 
 #fundoForma polygon {
-    fill: rgba(52, 52, 52, 0.447); /* Cor de fundo solicitada */
+    fill: rgba(0, 0, 0, 0.249); /* Cor de fundo solicitada */
     
     /* ADICIONE ESTAS DUAS LINHAS PARA A BORDA */
     stroke: rgba(123, 120, 120, 0.781); /* Cor cinza para a borda */
@@ -175,22 +219,24 @@ strong.strongBlue{
 
 
 .tituloDev{
-    color: black;
-    font-size: 3em;
-    font-weight: bold;
+    color: white;
+    font-size: 5em;
     margin: 0;
     padding: 15px 0;
     height: 20%;
     width: 100%;
     display: flex;
     align-items: center;
+    letter-spacing: -2px;
+    word-spacing: -25px;
+    font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
 }
 
 
 .subDev{
 
-    color: black;
-    font-size: 2.1em;
+    color: white;
+    font-size: 3.2em;
     font-weight: 600;
     margin: 0;
     padding: 10px 0;
@@ -198,12 +244,15 @@ strong.strongBlue{
     width: 100%;
     display: flex;
     align-items: center;
+    letter-spacing: -2px;
+    word-spacing: -16px;
+    font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
 }
 
 .legDev1{
     color: #FF1493;
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 2em;
+    font-weight: normal;
     margin: 0;
     padding: 12px 0;
     margin-top: 10px;
@@ -211,11 +260,12 @@ strong.strongBlue{
     width: 100%;
     display: flex;
     align-items: center;
+    font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
 }
 
 .legDev2{
 
-    color: black;
+    color: #0AB8D6;
     font-size: 0.95em;
     line-height: 1.6;
     margin: 0;
@@ -225,12 +275,16 @@ strong.strongBlue{
     width: 100%;
     display: flex;
     align-items: center;
+    font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
+    word-spacing: 2px;
+    font-weight: 400;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.644);
 }
 
 .Explorar{
     background: linear-gradient(90deg, #0AB8D6, #00FF7F);
     color: white;
-    font-size: 1em;
+    font-size: 1.7em;
     font-weight: bold;
     padding: 15px 40px;
     border: none;
@@ -239,8 +293,11 @@ strong.strongBlue{
     align-self: flex-start;
     margin: 15px 0 15px 40px;
     transition: 0.3s;
-    width: 35%;
-    height: 60px;
+    width: 370px;
+    height: 100px;
+    font-family: ;
+    font-weight: 600;
+    word-spacing: -3px;
 }
 
 .Explorar:hover{
@@ -480,12 +537,24 @@ strong.strongBlue{
 
 }
 
+#projects h1{
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    margin: 0 0 30px 0;
+    padding-top: 20px;
+}
+
 .containerProject{
-    background-color: coral;
     width: 300px;
     height: 300px;
-    border: 2px solid rgb(16, 9, 93);
+    border-radius: 10px;
     box-sizing: border-box; /* Garante que a borda e o padding (se houver) não aumentem o tamanho total de 400x400 */
+    border: 2px solid #00ffff; 
+    box-shadow: 0 0 15px #00ffff;
+    padding: 20px;
+    background-color: #161b2251;
+    backdrop-filter: blur(10px);
 }
 
 #alinhamentoContainer{
@@ -534,6 +603,7 @@ strong.strongBlue{
     box-shadow: 0 0 15px #00ffff;
     padding: 20px;
     background-color: #161b22;
+    border-radius: 8px;
 }
 
 .curriculoImg {
@@ -562,6 +632,7 @@ strong.strongBlue{
     align-items: center;
     font-size: 1.2em;
     text-align: center;
+    border-radius: 8px;
 }
 
 /* ------------------ COLUNA DIREITA (FORMULÁRIO) ------------------ */
@@ -576,6 +647,7 @@ strong.strongBlue{
     box-shadow: 0 0 15px #ff00ff;
     padding: 20px;
     background-color: #161b22;
+        border-radius: 8px;
 }
 
 .formContatos form {
@@ -604,6 +676,7 @@ strong.strongBlue{
     background-color: #24292e; /* Fundo dos campos escuro */
     color: #fff;
     border: 2px solid #ff4500; /* Borda laranja de destaque */
+    border-radius: 5px;
     padding: 10px;
     font-size: 1em;
     width: 100%;
