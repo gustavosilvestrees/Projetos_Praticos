@@ -12,6 +12,12 @@ body{
     overflow-x: hidden;
 }
 
+html{
+    scroll-behavior: smooth; /* Garante rolagem suave a pagina ao clicar nos buttons do menu */
+}
+
+
+
 /* FONTES */
 
 @font-face {
@@ -48,6 +54,15 @@ body{
 @font-face {
     font-family: "Roboto Slab";
     src: url(fontes/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf);
+
+}
+
+@font-face {
+    font-family: "Futura";
+    src: url(fontes/Futura/HellasFun-Plain/HFUNB.TTF);
+    src: url(fontes/Futura/HellasFun-Plain/HFUNCB.TTF);
+    src: url(fontes/Futura/HellasFun-Plain/HFUNCP.TTF);
+    src: url(fontes/Futura/HellasFun-Plain/HFUNP.TTF);
 
 }
 
@@ -103,6 +118,11 @@ body{
     -o-transform: scaleY(1.2);
 }
 
+.botaoNav a{
+    text-decoration: none;
+    color: white;
+}
+
 .botaoNav:hover{
     cursor: pointer;
     background-color: #0AB8D6;
@@ -126,6 +146,7 @@ nav#menu{
 strong.strongBlue{
     color: #0AB8D6
 }
+
 
 /* HOME PAGE  */
 
@@ -209,10 +230,9 @@ strong.strongBlue{
 }
 
 #logoSite2{
-    background-color: blue;
     color: white;
     font-size: 1.5em;
-    text-align: center;
+    text-align: left;
     white-space: nowrap;
     width: 35%;
 }
@@ -284,20 +304,21 @@ strong.strongBlue{
 .Explorar{
     background: linear-gradient(90deg, #0AB8D6, #00FF7F);
     color: white;
-    font-size: 1.7em;
+    font-size: 1.5em;
     font-weight: bold;
-    padding: 15px 40px;
+    padding: 15px 30px;
     border: none;
     border-radius: 40px;
     cursor: pointer;
     align-self: flex-start;
     margin: 15px 0 15px 40px;
     transition: 0.3s;
-    width: 370px;
+    width: 245px;
     height: 100px;
-    font-family: ;
-    font-weight: 600;
-    word-spacing: -3px;
+    letter-spacing: 1-px;
+    font-family: "Bebas Neue", Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.418);
 }
 
 .Explorar:hover{
@@ -306,14 +327,21 @@ strong.strongBlue{
 }
 
 .legDiv5{
-    color: #00BFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.79);
     font-size: 0.9em;
     font-weight: 600;
+    font-size: 0.9em;
     margin: 0;
-    padding: 10px 0;
+    padding: 20px 20px;
     margin-top: auto;
-    height: 8%;
-    width: 100%;
+    height: 10%;
+    width: 85%;
+    background-color: rgba(39, 39, 39, 0.416);
+    border-radius: 50px;
+    font-family: "JetBrain Mono", Arial, Helvetica, sans-serif;
 }
 
 
@@ -340,18 +368,50 @@ strong.strongBlue{
     height: 50px;
     padding: 0 20px;
     box-sizing: border-box;
+    font-size: 2em;
+    font-family: consolas, Arial, Helvetica, sans-serif;
 
 }
 
 #pesquisaFake p{
     margin: 0;
+    width: 0; /* medida em numero de caracteres para a animação de digitaçao rolar */
     color: white;
     font-weight: bold;
-    font-size: 1.5em;
     margin-left: 30px;
     font-weight: normal;
     color: #0AB8D6;
-    letter-spacing: 2px;
+    letter-spacing: -1px;
+    border-right: 16px solid rgba(255, 0, 255, 0.897);
+    overflow: hidden;
+    animation: mark .5s step-end infinite, writeL1 7s steps(22, end) infinite;
+    background-color: transparent;
+}
+
+
+@keyframes mark{/* Animaçao do marcardor piscando */
+    50% {
+        border-right-color: transparent;
+    }
+}
+
+@keyframes writeL1{
+    20%{
+        width: 12.3ch;
+    }
+
+    70%{
+        width: 12.3ch;
+    }
+
+    85%{
+        width: 0;
+    }
+    
+    100%{
+        width: 0;
+    }
+
 }
 
 #lupa{
@@ -381,19 +441,44 @@ strong.strongBlue{
 }
 
 #textoFake1{
-    width: 100%;
-    height: 80px;
-    padding: 15px;
+    width: 0;
+    padding: 5px 0px;
+    margin: 15px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     color: #0AB8D6;
     font-weight: bold;
-    font-size: 1.5em;
     font-weight: normal;
-    letter-spacing: 2px;
+    font-family: consolas, Arial, Helvetica, sans-serif;
+    font-size: 1.8em;
+    border-right: 16px solid rgba(255, 0, 255, 0.897);
+    overflow: hidden;
+    animation: mark .5s step-end infinite, writeL2 10s steps(30, end) infinite;
+    white-space: nowrap;
     
+    
+}
+
+
+@keyframes writeL2{
+    20%{
+        width: 27.8ch;
+    }
+
+    70%{
+        width: 27.8ch;
+    }
+
+    85%{
+        width: 0;
+    }
+    
+    100%{
+        width: 0;
+    }
+
 }
 
 #textoFake2{
@@ -404,11 +489,40 @@ strong.strongBlue{
     justify-content: flex-start;
     color: #0AB8D6;
     font-weight: bold;
-    font-size: 1.3em;
+    font-size: 1.5em;
     font-weight: normal;
-    letter-spacing: 1px;
+    word-spacing: -8px;
     text-shadow: none;
+    font-family: consolas, Arial, Helvetica, sans-serif;
     
+
+    
+}
+#textoFake2 p{
+    width: 0;
+    border-right: 16px solid rgba(255, 0, 255, 0.897);
+    overflow: hidden;
+    animation: mark .5s step-end infinite, writeL3 8s steps(22, end) infinite;
+    white-space: nowrap;
+}
+
+@keyframes writeL3{
+    20%{
+        width: 15.5ch;
+    }
+
+    70%{
+        width: 15.5ch;
+    }
+
+    85%{
+        width: 0;
+    }
+    
+    100%{
+        width: 0;
+    }
+
 }
 
 #textoSobre{
@@ -426,6 +540,7 @@ strong.strongBlue{
     overflow-y: auto;
     text-shadow: 1px 1px 2px black;
     text-align: justify;
+    font-family: "JetBrain Mono", Arial, Helvetica, sans-serif;
 }
 
 #textoSobre p{
@@ -511,11 +626,11 @@ strong.strongBlue{
 
 /* Opcional: Para evitar quebras de layout, adicione isto ao corpo do polígono */
 .hexagono-svg polygon {
-    fill: magenta; 
+    fill: #404f9389; 
     
     /* ADICIONANDO BORDA PARA VISUALIZAR O ARREDONDAMENTO */
-    stroke: white; /* Borda branca para contraste */
-    stroke-width: 9px; /* Espessura da borda */
+    stroke: rgba(255, 0, 255, 0.856); /* Borda branca para contraste */
+    stroke-width: 6px; /* Espessura da borda */
 
     /* NOVO: PROPRIEDADE PARA ARREDONDAR OS CANTOS DA BORDA */
     stroke-linejoin: round; 
@@ -540,9 +655,10 @@ strong.strongBlue{
 #projects h1{
     text-align: center;
     color: white;
-    font-size: 2em;
+    font-size: 3em;
     margin: 0 0 30px 0;
     padding-top: 20px;
+    font-family: "Futura", Arial, Helvetica, sans-serif;
 }
 
 .containerProject{
@@ -639,53 +755,59 @@ strong.strongBlue{
 
 .formContatos {
     /* Largura e altura aproximadas da imagem de referência */
-    width: 550px;
+    width: 800px;
     height: 600px;
     
     /* Estilo de borda neon da referência */
     border: 3px solid #ff00ff; /* Cor magenta/roxo para o formulário */
     box-shadow: 0 0 15px #ff00ff;
-    padding: 20px;
+    padding: 50px 80px 30px 80px;
     background-color: #161b22;
-        border-radius: 8px;
+    border-radius: 8px;
 }
 
 .formContatos form {
-    height: 100%;
+    height: 95%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Empurra o botão 'ENVIAR' para baixo */
+    justify-content: space-between; /* Empurra o botão 'ENVIAR' para baixo */;
 }
 
 .formC {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Espaço entre os campos */
+    gap: 30px; /* Espaço entre os campos */
 }
 
 .formC label {
     color: #fff;
     font-weight: bold;
     font-size: 0.9em;
-    margin-top: 5px;
+}
+.formContatos h1{
+    font-family: "Futura", Arial, Helvetica, sans-serif;
+    color: wheat;
+    text-align: center;
+    font-size: 2.5em;
 }
 
 .formC input[type="text"], 
 .formC input[type="email"], 
 .formC textarea {
     background-color: #24292e; /* Fundo dos campos escuro */
-    color: #fff;
-    border: 2px solid #ff4500; /* Borda laranja de destaque */
+    border: 2px solid #ff00ff; /* Cor magenta/roxo para o formulário */
+    box-shadow: 0 0 15px #ff00ff;
     border-radius: 5px;
     padding: 10px;
     font-size: 1em;
+    font-weight: bold;
     width: 100%;
     box-sizing: border-box;
 }
 
 .formContatos textarea {
     resize: vertical; /* Permite redimensionar verticalmente */
-    height: 100px;
+    height: 200px;
 }
 
 /* Botão Enviar */
