@@ -581,7 +581,9 @@ strong.strongBlue{
     color: white;
     font-size: 2em;
     margin: 0 0 30px 0;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.503);
+    text-shadow: 1px 1px 4px rgb(194, 194, 194);
+    font-family: "Futura", Arial, Helvetica, sans-serif;
+    font-size: 3em;
 }
 
 #alinhamentoTech{
@@ -602,9 +604,10 @@ strong.strongBlue{
 }
 
 .col h2{
-    color: #333;
-    font-size: 1.3em;
-    margin: 0;
+    color: white;
+    font-family: "Futura", Arial, Helvetica, sans-serif;
+    font-size: 2em;
+    margin: 30px 0px;
 }
 
 .hexagono-container {
@@ -636,10 +639,6 @@ strong.strongBlue{
     stroke-linejoin: round; 
 }
 
-.HCol{
-    background-color: lightgray;
-    
-}
 
 
 /* PROJETOS  */
@@ -799,35 +798,126 @@ strong.strongBlue{
     box-shadow: 0 0 15px #ff00ff;
     border-radius: 5px;
     padding: 10px;
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: bold;
     width: 100%;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
 }
+
 
 .formContatos textarea {
     resize: vertical; /* Permite redimensionar verticalmente */
     height: 200px;
 }
 
+
 /* Botão Enviar */
 .enviar {
+    width: 100%;
+    height: 50px;
     padding: 10px 20px;
     font-size: 1.2em;
     font-weight: bold;
     color: #fff;
-    /* Gradiente para replicar o efeito da imagem */
-    background: linear-gradient(90deg, #ff00ff, #00ffff); 
+    background: #161b22; /* Fundo sólido para tapar o aqua que está atrás */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    margin-top: 20px; /* Garante que haja espaço */
+
+    /* --- CAMADAS CORRIGIDAS --- */
+    position: relative; 
+    /* Mudamos para z-index positivo baixo e transform-style */
+    z-index: 1; 
+    transform-style: preserve-3d; 
+    
+transition: transform 0.3s ease, background-color 0.3s ease; /* Transição suave apenas para o corpo */
+    margin-top: 20px;
+    display: block;
 }
 
+
+
+.enviar::after, .enviar::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    
+    /* Gradiente ajustado com paradas nítidas para evitar a mistura de cores */
+    background-image: conic-gradient(
+        from var(--angle),
+        transparent 0%,
+        #ff00ff 5%,    /* Magenta inicia */
+        #ff00ff 15%,   /* Magenta termina */
+        transparent 20%,
+        transparent 50%,
+        #00ffff 55%,   /* Aqua inicia */
+        #00ffff 65%,   /* Aqua termina */
+        transparent 70%,
+        transparent 100%
+    );
+    
+    border-radius: 8px;
+    transform: translateZ(-1px);
+    z-index: -1; 
+    pointer-events: none; 
+    animation: 3s spin linear infinite; /* Aumentei um pouco a velocidade */
+}
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    }
+    to {
+        --angle: 360deg;
+    }
+}
+
+.enviar::before{ /* Add brilho na borda */
+    filter: blur(1.5rem); 
+    opacity: 1;
+}
+
+
+/* Animação do Gradiente */
+@keyframes animaNeon {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+
+
 .enviar:hover {
-    box-shadow: 0 0 15px #ff00ff, 0 0 15px #00ffff;
+    border-color: #00ffff; 
     transform: scale(1.02);
+    background-color: transparent;
+}
+
+
+.enviar:hover::after {
+    opacity: 0.5;
+    filter: blur(15px);
+    
+    
+    background: linear-gradient(90deg, #ff00ffe7, #00ffffe1, #ff00ffdf);
+    background-size: 200%;
+    animation: animaNeon 3s linear infinite;
+} 
+
+.enviar:hover::before {
+    filter: blur(2rem); /* Aumenta o brilho (glow) ao redor no hover */
+    opacity: 1;
 }
 
 
@@ -865,6 +955,7 @@ footer {
     flex-direction: column;
     justify-content: flex-start;
     gap: 5px;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
 
 #f1 .copyright, #f1 .tech-uiux {
@@ -885,6 +976,7 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 15px;
+    
 }
 
 #f2 .feito-com {
@@ -898,6 +990,8 @@ footer {
     font-size: 1.2em;
     font-weight: bold;
     white-space: nowrap;
+    color: white;
+    font-family: consolas, Arial, Helvetica, sans-serif;
 }
 
 .social-icons {
