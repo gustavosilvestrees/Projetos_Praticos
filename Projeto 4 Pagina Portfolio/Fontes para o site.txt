@@ -2,7 +2,7 @@ Fontes para o site
 
 Programação:
 
-> Consolas
+> Consolas já tem no windows
 > JetBrains Mono
 
 

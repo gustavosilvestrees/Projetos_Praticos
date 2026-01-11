@@ -1,19 +1,20 @@
 @charset "UTF-8";
 
-*{
+* {
     margin: 0px;
     box-sizing: border-box;
 }
 
-body{
+body {
     width: 100%;
     height: 100vh;
     background-color: #151B42;
     overflow-x: hidden;
 }
 
-html{
-    scroll-behavior: smooth; /* Garante rolagem suave a pagina ao clicar nos buttons do menu */
+html {
+    scroll-behavior: smooth;
+    /* Garante rolagem suave a pagina ao clicar nos buttons do menu */
 }
 
 
@@ -68,7 +69,7 @@ html{
 
 /* MENU */
 
-.logoSite{
+.logoSite {
     color: white;
     font-size: 2em;
     text-align: center;
@@ -76,21 +77,25 @@ html{
     margin-left: 20px;
     font-family: "JetBrain Mono", Arial, Helvetica, sans-serif;
     letter-spacing: -2px;
-    
+
 }
 
 
-#alinhamentoNav{
+#alinhamentoNav {
     display: flex;
     align-items: center;
     margin-left: auto;
-    padding: 10px 20px; /* Controla o espaço */
-    min-width: 0; /* Controla o espaço */
-    flex-shrink: 1; /* Controla o espaço */
-    overflow: hidden; /* Tira rolagem */
+    padding: 10px 20px;
+    /* Controla o espaço */
+    min-width: 0;
+    /* Controla o espaço */
+    flex-shrink: 1;
+    /* Controla o espaço */
+    overflow: hidden;
+    /* Tira rolagem */
 }
 
-#alinhamentoB{
+#alinhamentoB {
     display: flex;
     gap: 10px;
     box-sizing: border-box;
@@ -99,13 +104,13 @@ html{
     margin-right: 2%;
 }
 
-.botaoNav{
+.botaoNav {
     width: auto;
     min-width: 90px;
     height: 40px;
     background-color: transparent;
     font-size: 1.15em;
-     transform: scaleY(1.2);
+    transform: scaleY(1.2);
     border-radius: 20px;
     color: white;
     font-weight: bold;
@@ -118,21 +123,21 @@ html{
     -o-transform: scaleY(1.2);
 }
 
-.botaoNav a{
+.botaoNav a {
     text-decoration: none;
     color: white;
 }
 
-.botaoNav:hover{
+.botaoNav:hover {
     cursor: pointer;
     background-color: #0AB8D6;
     border-radius: 20px;
     border: none;
     box-shadow: 0px 0px 8px whitesmoke;
-    transition:  0.5s;
+    transition: 0.5s;
 }
 
-nav#menu{
+nav#menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -143,7 +148,7 @@ nav#menu{
     border-bottom: 2px solid #282828;
 }
 
-strong.strongBlue{
+strong.strongBlue {
     color: #0AB8D6
 }
 
@@ -151,14 +156,14 @@ strong.strongBlue{
 /* HOME PAGE  */
 
 
-#Perfil{
+#Perfil {
     width: 100%;
     height: 590px;
     display: flex;
     position: relative;
 }
 
-#Avatar{
+#Avatar {
     background-color: red;
     height: 500px;
     width: 40%;
@@ -166,23 +171,25 @@ strong.strongBlue{
 
 }
 
-#quadradoBG{
-/* Fundo preto que será substituído pelo SVG */
+#quadradoBG {
+    /* Fundo preto que será substituído pelo SVG */
     /* background-color: rgba(0, 0, 0, 0.556); <--- REMOVIDO */
-    background-color: transparent; /* Permite que o SVG seja visto */
-    
+    background-color: transparent;
+    /* Permite que o SVG seja visto */
+
     height: 550px;
     width: 55%;
-    
+
     /* NOVO POSICIONAMENTO para sobreposição perfeita */
-    position: absolute; 
-    left: 40px; 
-    top: 20px; 
-    z-index: 2; /* Mantido em z-index 2 */
-    
+    position: absolute;
+    left: 40px;
+    top: 20px;
+    z-index: 2;
+    /* Mantido em z-index 2 */
+
     /* ADICIONADO: Necessário para posicionar o SVG absolutamente */
     position: relative;
-    
+
     /* Manter estilos de conteúdo */
     display: flex;
     flex-direction: column;
@@ -197,39 +204,45 @@ strong.strongBlue{
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Garante que fique atrás do conteúdo do #quadradoBG */
-    overflow: hidden; /* Opcional, mas útil */
+    z-index: 1;
+    /* Garante que fique atrás do conteúdo do #quadradoBG */
+    overflow: hidden;
+    /* Opcional, mas útil */
     filter: drop-shadow(0 0 8px rgba(42, 42, 42, 0.433));
 }
 
 /* Estilos para a forma Polygon (o elemento de desenho) */
 #fundoForma polygon {
-    fill: green; /* Cor de fundo solicitada */
-    
+    fill: green;
+    /* Cor de fundo solicitada */
+
 }
 
 /* Opcional: Para garantir que todos os elementos de conteúdo 
    fiquem acima do z-index: 1 do SVG. */
-#quadradoBG > .logoSite, 
-#quadradoBG > .tituloDev,
-#quadradoBG > .subDev,
-#quadradoBG > .legDev1,
-#quadradoBG > .legDev2,
-#quadradoBG > .Explorar,
-#quadradoBG > .legDiv5 {
+#quadradoBG>.logoSite,
+#quadradoBG>.tituloDev,
+#quadradoBG>.subDev,
+#quadradoBG>.legDev1,
+#quadradoBG>.legDev2,
+#quadradoBG>.Explorar,
+#quadradoBG>.legDiv5 {
     position: relative;
     z-index: 3;
 }
 
 #fundoForma polygon {
-    fill: rgba(0, 0, 0, 0.249); /* Cor de fundo solicitada */
-    
+    fill: rgba(0, 0, 0, 0.249);
+    /* Cor de fundo solicitada */
+
     /* ADICIONE ESTAS DUAS LINHAS PARA A BORDA */
-    stroke: rgba(123, 120, 120, 0.781); /* Cor cinza para a borda */
-    stroke-width: 0.5px; /* Espessura de 2px para a borda */
+    stroke: rgba(123, 120, 120, 0.781);
+    /* Cor cinza para a borda */
+    stroke-width: 0.5px;
+    /* Espessura de 2px para a borda */
 }
 
-#logoSite2{
+#logoSite2 {
     color: white;
     font-size: 1.5em;
     text-align: left;
@@ -238,7 +251,7 @@ strong.strongBlue{
 }
 
 
-.tituloDev{
+.tituloDev {
     color: white;
     font-size: 5em;
     margin: 0;
@@ -253,7 +266,7 @@ strong.strongBlue{
 }
 
 
-.subDev{
+.subDev {
 
     color: white;
     font-size: 3.2em;
@@ -269,7 +282,7 @@ strong.strongBlue{
     font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
 }
 
-.legDev1{
+.legDev1 {
     color: #FF1493;
     font-size: 2em;
     font-weight: normal;
@@ -283,7 +296,7 @@ strong.strongBlue{
     font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
 }
 
-.legDev2{
+.legDev2 {
 
     color: #0AB8D6;
     font-size: 0.95em;
@@ -301,7 +314,7 @@ strong.strongBlue{
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.644);
 }
 
-.Explorar{
+.Explorar {
     background: linear-gradient(90deg, #0AB8D6, #00FF7F);
     color: white;
     font-size: 1.5em;
@@ -321,12 +334,12 @@ strong.strongBlue{
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.418);
 }
 
-.Explorar:hover{
+.Explorar:hover {
     box-shadow: 0px 0px 15px rgba(0, 255, 127, 0.5);
     transform: scale(1.05);
 }
 
-.legDiv5{
+.legDiv5 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -346,7 +359,7 @@ strong.strongBlue{
 
 
 
-#Sobre{
+#Sobre {
     width: 100%;
     padding: 20px;
     display: flex;
@@ -354,13 +367,13 @@ strong.strongBlue{
     gap: 10px;
 }
 
-#containerSobre{
+#containerSobre {
     display: flex;
     flex: 1;
     gap: 10px;
 }
 
-#pesquisaFake{
+#pesquisaFake {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -373,9 +386,10 @@ strong.strongBlue{
 
 }
 
-#pesquisaFake p{
+#pesquisaFake p {
     margin: 0;
-    width: 0; /* medida em numero de caracteres para a animação de digitaçao rolar */
+    width: 0;
+    /* medida em numero de caracteres para a animação de digitaçao rolar */
     color: white;
     font-weight: bold;
     margin-left: 30px;
@@ -389,39 +403,41 @@ strong.strongBlue{
 }
 
 
-@keyframes mark{/* Animaçao do marcardor piscando */
+@keyframes mark {
+
+    /* Animaçao do marcardor piscando */
     50% {
         border-right-color: transparent;
     }
 }
 
-@keyframes writeL1{
-    20%{
+@keyframes writeL1 {
+    20% {
         width: 12.3ch;
     }
 
-    70%{
+    70% {
         width: 12.3ch;
     }
 
-    85%{
+    85% {
         width: 0;
     }
-    
-    100%{
+
+    100% {
         width: 0;
     }
 
 }
 
-#lupa{
+#lupa {
     background-color: black;
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }
 
-#alinhamentoAside{
+#alinhamentoAside {
     display: flex;
     gap: 20px;
     width: 100%;
@@ -430,7 +446,7 @@ strong.strongBlue{
     justify-content: space-between;
 }
 
-#alinhamentoSobre{
+#alinhamentoSobre {
     flex: 2;
     width: 60%;
     display: flex;
@@ -440,7 +456,7 @@ strong.strongBlue{
     box-sizing: border-box;
 }
 
-#textoFake1{
+#textoFake1 {
     width: 0;
     padding: 5px 0px;
     margin: 15px;
@@ -457,31 +473,31 @@ strong.strongBlue{
     overflow: hidden;
     animation: mark .5s step-end infinite, writeL2 10s steps(30, end) infinite;
     white-space: nowrap;
-    
-    
+
+
 }
 
 
-@keyframes writeL2{
-    20%{
+@keyframes writeL2 {
+    20% {
         width: 27.8ch;
     }
 
-    70%{
+    70% {
         width: 27.8ch;
     }
 
-    85%{
+    85% {
         width: 0;
     }
-    
-    100%{
+
+    100% {
         width: 0;
     }
 
 }
 
-#textoFake2{
+#textoFake2 {
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -494,11 +510,12 @@ strong.strongBlue{
     word-spacing: -8px;
     text-shadow: none;
     font-family: consolas, Arial, Helvetica, sans-serif;
-    
 
-    
+
+
 }
-#textoFake2 p{
+
+#textoFake2 p {
     width: 0;
     border-right: 16px solid rgba(255, 0, 255, 0.897);
     overflow: hidden;
@@ -506,26 +523,26 @@ strong.strongBlue{
     white-space: nowrap;
 }
 
-@keyframes writeL3{
-    20%{
+@keyframes writeL3 {
+    20% {
         width: 15.5ch;
     }
 
-    70%{
+    70% {
         width: 15.5ch;
     }
 
-    85%{
+    85% {
         width: 0;
     }
-    
-    100%{
+
+    100% {
         width: 0;
     }
 
 }
 
-#textoSobre{
+#textoSobre {
     width: 100%;
     padding: 15px;
     box-sizing: border-box;
@@ -543,18 +560,18 @@ strong.strongBlue{
     font-family: "JetBrain Mono", Arial, Helvetica, sans-serif;
 }
 
-#textoSobre p{
+#textoSobre p {
     margin-bottom: 20px;
 }
 
-#asideSobre{
+#asideSobre {
     background-color: #FF1493;
     width: 35%;
     padding: 15px;
     box-sizing: border-box;
 }
 
-#waveOndas{
+#waveOndas {
     background-color: white;
     width: 100%;
     height: 60%;
@@ -567,7 +584,7 @@ strong.strongBlue{
 
 
 
-#techSkills{
+#techSkills {
     width: 100%;
     padding: 30px 20px;
     box-sizing: border-box;
@@ -576,7 +593,7 @@ strong.strongBlue{
     align-items: center;
 }
 
-#techSkills h1{
+#techSkills h1 {
     text-align: center;
     color: white;
     font-size: 2em;
@@ -586,14 +603,14 @@ strong.strongBlue{
     font-size: 3em;
 }
 
-#alinhamentoTech{
+#alinhamentoTech {
     width: 100%;
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
 }
 
-.col{
+.col {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -603,7 +620,7 @@ strong.strongBlue{
     align-items: center;
 }
 
-.col h2{
+.col h2 {
     color: white;
     font-family: "Futura", Arial, Helvetica, sans-serif;
     font-size: 2em;
@@ -614,29 +631,238 @@ strong.strongBlue{
     /* NOVO: TAMANHO AJUSTADO PARA HARMONIA COM A COLUNA (100px de largura é adequado para um min-width de 200px) */
     width: 160px;
     /* Altura proporcional ao viewBox="0 0 100 115" para manter a forma correta do hexágono */
-    height: 175px; 
-    
+    height: 175px;
+
     /* Garante que o container se comporte como um bloco */
-    display: block; 
+    display: block;
 }
 
 .hexagono-svg {
     width: 100%;
     height: 100%;
     /* Pode ser necessário um display: block aqui se houver problemas de alinhamento */
-    display: block; 
+    display: block;
 }
+
+.hexagono-wrapper {
+    position: relative;
+    width: 160px;
+    /* Tamanho original que queres manter */
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.hexagono-wrapper:hover {
+    transition: 0.5s ease-in-out;
+    scale: 1.10;
+}
+
+.hexagono-wrapper:hover .hex-border {
+    opacity: 1;
+    stroke-width: 4px;
+    filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 20px currentColor);
+
+}
+
+.hexagono-svg-base {
+    width: 100%;
+    /* Faz o SVG ocupar os 160px definidos no wrapper */
+    height: 100%;
+    overflow: visible;
+    /* Garante que o brilho (glow) não seja cortado */
+}
+
+.hex-glass {
+    /* Um preenchimento levemente mais claro e azulado para não sumir no preto */
+    fill: rgba(255, 255, 255, 0.08);
+
+    /* O segredo: adicione um drop-shadow interno ou brilho */
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.1));
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.hex-border {
+    fill: none;
+    /* Garante que o meio seja vazio */
+    stroke-width: 8px;
+    /* Espessura da linha neon */
+
+    /* ARREDONDAMENTO DO TRAÇADO */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    /* Transição suave para o hover */
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.hex-border-blend {
+    fill: none;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 
 /* Opcional: Para evitar quebras de layout, adicione isto ao corpo do polígono */
 .hexagono-svg polygon {
-    fill: #404f9389; 
-    
+    fill: #404f9389;
+
     /* ADICIONANDO BORDA PARA VISUALIZAR O ARREDONDAMENTO */
-    stroke: rgba(255, 0, 255, 0.856); /* Borda branca para contraste */
-    stroke-width: 6px; /* Espessura da borda */
+    stroke: rgba(255, 0, 255, 0.856);
+    /* Borda branca para contraste */
+    stroke-width: 6px;
+    /* Espessura da borda */
 
     /* NOVO: PROPRIEDADE PARA ARREDONDAR OS CANTOS DA BORDA */
-    stroke-linejoin: round; 
+    stroke-linejoin: round;
+}
+
+.hex-glass {
+    /* Gradiente para simular a espessura do vidro */
+    fill: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+
+    /* Ativa o desfoque do fundo (Glassmorfismo) */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    /* Importante: a cor base no SVG deve ser controlada pelo CSS ou pelo atributo fill */
+}
+
+
+/* Adicionando um reflexo de luz extra no topo (opcional para mais realismo) */
+.hexagono-wrapper::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 20px;
+    /* Mais perto da ponta superior */
+    width: 120px;
+    height: 140px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.263) 0%, transparent 70%);
+    z-index: 3;
+    pointer-events: none;
+    filter: blur(1px);
+}
+
+.hexagono-wrapper::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0px;
+    /* Mais perto da ponta superior */
+    width: 120px;
+    height: 130px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.134) 0%, transparent 70%);
+    z-index: 3;
+    pointer-events: none;
+    filter: blur(1px);
+}
+
+/* Borda de Fundo: Aqua com brilho expandido */
+.aqua-base {
+    stroke: #00ffff;
+    stroke-width: 5px;
+    opacity: 0.8;
+    /* Brilho expandido que mistura com o roxo */
+    filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #9d00ff);
+}
+
+/* Camada Magenta: O "Filamento" interno */
+.magenta-core {
+    stroke: #ff00ff;
+    stroke-width: 2.5px;
+    opacity: 0.8;
+    /* Brilho focado para dar nitidez */
+    filter: drop-shadow(0 0 4px #ff00ff);
+
+    transform: scale(0.97);
+    /* Reduz o tamanho para ficar por dentro */
+    transform-origin: center;
+    /* Garante que ela diminua em direção ao centro */
+}
+
+.hexagono-wrapper:hover .aqua-base {
+    stroke-width: 7px;
+    stroke: rgb(87, 242, 242);
+    opacity: 0.8;
+    filter: drop-shadow(0 0 15px #00ffffe5) drop-shadow(0 0 30px #9d00ff);
+}
+
+.hexagono-wrapper:hover .magenta-core {
+    stroke-width: 4px;
+    stroke: #ff54fff1;
+    /* O núcleo fica branco no hover, como se estivesse superaquecido */
+    filter: drop-shadow(0 0 8px #ff00ff);
+}
+
+.aqua-text {
+    fill: #00ffff;
+    font-size: 0.8em;
+    /* Aumentei um pouco para preencher melhor */
+    z-index: 2;
+    font-weight: bold;
+    font-family: "JetBrain Mono", monospace;
+
+
+    filter: drop-shadow(0 0 5px #00ffff);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    filter: drop-shadow(0 0 8px #00ffff);
+
+    /* Alinhamento exclusivo para SVG */
+    text-anchor: middle;
+    /* Centraliza horizontalmente */
+    dominant-baseline: middle;
+    /* Centraliza verticalmente (mais compatível que alignment-baseline) */
+    pointer-events: none;
+    /* Importante: para o mouse "atravessar" o texto e ativar o hover do hexágono */
+}
+
+/* Container de conteúdo dentro do hexágono */
+.hex-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* Deixa o hover passar para o SVG */
+    z-index: 10;
+}
+
+/* Estilo do Ícone (Font Awesome) */
+.hex-content i {
+    font-size: 2.8rem;
+    color: #00ffff;
+    filter: drop-shadow(0 0 8px #00ffff);
+    margin-bottom: 5px;
+    transition: all 0.4s ease;
+}
+
+/* Estilo do Texto */
+.hex-content span {
+    font-size: 0.75rem;
+    color: #00ffff;
+    font-family: "JetBrain Mono", monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    filter: drop-shadow(0 0 5px #00ffff);
+}
+
+/* Sincronização do hover */
+.hexagono-wrapper:hover .hex-content i,
+.hexagono-wrapper:hover .hex-content span {
+    color: #ffffff;
+    filter: drop-shadow(0 0 12px #ff00ff);
 }
 
 
@@ -645,13 +871,13 @@ strong.strongBlue{
 
 
 
-#projects{
+#projects {
     background-color: lightseagreen;
     width: 100%;
 
 }
 
-#projects h1{
+#projects h1 {
     text-align: center;
     color: white;
     font-size: 3em;
@@ -660,31 +886,95 @@ strong.strongBlue{
     font-family: "Futura", Arial, Helvetica, sans-serif;
 }
 
-.containerProject{
+.containerProject {
     width: 300px;
     height: 300px;
     border-radius: 10px;
-    box-sizing: border-box; /* Garante que a borda e o padding (se houver) não aumentem o tamanho total de 400x400 */
-    border: 2px solid #00ffff; 
-    box-shadow: 0 0 15px #00ffff;
+    box-sizing: border-box;
     padding: 20px;
-    background-color: #161b2251;
+
+    /* GLASSMORFISMO */
+    background-color: rgba(22, 27, 34, 0.5);
+    /* Fundo semi-transparente */
     backdrop-filter: blur(10px);
+    /* Efeito de desfoque */
+
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* IMPORTANTE: Removemos o overflow:hidden daqui para o brilho não sumir */
+    /* Mas precisamos garantir que a borda não vaze */
 }
 
-#alinhamentoContainer{
+/* Criamos a borda como um elemento absoluto */
+.containerProject::before {
+    content: '';
+    position: absolute;
+    /* O "inset: 0" faz ele ocupar tudo, mas vamos usar um padding negativo para a borda */
+    inset: -2px;
+    padding: 2px;
+    /* Esta é a espessura da sua borda */
+
+    /* O segredo está aqui: o gradiente só aparece onde tem o padding */
+    background: conic-gradient(from var(--angle),
+            transparent 70%,
+            #00ffff 85%,
+            #00ffff 100%);
+
+    border-radius: 12px;
+    /* Ligeiramente maior que o container */
+
+    /* A MÁGICA: Esta máscara diz ao navegador: 
+       "Mostre o fundo apenas na área do padding e oculte o centro" */
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    z-index: -1;
+    animation: 4s spin linear infinite;
+}
+
+/* Camada interna para criar o efeito de "linha" fina da borda */
+.containerProject::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    /* Espessura da borda (distância do gradiente) */
+    background: #161b2277;
+    /* Mesma cor de fundo do site */
+    border-radius: 8px;
+    z-index: -1;
+}
+
+/* Efeito de hover atualizado */
+.containerProject:hover {
+    transform: scale(1.02);
+    transition: 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+
+
+#alinhamentoContainer {
     display: flex;
-    flex-wrap: wrap; 
-    gap: 20px; 
-    justify-content: center; 
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
     padding: 20px;
 }
 
 #contact {
-    background-color: #0d1117; /* Fundo escuro */
+    background-color: #0d1117;
+    /* Fundo escuro */
     padding: 50px 0;
     width: 100%;
-    min-height: 80vh; /* Altura mínima para visualização */
+    min-height: 80vh;
+    /* Altura mínima para visualização */
 }
 
 /* alignEffect: Contêiner principal que coloca as duas colunas lado a lado */
@@ -696,7 +986,7 @@ strong.strongBlue{
     /* 3. Centraliza o bloco inteiro horizontalmente */
     justify-content: center;
     /* 4. Permite que o contêiner interno tenha um tamanho definido */
-    max-width: 1200px; 
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -707,14 +997,14 @@ strong.strongBlue{
     /* Largura e altura aproximadas da imagem de referência */
     width: 450px;
     height: 600px;
-    
+
     /* Layout interno da coluna (elementos empilhados) */
     display: flex;
     flex-direction: column;
     gap: 20px;
-    
+
     /* Estilo de borda neon da referência */
-    border: 3px solid #00ffff; 
+    border: 3px solid #00ffff;
     box-shadow: 0 0 15px #00ffff;
     padding: 20px;
     background-color: #161b22;
@@ -723,24 +1013,28 @@ strong.strongBlue{
 
 .curriculoImg {
     /* Div da imagem de monitor/celular */
-    height: 200px; 
+    height: 200px;
     /* Coloque a imagem de fundo aqui: */
     /* background-image: url('caminho-para-sua-imagem'); */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    border: 1px solid #333; /* Apenas para visualização */
+    border: 1px solid #333;
+    /* Apenas para visualização */
 }
 
-.contactLinks, .bannerC {
-    color: #00ffff; /* Texto azul neon */
+.contactLinks,
+.bannerC {
+    color: #00ffff;
+    /* Texto azul neon */
     font-family: monospace;
     padding: 10px;
 }
 
 .bannerC {
     height: 80px;
-    border: 2px solid #ff4500; /* Borda cor de destaque */
+    border: 2px solid #ff4500;
+    /* Borda cor de destaque */
     box-shadow: 0 0 10px #ff4500;
     display: flex;
     justify-content: center;
@@ -756,9 +1050,10 @@ strong.strongBlue{
     /* Largura e altura aproximadas da imagem de referência */
     width: 800px;
     height: 600px;
-    
+
     /* Estilo de borda neon da referência */
-    border: 3px solid #ff00ff; /* Cor magenta/roxo para o formulário */
+    border: 3px solid #ff00ff;
+    /* Cor magenta/roxo para o formulário */
     box-shadow: 0 0 15px #ff00ff;
     padding: 50px 80px 30px 80px;
     background-color: #161b22;
@@ -769,13 +1064,16 @@ strong.strongBlue{
     height: 95%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Empurra o botão 'ENVIAR' para baixo */;
+    justify-content: space-between;
+    /* Empurra o botão 'ENVIAR' para baixo */
+    ;
 }
 
 .formC {
     display: flex;
     flex-direction: column;
-    gap: 30px; /* Espaço entre os campos */
+    gap: 30px;
+    /* Espaço entre os campos */
 }
 
 .formC label {
@@ -783,18 +1081,21 @@ strong.strongBlue{
     font-weight: bold;
     font-size: 0.9em;
 }
-.formContatos h1{
+
+.formContatos h1 {
     font-family: "Futura", Arial, Helvetica, sans-serif;
     color: wheat;
     text-align: center;
     font-size: 2.5em;
 }
 
-.formC input[type="text"], 
-.formC input[type="email"], 
+.formC input[type="text"],
+.formC input[type="email"],
 .formC textarea {
-    background-color: #24292e; /* Fundo dos campos escuro */
-    border: 2px solid #ff00ff; /* Cor magenta/roxo para o formulário */
+    background-color: #24292e;
+    /* Fundo dos campos escuro */
+    border: 2px solid #ff00ff;
+    /* Cor magenta/roxo para o formulário */
     box-shadow: 0 0 15px #ff00ff;
     border-radius: 5px;
     padding: 10px;
@@ -808,7 +1109,8 @@ strong.strongBlue{
 
 
 .formContatos textarea {
-    resize: vertical; /* Permite redimensionar verticalmente */
+    resize: vertical;
+    /* Permite redimensionar verticalmente */
     height: 200px;
 }
 
@@ -821,52 +1123,59 @@ strong.strongBlue{
     font-size: 1.2em;
     font-weight: bold;
     color: #fff;
-    background: #161b22; /* Fundo sólido para tapar o aqua que está atrás */
+    background: #161b22;
+    /* Fundo sólido para tapar o aqua que está atrás */
     border: none;
     border-radius: 5px;
     cursor: pointer;
 
     /* --- CAMADAS CORRIGIDAS --- */
-    position: relative; 
+    position: relative;
     /* Mudamos para z-index positivo baixo e transform-style */
-    z-index: 1; 
-    transform-style: preserve-3d; 
-    
-transition: transform 0.3s ease, background-color 0.3s ease; /* Transição suave apenas para o corpo */
+    z-index: 1;
+    transform-style: preserve-3d;
+
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    /* Transição suave apenas para o corpo */
     margin-top: 20px;
     display: block;
 }
 
 
 
-.enviar::after, .enviar::before {
+.enviar::after,
+.enviar::before {
     content: '';
     position: absolute;
     top: -3px;
     left: -3px;
     right: -3px;
     bottom: -3px;
-    
+
     /* Gradiente ajustado com paradas nítidas para evitar a mistura de cores */
-    background-image: conic-gradient(
-        from var(--angle),
-        transparent 0%,
-        #ff00ff 5%,    /* Magenta inicia */
-        #ff00ff 15%,   /* Magenta termina */
-        transparent 20%,
-        transparent 50%,
-        #00ffff 55%,   /* Aqua inicia */
-        #00ffff 65%,   /* Aqua termina */
-        transparent 70%,
-        transparent 100%
-    );
-    
+    background-image: conic-gradient(from var(--angle),
+            transparent 0%,
+            #ff00ff 5%,
+            /* Magenta inicia */
+            #ff00ff 15%,
+            /* Magenta termina */
+            transparent 20%,
+            transparent 50%,
+            #00ffff 55%,
+            /* Aqua inicia */
+            #00ffff 65%,
+            /* Aqua termina */
+            transparent 70%,
+            transparent 100%);
+
     border-radius: 8px;
     transform: translateZ(-1px);
-    z-index: -1; 
-    pointer-events: none; 
-    animation: 3s spin linear infinite; /* Aumentei um pouco a velocidade */
+    z-index: -1;
+    pointer-events: none;
+    animation: 3s spin linear infinite;
+    /* Aumentei um pouco a velocidade */
 }
+
 @property --angle {
     syntax: "<angle>";
     initial-value: 0deg;
@@ -877,29 +1186,39 @@ transition: transform 0.3s ease, background-color 0.3s ease; /* Transição suav
     from {
         --angle: 0deg;
     }
+
     to {
         --angle: 360deg;
     }
 }
 
-.enviar::before{ /* Add brilho na borda */
-    filter: blur(1.5rem); 
+.enviar::before {
+    /* Add brilho na borda */
+    filter: blur(1.5rem);
     opacity: 1;
 }
 
 
 /* Animação do Gradiente */
 @keyframes animaNeon {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 
 
 
 .enviar:hover {
-    border-color: #00ffff; 
+    border-color: #00ffff;
     transform: scale(1.02);
     background-color: transparent;
 }
@@ -908,15 +1227,16 @@ transition: transform 0.3s ease, background-color 0.3s ease; /* Transição suav
 .enviar:hover::after {
     opacity: 0.5;
     filter: blur(15px);
-    
-    
+
+
     background: linear-gradient(90deg, #ff00ffe7, #00ffffe1, #ff00ffdf);
     background-size: 200%;
     animation: animaNeon 3s linear infinite;
-} 
+}
 
 .enviar:hover::before {
-    filter: blur(2rem); /* Aumenta o brilho (glow) ao redor no hover */
+    filter: blur(2rem);
+    /* Aumenta o brilho (glow) ao redor no hover */
     opacity: 1;
 }
 
@@ -924,22 +1244,25 @@ transition: transform 0.3s ease, background-color 0.3s ease; /* Transição suav
 /* FOOTER */
 
 footer {
-    background-color: #0d1117; /* Fundo escuro (mesmo da seção de contato) */
+    background-color: #0d1117;
+    /* Fundo escuro (mesmo da seção de contato) */
     width: 100%;
     /* Altura ajustada para o conteúdo */
-    padding: 30px 0 0 0; 
+    padding: 30px 0 0 0;
     box-sizing: border-box;
 }
 
 /* alinhaFooter: Contêiner da linha superior (f1 e f2) */
 #alinhaFooter {
     display: flex;
-    justify-content: space-around; /* Distribui f1 e f2 */
+    justify-content: space-around;
+    /* Distribui f1 e f2 */
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    border-bottom: 2px solid #24292e; /* Linha divisória fina */
+    border-bottom: 2px solid #24292e;
+    /* Linha divisória fina */
 }
 
 /* ------------------ f1: Direitos Autorais ------------------ */
@@ -947,7 +1270,8 @@ footer {
 #f1 {
     width: 300px;
     height: 150px;
-    border: 1px solid #00ffff; /* Borda azul clara */
+    border: 1px solid #00ffff;
+    /* Borda azul clara */
     box-shadow: 0 0 8px #00ffff;
     padding: 15px;
     background-color: #161b22;
@@ -958,7 +1282,8 @@ footer {
     font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
 
-#f1 .copyright, #f1 .tech-uiux {
+#f1 .copyright,
+#f1 .tech-uiux {
     color: #fff;
     font-size: 0.9em;
     margin: 0;
@@ -968,7 +1293,7 @@ footer {
 
 #f2 {
     /* Ocupa o espaço central */
-    flex-grow: 1; 
+    flex-grow: 1;
     max-width: 600px;
     height: 150px;
     display: flex;
@@ -976,14 +1301,15 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 15px;
-    
+
 }
 
 #f2 .feito-com {
     /* Estilo do balão de React */
     background: #161b22;
     color: #00ffff;
-    border: 3px solid #ff00ff; /* Borda roxa/magenta */
+    border: 3px solid #ff00ff;
+    /* Borda roxa/magenta */
     box-shadow: 0 0 15px #ff00ff, 0 0 5px #00ffff;
     border-radius: 40px;
     padding: 15px 40px;
@@ -1012,11 +1338,13 @@ footer {
 /* ------------------ f3: Mensagem Final ------------------ */
 
 #f3 {
-    background-color: #24292e; /* Fundo mais escuro para a linha inferior */
+    background-color: #24292e;
+    /* Fundo mais escuro para a linha inferior */
     width: 100%;
     padding: 20px 0;
     text-align: center;
-    border-top: 3px solid #ff4500; /* Borda cor de destaque */
+    border-top: 3px solid #ff4500;
+    /* Borda cor de destaque */
 }
 
 #f3 p {
@@ -1034,5 +1362,5 @@ footer {
 
 /* Removendo a div de direitos autorais duplicada */
 .direitos-autorais {
-    display: none; 
+    display: none;
 }

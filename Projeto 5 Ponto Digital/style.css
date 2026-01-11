@@ -1,0 +1,205 @@
+/* Variáveis de Cores (Sistema de Temas) */
+:root {
+    --bg-color: #0F172A;
+    --surface-color: #1E293B;
+    --text-main: #F0F9FF;
+    --text-sub: #94A3B8;
+    
+    /* Cores de Verão Vibrantes */
+    --teal-pool: #2AF598;
+    --mango-sunset: #FF9A00;
+    --dragonfruit: #FF006E;
+    --neon-purple: #8338EC;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Layout do Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--surface-color);
+    margin-bottom: 40px;
+}
+
+.logo { font-weight: bold; font-size: 1.5rem; }
+.logo span { color: var(--teal-pool); }
+
+/* Card Principal do Timer */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+.timer-card {
+    background: var(--surface-color);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    margin-bottom: 30px;
+}
+
+#display-timer {
+    font-size: 5rem;
+    font-weight: 800;
+    margin: 20px 0;
+    color: var(--mango-sunset);
+    text-shadow: 0 0 20px rgba(255, 154, 0, 0.3);
+    font-family: consolas, monospace;
+}
+
+#current-time{
+    font-size: 1.5rem;
+    color: var(--text-sub);
+}
+
+span#status-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+span#status-text div{
+    width:20px;
+    height: 20px;
+    background-color: green;
+    border-radius: 50px;
+    margin-left: 10px;
+}
+
+/* Botões Estilo Verão */
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+button:active { transform: scale(0.95); }
+
+.btn-start {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, var(--teal-pool), var(--mango-sunset));
+    color: #000;
+}
+
+.btn-stop {
+    background: linear-gradient(45deg, var(--dragonfruit), var(--neon-purple));
+    color: white;
+}
+
+
+
+/* Diário de Estudos */
+#study-notes {
+    width: 100%;
+    min-height: 100px; /* Altura mínima */
+    max-height: 400px; /* Altura máxima para não quebrar o layout */
+    resize: vertical;  /* Permite redimensionar apenas para cima e para baixo */
+    overflow-y: auto;  /* Adiciona scroll se o texto for maior que a caixa */
+    margin-top: 20px;
+    background: var(--bg-color);
+    border: 1px solid var(--text-sub);
+    border-radius: 10px;
+    color: white;
+    padding: 15px;
+    resize: none;
+}
+
+.btn-clear {
+    padding: 10px 20px;
+    background: transparent;
+    border: 2px solid var(--dragonfruit); /* Aquele rosa vibrante */
+    color: var(--dragonfruit);
+    border-radius: 12px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-clear:hover {
+    background: var(--dragonfruit);
+    color: white;
+    box-shadow: 0 0 15px var(--dragonfruit);
+}
+
+.btn-delete-row {
+    background: transparent;
+    color: var(--dragonfruit);
+    border: 1px solid var(--dragonfruit);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.btn-delete-row:hover {
+    background: var(--dragonfruit);
+    color: white;
+}
+
+
+.hidden {  /* mantem conteudo exclusivo */
+    display: none;
+    opacity: 0;
+}
+
+/* Criamos uma classe para mostrar com animação */
+.show-area {
+    display: block !important; /* O !important serve para garantir que essa regra vença o display: none da classe anterior. */
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn { /* Animação de Fade In */
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Tabela de Histórico */
+.history-container {
+    background: var(--surface-color);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th { 
+    text-align: left; 
+    color: var(--text-sub); 
+    padding: 10px; 
+}
+
+td { 
+    padding: 15px 10px; 
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    max-width: 300px; /* Limita a largura da célula */
+    white-space: nowrap; /* Impede que o texto quebre linha dentro da célula */
+    overflow: hidden; /* Esconde o que sobrar */
+    text-overflow: ellipsis; /* Força os 3 pontos via CSS também, por segurança */
+ }
+
+.hidden { display: none; }
