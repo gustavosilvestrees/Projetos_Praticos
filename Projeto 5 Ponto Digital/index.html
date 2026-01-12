@@ -19,21 +19,39 @@
     </header>
 
     <main class="container">
+        <div class="main-layout">
         <section class="timer-card">
             <h2>Tempo de Estudo</h2>
             <div id="display-timer">00:00:00</div>
 
             <div class="actions">
+                <button id="btn-pause" class="btn-pause hidden">Pausar</button>
                 <button id="btn-action" class="btn-start">Iniciar Estudo</button>
             </div>
 
             <div id="input-area" class="hidden">
-    <textarea id="study-notes" placeholder="O que você aprendeu hoje?"></textarea>
-    <button id="btn-save" class="btn-start">Salvar Registro</button> 
-</div>
+                <textarea id="study-notes" placeholder="O que você aprendeu hoje?"></textarea>
+                <button id="btn-save" class="btn-start">Salvar Registro</button>
+            </div>
         </section>
 
-        <section class="history-container">
+        <aside class="measurement-chart">
+        <h3>Metas de Foco</h3>
+        <ul>
+            <li><span class="box red"></span> 10min - Melhor que parado! (1%)</li>
+            <li><span class="box yellow"></span> 30min - Foco total! No ritmo.</li>
+            <li><span class="box green"></span> 1h - Muito Bom! Consistência.</li>
+            <li><span class="box blue"></span> 2h - Incrível! Mente afiada.</li>
+            <li><span class="box purple"></span> 3h+ - Excelente! Além das expectativas.</li>
+        </ul>
+    </aside>
+        </div>
+
+        <section class="history-container chart-section">
+            <h3>Produtividade Semanal (Horas)</h3>
+    <canvas id="studyChart"></canvas>
+
+            
 
             <div class="history-header">
                 <h3>Meus Registros</h3>
@@ -56,10 +74,12 @@
             </table>
         </section>
     </main>
-    
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="script.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+<script src="dashboard.js"></script>
 </body>
 
 </html>

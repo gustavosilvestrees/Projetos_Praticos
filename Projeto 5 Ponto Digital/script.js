@@ -4,6 +4,7 @@ const displayCronometro = document.getElementById('display-timer');
 const btnAction = document.getElementById('btn-action');
 const statusDot = document.getElementById('status-dot');
 const statusText = document.getElementById('status-text');
+const btnPause = document.getElementById('btn-pause');
 
 
 // Variáveis de controle do cronômetro
@@ -11,6 +12,7 @@ let horaInicio = "";
 let segundos = 0;
 let intervaloCronometro = null;
 let estaRodando = false;
+let estaPausado = false;
 
 /* ================================= 1. LÓGICA DO RELÓGIO (HORA ATUAL) ================================= */
 
@@ -126,19 +128,16 @@ const historyList = document.getElementById('history-list'); //Recebe a tabela d
 function salvarRegistro() {
     const resumo = notasEstudo.value;
 
-    if (resumo.trim() === "") { // Verifica se o campo de resumo está vazio
-        alert("Por favor, descreva brevemente o que estudou.");
-        return;
-    }
+
 
 
     // Criamos o objeto com os dados da sessão atual
     const novoPonto = { // aqui criamos um objeto molde para salvar os dados
         data: new Date().toLocaleDateString('pt-BR'),
-        inicio: "Pegar do sistema", // Vamos ajustar isso abaixo
-        fim: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
-        total: formatarTempo(segundos),
-        conteudo: resumo
+    inicio: horaInicio, // Agora usa a variável real capturada no início
+    fim: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+    total: formatarTempo(segundos),
+    conteudo: resumo
     };
 
     // 1. Pegar o que já existe no LocalStorage ou criar lista vazia
@@ -151,7 +150,8 @@ function salvarRegistro() {
     localStorage.setItem('pontos_estudo', JSON.stringify(registros)); // Usa o JSON.stringify para converter o objeto JS em texto para salvar no LocalStorage
 
     // Limpar e esconder campo
-    inputArea.classList.add('hidden');
+    inputArea.classList.remove('show-area'); //Remove a classe show-area escondendo a area de notas
+    inputArea.classList.add('hidden'); //Adiciona a classe hidden para esconder o text area
     segundos = 0; // Reseta o cronômetro para o próximo estudo
     displayCronometro.textContent = "00:00:00";
 
@@ -187,7 +187,7 @@ function carregarHistorico() {
     tabelaCorpo.innerHTML = "";
 
     // 4. Cria uma linha para cada registro guardado
-    registros.forEach((ponto) => { // o forEach diz para cada item da lista roda o script uma vez
+    registros.forEach((ponto, index) => { // o forEach diz para cada item da lista roda o script uma vez
         const linha = document.createElement('tr'); // Vai criar uma linha nova na tabela
 
 
@@ -203,17 +203,16 @@ function carregarHistorico() {
         // Preenche a linha com os dados do ponto de estudo
 
         linha.innerHTML = `
-            <td>${ponto.data}</td>
-            <td>${ponto.inicio}</td>
-            <td>${ponto.fim}</td>
-            <td>${ponto.total}</td>
-            <td title="${ponto.conteudo}">${resumoExibicao}</td>
-            <td>
-                <button class="btn-delete-row" onclick="apagarLinha(${index})">
-                    🗑️
-                </button>
-            </td>
-        `; // Cada <td> e um dado da tabela
+    <td>${ponto.data}</td>
+    <td>${ponto.inicio}</td>
+    <td>${ponto.fim}</td>
+    <td>${ponto.total}</td>
+    <td title="${ponto.conteudo}">${resumoExibicao}</td>
+    <td>
+        <button class="btn-edit-row" onclick="editarLinha(${index})">✏️</button>
+        <button class="btn-delete-row" onclick="apagarLinha(${index})">🗑️</button>
+    </td>
+`; // Cada <td> e um dado da tabela
 
         // Adiciona a linha na tabela
         tabelaCorpo.appendChild(linha); // Com a tabela criada add a linha com os dados
@@ -222,6 +221,35 @@ function carregarHistorico() {
 
 // Chamar ao carregar a página para os dados antigos aparecerem logo
 carregarHistorico();
+
+
+
+
+function apagarLinha(index) {
+    if (confirm("Deseja excluir este registro?")) {
+        let registros = JSON.parse(localStorage.getItem('pontos_estudo')) || [];
+        
+        // Remove o item da lista pelo índice
+        registros.splice(index, 1);
+        
+        // Salva a lista atualizada no LocalStorage
+        localStorage.setItem('pontos_estudo', JSON.stringify(registros));
+        
+        // Recarrega a tabela
+        carregarHistorico();
+    }
+}
+
+function editarLinha(index) {
+    let registros = JSON.parse(localStorage.getItem('pontos_estudo')) || [];
+    const novoResumo = prompt("Edite seu resumo de estudo:", registros[index].conteudo);
+    
+    if (novoResumo !== null) {
+        registros[index].conteudo = novoResumo;
+        localStorage.setItem('pontos_estudo', JSON.stringify(registros));
+        carregarHistorico();
+    }
+}
 
 
 
@@ -315,3 +343,117 @@ btnClear.addEventListener('click', limparHistorico);
 
 
 
+
+
+
+
+/* ================================= LÓGICA DE PERSISTÊNCIA PARA ATUALIZAR A PAGINA  ================================= */
+
+// Salva o estado atual no LocalStorage
+function salvarEstadoTimer() {
+    const estado = {
+        segundos,
+        estaRodando,
+        estaPausado,
+        horaInicio
+    };
+    localStorage.setItem('studyflow_timer', JSON.stringify(estado));
+}
+
+// Carrega o estado ao abrir a página
+function carregarEstadoTimer() {
+    const salvo = JSON.parse(localStorage.getItem('studyflow_timer'));
+    if (salvo) {
+        segundos = salvo.segundos;
+        estaRodando = salvo.estaRodando;
+        estaPausado = salvo.estaPausado;
+        horaInicio = salvo.horaInicio;
+
+        displayCronometro.textContent = formatarTempo(segundos);
+
+        if (estaRodando && !estaPausado) {
+            iniciarIntervalo();
+            atualizarInterface(true);
+        } else if (estaPausado) {
+            atualizarInterface(true);
+            btnPause.textContent = "Retomar";
+        }
+    }
+}
+
+/* ================================= LÓGICA DO CRONÔMETRO ATUALIZADA ================================= */
+
+function iniciarIntervalo() {
+    if (intervaloCronometro) clearInterval(intervaloCronometro);
+    intervaloCronometro = setInterval(() => {
+        segundos++;
+        displayCronometro.textContent = formatarTempo(segundos);
+        salvarEstadoTimer(); // Salva a cada segundo para persistência
+    }, 1000);
+}
+
+function atualizarInterface(rodando) {
+    if (rodando) {
+        btnAction.textContent = "Finalizar Estudo";
+        btnAction.classList.replace('btn-start', 'btn-stop');
+        btnPause.classList.remove('hidden');
+statusDot.style.backgroundColor = "#FF9A00"; // Laranja (Estudando)
+        statusText.textContent = "Estudando...";
+    } else {
+        btnAction.textContent = "Iniciar Estudo";
+        btnAction.classList.replace('btn-stop', 'btn-start');
+        btnPause.classList.add('hidden');
+statusDot.style.backgroundColor = "#2AF598"; // Verde (Disponível)
+        statusText.textContent = "Disponível";
+    }
+}
+
+function gerenciarBotao() {
+    if (!estaRodando) {
+        // INICIAR
+        estaRodando = true;
+        estaPausado = false;
+        horaInicio = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        iniciarIntervalo();
+        atualizarInterface(true);
+        inputArea.classList.add('hidden');
+    } else {
+        // FINALIZAR
+        clearInterval(intervaloCronometro);
+        estaRodando = false;
+        estaPausado = false;
+        atualizarInterface(false);
+        inputArea.classList.remove('hidden');
+        inputArea.classList.add('show-area');
+        notasEstudo.focus();
+        localStorage.removeItem('studyflow_timer'); // Limpa o temporário ao finalizar
+    }
+    salvarEstadoTimer();
+}
+
+function pausarRetomar() {
+    if (!estaPausado) {
+        // PAUSAR
+        clearInterval(intervaloCronometro);
+        estaPausado = true;
+        btnPause.textContent = "Retomar";
+        statusText.textContent = "Pausado";
+        statusDot.style.backgroundColor = "gray";
+    } else {
+        // RETOMAR
+        estaPausado = false;
+        btnPause.textContent = "Pausar";
+        statusText.textContent = "Estudando...";
+        statusDot.style.backgroundColor = "var(--mango-sunset)";
+        iniciarIntervalo();
+    }
+    salvarEstadoTimer();
+}
+
+
+// Event Listeners
+btnAction.addEventListener('click', gerenciarBotao);
+btnPause.addEventListener('click', pausarRetomar);
+
+// Inicialização
+carregarEstadoTimer();

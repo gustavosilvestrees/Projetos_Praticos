@@ -46,6 +46,15 @@ header {
 }
 
 
+/* Layout Flex para Timer + Medidas */
+.main-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+
 .timer-card {
     background: var(--surface-color);
     padding: 40px;
@@ -53,6 +62,7 @@ header {
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     margin-bottom: 30px;
+    flex: 2;
 }
 
 #display-timer {
@@ -81,6 +91,69 @@ span#status-text div{
     background-color: green;
     border-radius: 50px;
     margin-left: 10px;
+}
+
+/* Lista de Medidas */
+.measurement-chart {
+    flex: 1;
+    background: white;
+    color: #333;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.measurement-chart h3 { margin-bottom: 15px; color: var(--bg-color); }
+
+.measurement-chart ul { list-style: none; }
+
+.measurement-chart li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.box { width: 15px; height: 15px; border-radius: 3px; }
+.red { background: #ff4d4d; }
+.yellow { background: #ffd700; }
+.green { background: #2ecc71; }
+.blue { background: #3498db; }
+.purple { background: #9b59b6; }
+
+/* Status Dots */
+#status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    transition: background 0.3s;
+}
+
+/* Status Dots */
+#status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    transition: background 0.3s;
+}
+
+/* Gráfico */
+.chart-section { margin-top: 30px; padding: 30px; }
+
+/* Botão Editar na Tabela */
+.btn-edit-row {
+    background: transparent;
+    color: var(--teal-pool);
+    border: 1px solid var(--teal-pool);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
 }
 
 /* Botões Estilo Verão */
@@ -179,6 +252,38 @@ button:active { transform: scale(0.95); }
     background: var(--surface-color);
     border-radius: 20px;
     padding: 20px;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10%; /* Espaçamento de 10% entre os elementos */
+}
+
+.btn-secondary {
+    padding: 10px 20px;
+    background: transparent;
+    border: 2px solid var(--neon-purple);
+    color: var(--neon-purple);
+    border-radius: 12px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--neon-purple);
+    color: white;
+    box-shadow: 0 0 15px var(--neon-purple);
+}
+
+/* Botão de Pausa */
+.btn-pause {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    background: var(--mango-sunset);
+    color: #000;
+    margin-right: 10px;
 }
 
 table {
