@@ -10,6 +10,10 @@
     --mango-sunset: #FF9A00;
     --dragonfruit: #FF006E;
     --neon-purple: #8338EC;
+
+    /* As variáveis são preenchidas pelo JS, mas definimos os fallbacks aqui */
+    --table-btn-bg: transparent;
+    --table-btn-border: currentColor;
 }
 
 * {
@@ -37,7 +41,10 @@ header {
 }
 
 .logo { font-weight: bold; font-size: 1.5rem; }
-.logo span { color: var(--teal-pool); }
+.logo span { 
+    color: var(--accent-color) !important; 
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
 
 /* Card Principal do Timer */
 .container {
@@ -65,12 +72,18 @@ header {
     flex: 2;
 }
 
+/* Garante que o Card tenha contraste */
+.timer-card, .history-container, .measurement-chart {
+    background: var(--surface-color) !important;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
 #display-timer {
     font-size: 5rem;
     font-weight: 800;
     margin: 20px 0;
-    color: var(--mango-sunset);
-    text-shadow: 0 0 20px rgba(255, 154, 0, 0.3);
+    color: var(--timer-color) !important; /* Agora segue o JS */
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     font-family: consolas, monospace;
 }
 
@@ -123,6 +136,124 @@ span#status-text div{
 .blue { background: #3498db; }
 .purple { background: #9b59b6; }
 
+
+/* Botão e Menu de Temas */
+.theme-selector {
+    position: relative;
+    display: inline-block;
+}
+
+#theme-btn {
+    background: var(--surface-color);
+    border: 1px solid var(--text-sub);
+    padding: 8px;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.theme-options {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: var(--surface-color);
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+}
+
+.theme-dot {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+/* Cores das bolinhas no menu */
+.default { background-color: #0F172A; }
+.energy { background-color: #FF006E; }
+.calm { background-color: #2AF598; }
+
+.hidden { display: none !important; } /* Classe para esconder o menu de temas */
+
+/* Transição Global para todos os elementos */
+body, .timer-card, .history-container, button, header, td, th {
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.theme-options {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: var(--surface-color);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    width: 280px; /* Menu bem largo */
+    max-height: 450px;
+    overflow-y: auto; /* Scroll se tiver muitas cores */
+    display: flex;
+    flex-direction: column; /* Estilo Lista */
+    gap: 15px;
+    z-index: 1000;
+}
+
+.theme-section h4 {
+    margin-bottom: 10px;
+    color: var(--text-sub);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 5px;
+}
+
+.theme-row {
+    display: flex;
+    flex-direction: column; /* Uma cor embaixo da outra */
+    gap: 8px;
+}
+
+/* Bolinha de Cor (Tamanho aumentado para evitar o bug) */
+.theme-dot {
+    width: 100%; /* Ocupa a largura da lista */
+    height: 35px; /* Altura fixa confortável */
+    border-radius: 8px; /* Formato de pílula/botão */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.theme-dot span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white; /* Texto sempre visível dentro da cor */
+    pointer-events: none; /* Evita que o texto interfira no hover da div */
+}
+
+/* Efeito Hover Estável */
+.theme-dot:hover {
+    transform: scale(1.03); /* Aumenta levemente sem quebrar o layout */
+    filter: brightness(1.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.theme-dot:hover span {
+    font-size: 0.7rem; /* Mostra o nome da cor */
+}
+
+/* Ajuste para o modo claro no menu */
+.light-dot span {
+    color: #1a1a1a; /* Texto escuro para as bolinhas do modo claro */
+}
+
+
 /* Status Dots */
 #status-dot {
     width: 12px;
@@ -167,16 +298,18 @@ button {
 
 button:active { transform: scale(0.95); }
 
-.btn-start {
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    background: linear-gradient(45deg, var(--teal-pool), var(--mango-sunset));
-    color: #000;
+.btn-start { 
+    background: var(--timer-color) !important; 
+    color: var(--bg-color) !important;
+    
 }
+
+
 
 .btn-stop {
     background: linear-gradient(45deg, var(--dragonfruit), var(--neon-purple));
     color: white;
+
 }
 
 
@@ -213,20 +346,18 @@ button:active { transform: scale(0.95); }
     box-shadow: 0 0 15px var(--dragonfruit);
 }
 
-.btn-delete-row {
-    background: transparent;
-    color: var(--dragonfruit);
-    border: 1px solid var(--dragonfruit);
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    transition: all 0.2s;
+/* Botões da Tabela (Editar e Lixeira) - Estilo Invertido */
+.btn-edit-row, .btn-delete-row {
+    background-color: var(--table-btn-bg) !important;
+    border: 2px solid var(--table-btn-border) !important;
+    color: var(--text-main) !important;
+    backdrop-filter: blur(4px); /* Efeito moderno */
 }
 
-.btn-delete-row:hover {
-    background: var(--dragonfruit);
-    color: white;
+/* Hover nos botões da tabela para feedback */
+.btn-edit-row:hover, .btn-delete-row:hover {
+    background-color: var(--table-btn-border) !important;
+    color: white !important;
 }
 
 
@@ -277,14 +408,42 @@ button:active { transform: scale(0.95); }
     box-shadow: 0 0 15px var(--neon-purple);
 }
 
-/* Botão de Pausa */
+/* Botão de Pausa específico (Texto em contraste) */
 .btn-pause {
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    background: var(--mango-sunset);
-    color: #000;
+    filter: saturate(1.2);
+    width: 180px;
+}
+
+
+
+.btn-start, .btn-pause, .btn-stop {
+    background: var(--btn-gradient) !important;
+    border: 2px solid var(--accent-color) !important;
+    color: var(--text-main) !important; /* Branco no Dark, Escuro no Light */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    border-radius: 50px;
+    font-size: 1.2em;
+    margin-left: 10px;
     margin-right: 10px;
 }
+
+.btn-start:hover , .btn-pause:hover , .btn-stop:hover {
+    scale: 1.05;
+    transition: all 0.5s ease-in-out;
+}
+
+#theme-menu::-webkit-scrollbar {
+  width: 8px;
+}
+#theme-menu::-webkit-scrollbar-track {
+  background: var(--timer-color);
+}
+#theme-menu::-webkit-scrollbar-thumb {
+  background: #ecececb5;
+}
+
+
 
 table {
     width: 100%;

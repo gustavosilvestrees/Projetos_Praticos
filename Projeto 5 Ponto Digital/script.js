@@ -14,6 +14,7 @@ let intervaloCronometro = null;
 let estaRodando = false;
 let estaPausado = false;
 
+
 /* ================================= 1. LÓGICA DO RELÓGIO (HORA ATUAL) ================================= */
 
 
@@ -355,7 +356,8 @@ function salvarEstadoTimer() {
         segundos,
         estaRodando,
         estaPausado,
-        horaInicio
+        horaInicio,
+        ultimoUpdate: Date.now() // Guarda o momento exato que salvou
     };
     localStorage.setItem('studyflow_timer', JSON.stringify(estado));
 }
@@ -363,23 +365,56 @@ function salvarEstadoTimer() {
 // Carrega o estado ao abrir a página
 function carregarEstadoTimer() {
     const salvo = JSON.parse(localStorage.getItem('studyflow_timer'));
-    if (salvo) {
-        segundos = salvo.segundos;
-        estaRodando = salvo.estaRodando;
-        estaPausado = salvo.estaPausado;
-        horaInicio = salvo.horaInicio;
+    if (salvo && salvo.estaRodando) { // Se tinha algo salvo e estava rodando
+        segundos = salvo.segundos; // Restaura os segundos
+        estaRodando = salvo.estaRodando; // Restaura se estava rodando
+        estaPausado = salvo.estaPausado; // Restaura se estava pausado
+        horaInicio = salvo.horaInicio; // Restaura a hora de início
 
-        displayCronometro.textContent = formatarTempo(segundos);
-
-        if (estaRodando && !estaPausado) {
+        // Se estava rodando e NÃO estava pausado, compensa o tempo que a página ficou fechada
+        if (!estaPausado) {
+            const agora = Date.now();
+            const diferencaSegundos = Math.floor((agora - salvo.ultimoUpdate) / 1000);
+            segundos += diferencaSegundos;
             iniciarIntervalo();
-            atualizarInterface(true);
-        } else if (estaPausado) {
-            atualizarInterface(true);
+        }
+        
+        displayCronometro.textContent = formatarTempo(segundos); // Atualiza o display
+        atualizarInterface(true); // Atualiza a interface para o estado "rodando"
+
+        // Se estava pausado, ajusta a interface de pausa
+        
+        if (estaPausado) {
             btnPause.textContent = "Retomar";
+            statusText.textContent = "Pausado";
+            statusDot.style.backgroundColor = "gray";
         }
     }
 }
+
+// 3. FUNÇÃO DE PAUSA
+function pausarRetomar() {
+    if (!estaRodando) return; // Se não está rodando, não faz nada
+
+    if (!estaPausado) {
+        // Ação: Pausar
+        clearInterval(intervaloCronometro);
+        estaPausado = true;
+        btnPause.textContent = "Retomar";
+        statusText.textContent = "Pausado";
+        statusDot.style.backgroundColor = "gray";
+    } else {
+        // Ação: Retomar
+        estaPausado = false;
+        btnPause.textContent = "Pausar";
+        statusText.textContent = "Estudando...";
+        statusDot.style.backgroundColor = "var(--mango-sunset)";
+        iniciarIntervalo();
+    }
+    salvarEstadoTimer();
+}
+
+
 
 /* ================================= LÓGICA DO CRONÔMETRO ATUALIZADA ================================= */
 
@@ -393,17 +428,24 @@ function iniciarIntervalo() {
 }
 
 function atualizarInterface(rodando) {
+    const statusDot = document.getElementById('status-dot');
+    const statusText = document.getElementById('status-text');
+
     if (rodando) {
         btnAction.textContent = "Finalizar Estudo";
         btnAction.classList.replace('btn-start', 'btn-stop');
         btnPause.classList.remove('hidden');
-statusDot.style.backgroundColor = "#FF9A00"; // Laranja (Estudando)
+        
+        // COR FIXA: LARANJA AO ESTUDAR
+        statusDot.style.backgroundColor = "var(--color-estudando)"; 
         statusText.textContent = "Estudando...";
     } else {
         btnAction.textContent = "Iniciar Estudo";
         btnAction.classList.replace('btn-stop', 'btn-start');
         btnPause.classList.add('hidden');
-statusDot.style.backgroundColor = "#2AF598"; // Verde (Disponível)
+        
+        // COR FIXA: VERDE AO FICAR DISPONÍVEL
+        statusDot.style.backgroundColor = "var(--color-disponivel)"; 
         statusText.textContent = "Disponível";
     }
 }
@@ -438,13 +480,13 @@ function pausarRetomar() {
         estaPausado = true;
         btnPause.textContent = "Retomar";
         statusText.textContent = "Pausado";
-        statusDot.style.backgroundColor = "gray";
+        statusDot.style.backgroundColor = "var(--color-pausado)"; // CINZA FIXO
     } else {
         // RETOMAR
         estaPausado = false;
         btnPause.textContent = "Pausar";
         statusText.textContent = "Estudando...";
-        statusDot.style.backgroundColor = "var(--mango-sunset)";
+        statusDot.style.backgroundColor = "var(--color-estudando)"; // VOLTA PRO LARANJA
         iniciarIntervalo();
     }
     salvarEstadoTimer();
@@ -454,6 +496,7 @@ function pausarRetomar() {
 // Event Listeners
 btnAction.addEventListener('click', gerenciarBotao);
 btnPause.addEventListener('click', pausarRetomar);
+
 
 // Inicialização
 carregarEstadoTimer();

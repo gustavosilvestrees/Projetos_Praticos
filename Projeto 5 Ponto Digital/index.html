@@ -6,12 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyFlow - Ponto de Estudos</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon2.ico" type="image/x-icon">
 </head>
 
 <body class="theme-dark">
     <header> <!-- Cabeçalho -->
         <div class="logo">Study<span>Flow</span></div>
         <div id="current-time">00:00:00</div>
+
+<div class="theme-selector">
+    <button id="theme-btn" title="Personalizar Cores">🖌️</button>
+    <div id="theme-menu" class="theme-options hidden">
+        <div class="theme-section">
+            <h4>Modo Claro</h4>
+            <div class="theme-row" id="row-light">
+                </div>
+        </div>
+        <div class="theme-section">
+            <h4>Modo Escuro</h4>
+            <div class="theme-row" id="row-dark">
+                </div>
+        </div>
+    </div>
+</div>
+        
         <div class="status-container">
             <span id="status-dot"></span>
             <span id="status-text">Disponível <div id="bolinha"></div></span>
@@ -80,6 +98,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="script.js"></script>
 <script src="dashboard.js"></script>
+<script src="temas.js"></script>
 </body>
 
 </html>
