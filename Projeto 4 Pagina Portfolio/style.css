@@ -1341,7 +1341,6 @@ strong.strongBlue {
 /* FOOTER */
 
 footer {
-    background-color: #0d1117;
     /* Fundo escuro (mesmo da seção de contato) */
     width: 100%;
     /* Altura ajustada para o conteúdo */
@@ -1389,16 +1388,13 @@ footer {
 /* ------------------ f2: Feito com React e Redes Sociais ------------------ */
 
 #f2 {
-    /* Ocupa o espaço central */
-    flex-grow: 1;
-    max-width: 600px;
-    height: 150px;
+    position: relative;
+    width: 100%;
+    min-height: 400px; /* Aumentado para dar espaço aos ícones espalhados */
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 15px;
-
+    align-items: center;
+    overflow: visible;
 }
 
 #f2 .feito-com {
@@ -1462,20 +1458,64 @@ footer {
     transform: translateZ(-1px);
 }
 
-.social-icons {
-    display: flex;
-    gap: 15px;
+.feito-com {
+    position: relative;
+    z-index: 2;
 }
 
+/* Configuração do SVG de fundo */
+#svg-conexoes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Posicionamento absoluto dos ícones como você pediu */
+.social-icons {
+position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block; /* Importante: remove o flex que junta as bolinhas */
+}
 .social-icons .icon {
-    /* Placeholder para os ícones */
-    width: 40px;
-    height: 40px;
+position: absolute;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     border: 2px solid #00ffff;
-    background-color: transparent;
-    box-shadow: 0 0 5px #00ffff;
+    background-color: #151B42; /* Fundo escuro igual ao print */
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    z-index: 5;
+    color: white;
 }
+
+.icon:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px #00ffff;
+}
+
+/* POSICIONAMENTO EXATO (Baseado no seu print) */
+/* Ícone 1: Canto Superior Esquerdo */
+.icon:nth-child(1) { top: 30%; left: 90%; }
+
+/* Ícone 2: Lado Esquerdo mais abaixo */
+.icon:nth-child(2) { top: 30%; left: 98%; }
+
+/* Ícone 3: Canto Superior Direito */
+.icon:nth-child(3) { bottom: 30%; left: 90%; }
+
+/* Ícone 4: Canto Inferior Direito */
+.icon:nth-child(4) { bottom: 30%; left: 98%; }
+
+/* Ícone 4: Canto Inferior Direito */
+.icon:nth-child(5) { bottom: 30%; left: 106%; }
+
 
 /* ------------------ f3: Mensagem Final ------------------ */
 

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desenho de Z com Canvas</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #020617;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .canvas-wrapper {
+            position: relative;
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+            border: 2px solid #1e293b;
+        }
+
+        canvas {
+            display: block;
+            width: 500px;
+            height: 400px;
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            background: #3b82f6;
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover { background: #2563eb; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <div class="canvas-wrapper">
+        <canvas id="meuCanvas" width="500" height="400"></canvas>
+    </div>
+
+    <div class="controls">
+        <button id="btn-desenhar">✏️ Desenhar Z Passo a Passo</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('meuCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function desenharZ() {
+            // 1. Limpa o quadro
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 2. Define o estilo do "lápis"
+            ctx.strokeStyle = "#60a5fa";
+            ctx.lineWidth = 10;
+            ctx.lineCap = "round";  // Pontas arredondadas
+            ctx.lineJoin = "round"; // Cantos arredondados (faz a quebra ficar bonita)
+
+            // 3. Inicia o caminho
+            ctx.beginPath();
+
+            // PONTO 1: Início (Topo Esquerdo)
+            ctx.moveTo(150, 100); 
+
+            // PONTO 2: Topo Direito (Reta horizontal)
+            ctx.lineTo(350, 100); 
+
+            // PONTO 3: Base Esquerda (A diagonal do Z)
+            // Aqui acontece a "quebra": o pincel vai do topo direito para a base esquerda
+            ctx.lineTo(150, 300); 
+
+            // PONTO 4: Base Direita (Reta horizontal final)
+            ctx.lineTo(350, 300); 
+
+            // 4. Manda o Canvas pintar de facto o que riscamos
+            ctx.stroke();
+
+            // Adicionar círculos nos pontos para visualizar as "âncoras"
+            desenharPontos();
+        }
+
+        function desenharPontos() {
+            const pts = [[150, 100], [350, 100], [150, 300], [350, 300]];
+            ctx.fillStyle = "white";
+            pts.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p[0], p[1], 5, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        document.getElementById('btn-desenhar').addEventListener('click', desenharZ);
+        
+        // Desenha uma vez ao carregar
+        desenharZ();
+    </script>
+</body>
+</html>
