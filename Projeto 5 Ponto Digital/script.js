@@ -13,6 +13,7 @@ let segundos = 0;
 let intervaloCronometro = null;
 let estaRodando = false;
 let estaPausado = false;
+let tempoReferencia = null; // Guardará o timestamp de quando o timer iniciou/retomou
 
 
 /* ================================= 1. LÓGICA DO RELÓGIO (HORA ATUAL) ================================= */
@@ -82,8 +83,12 @@ function gerenciarBotao() {
 
     } else {
 
-        // Parar contagem
+        // FINALIZAR
         clearInterval(intervaloCronometro); //Caso seja false ele para a contagem no navegador parando o cronometro
+        estaRodando = false;
+        estaPausado = false;
+
+        
 
         // Voltar ao estado inicial (ou preparar para salvar)
         btnAction.textContent = "Iniciar Estudo"; // O botão volta ao estado original
@@ -94,11 +99,16 @@ function gerenciarBotao() {
         statusText.textContent = "Disponível"; //Volta o texto do status para disponivel
 
         // MOSTRAR A ÁREA DE NOTAS
+        atualizarInterface(false);
         inputArea.classList.remove('hidden'); //Remove a classe hidden deixando a area visivel
         inputArea.classList.add('show-area'); //Adiciona a classe show-area para mostrar o text area
 
         // Colocar o foco automático no texto para você já começar a digitar
         notasEstudo.focus();
+        document.title = "StudyFlow - Ponto de Estudos";
+        atualizarFavicon("#808080"); // Cinza indicando que terminou
+
+        localStorage.removeItem('studyflow_timer');
 
         // Aqui futuramente chamaremos a função de salvar no LocalStorage
 
@@ -150,6 +160,8 @@ function salvarRegistro() {
     // 3. Salvar de volta no LocalStorage (convertendo para texto)
     localStorage.setItem('pontos_estudo', JSON.stringify(registros)); // Usa o JSON.stringify para converter o objeto JS em texto para salvar no LocalStorage
 
+    if (typeof renderizarGrafico === "function") renderizarGrafico(); // Se a função de renderizar gráfico existir, chama ela para atualizar o gráfico com os novos dados
+
     // Limpar e esconder campo
     inputArea.classList.remove('show-area'); //Remove a classe show-area escondendo a area de notas
     inputArea.classList.add('hidden'); //Adiciona a classe hidden para esconder o text area
@@ -158,6 +170,8 @@ function salvarRegistro() {
 
     alert("Estudo registrado com sucesso!");
     carregarHistorico(); // Atualiza a tabela na tela
+
+    
 
     /*
     Conceitos dessa funçao:
@@ -353,11 +367,12 @@ btnClear.addEventListener('click', limparHistorico);
 // Salva o estado atual no LocalStorage
 function salvarEstadoTimer() {
     const estado = {
-        segundos,
+        segundos, // Mantemos para o display
         estaRodando,
         estaPausado,
         horaInicio,
-        ultimoUpdate: Date.now() // Guarda o momento exato que salvou
+        tempoReferencia, // O "marco zero" do cronômetro
+        ultimoUpdate: Date.now()
     };
     localStorage.setItem('studyflow_timer', JSON.stringify(estado));
 }
@@ -365,19 +380,26 @@ function salvarEstadoTimer() {
 // Carrega o estado ao abrir a página
 function carregarEstadoTimer() {
     const salvo = JSON.parse(localStorage.getItem('studyflow_timer'));
-    if (salvo && salvo.estaRodando) { // Se tinha algo salvo e estava rodando
-        segundos = salvo.segundos; // Restaura os segundos
-        estaRodando = salvo.estaRodando; // Restaura se estava rodando
-        estaPausado = salvo.estaPausado; // Restaura se estava pausado
-        horaInicio = salvo.horaInicio; // Restaura a hora de início
+    if (salvo && salvo.estaRodando) {
+        estaRodando = salvo.estaRodando;
+        estaPausado = salvo.estaPausado;
+        horaInicio = salvo.horaInicio;
+        tempoReferencia = salvo.tempoReferencia;
 
-        // Se estava rodando e NÃO estava pausado, compensa o tempo que a página ficou fechada
         if (!estaPausado) {
-            const agora = Date.now();
-            const diferencaSegundos = Math.floor((agora - salvo.ultimoUpdate) / 1000);
-            segundos += diferencaSegundos;
+            // Se estava rodando, recalculamos os segundos exatos agora
+            segundos = Math.floor((Date.now() - tempoReferencia) / 1000);
             iniciarIntervalo();
+        } else {
+            // Se estava pausado, recuperamos os segundos de onde parou
+            segundos = salvo.segundos;
+            displayCronometro.textContent = formatarTempo(segundos);
+            document.title = "Pausado - StudyFlow";
         }
+        
+        atualizarInterface(estaRodando);
+    
+
         
         displayCronometro.textContent = formatarTempo(segundos); // Atualiza o display
         atualizarInterface(true); // Atualiza a interface para o estado "rodando"
@@ -394,22 +416,26 @@ function carregarEstadoTimer() {
 
 // 3. FUNÇÃO DE PAUSA
 function pausarRetomar() {
-    if (!estaRodando) return; // Se não está rodando, não faz nada
-
     if (!estaPausado) {
-        // Ação: Pausar
+        // PAUSAR
         clearInterval(intervaloCronometro);
         estaPausado = true;
         btnPause.textContent = "Retomar";
         statusText.textContent = "Pausado";
-        statusDot.style.backgroundColor = "gray";
+        statusDot.style.backgroundColor = "var(--color-pausado)";
+        document.title = "Pausado - StudyFlow"; // Feedback visual na aba
+        atualizarFavicon("#808080"); // Cinza ao pausar 
     } else {
-        // Ação: Retomar
-        estaPausado = false;
-        btnPause.textContent = "Pausar";
-        statusText.textContent = "Estudando...";
-        statusDot.style.backgroundColor = "var(--mango-sunset)";
-        iniciarIntervalo();
+        // RETOMAR
+estaPausado = false;
+    btnPause.textContent = "Pausar";
+    statusText.textContent = "Estudando...";
+    statusDot.style.backgroundColor = "var(--color-estudando)";
+    
+    // REAJUSTA O REFERENCIAL: O novo início é "agora" menos o que já tínhamos estudado
+    tempoReferencia = Date.now() - (segundos * 1000);
+    
+    iniciarIntervalo(); // Ele já vai limpar o título e por a cor certa
     }
     salvarEstadoTimer();
 }
@@ -420,10 +446,26 @@ function pausarRetomar() {
 
 function iniciarIntervalo() {
     if (intervaloCronometro) clearInterval(intervaloCronometro);
-    intervaloCronometro = setInterval(() => {
-        segundos++;
-        displayCronometro.textContent = formatarTempo(segundos);
-        salvarEstadoTimer(); // Salva a cada segundo para persistência
+    
+    // Define o ponto de partida real (agora menos o que já passou)
+    tempoReferencia = Date.now() - (segundos * 1000);
+
+intervaloCronometro = setInterval(() => {
+        const agora = Date.now();
+        // Calcula a diferença real em segundos
+        segundos = Math.floor((agora - tempoReferencia) / 1000);
+        
+        const tempoFormatado = formatarTempo(segundos);
+        displayCronometro.textContent = tempoFormatado;
+
+        // REGRAS DE TÍTULO E FAVICON (MODO ESTUDO)
+        document.title = tempoFormatado; // Limpa o "StudyFlow" e deixa só o tempo
+        atualizarFavicon(obterCorPorTempo(segundos));
+        
+        // ATUALIZA O TÍTULO DA ABA
+        document.title = `(${tempoFormatado}) StudyFlow`;
+
+        salvarEstadoTimer(); 
     }, 1000);
 }
 
@@ -469,6 +511,7 @@ function gerenciarBotao() {
         inputArea.classList.add('show-area');
         notasEstudo.focus();
         localStorage.removeItem('studyflow_timer'); // Limpa o temporário ao finalizar
+        document.title = "StudyFlow - Ponto de Estudos";
     }
     salvarEstadoTimer();
 }
@@ -500,3 +543,56 @@ btnPause.addEventListener('click', pausarRetomar);
 
 // Inicialização
 carregarEstadoTimer();
+
+
+/* ================================= FAVICON CANVAS ================================= */
+
+
+function atualizarFavicon(cor) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 32;
+    canvas.height = 32;
+    const ctx = canvas.getContext('2d');
+
+    // Desenha a bolinha
+    ctx.beginPath();
+    ctx.arc(16, 16, 14, 0, Math.PI * 2);
+    ctx.fillStyle = cor;
+    ctx.fill();
+    
+    // Adiciona uma borda leve para destacar em temas claros/escuros
+    ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Substitui o favicon atual
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+    }
+    link.href = canvas.toDataURL('image/x-icon');
+}
+
+function obterCorPorTempo(totalSegundos) {
+    const minutos = totalSegundos / 60;
+    const horas = totalSegundos / 3600;
+
+    if (horas >= 3) return "#9b59b6";   // Roxo (3h+)
+    if (horas >= 2) return "#3498db";   // Azul (2h+)
+    if (horas >= 1) return "#2ecc71";   // Verde (1h+)
+    if (minutos >= 30) return "#ffd700"; // Amarelo (30min+)
+    if (minutos >= 10) return "#ff4d4d"; // Vermelho (10min+)
+    
+    return "#a2fba2"; // Verde bem claro (Início/Disponível)
+}
+
+// Para começar com a bolinha verde clara ao abrir o app
+document.addEventListener('DOMContentLoaded', () => {
+    if (!estaRodando) {
+        atualizarFavicon("#a2fba2"); // Verde bem claro (Disponível)
+    }
+});
+
+
