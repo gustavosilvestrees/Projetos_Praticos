@@ -937,7 +937,8 @@ strong.strongBlue {
 
 
 #projects {
-    background-color: lightseagreen;
+background-color: #151B42; /* Cor base do seu body */
+    padding: 80px 20px;
     width: 100%;
 
 }
@@ -952,59 +953,32 @@ strong.strongBlue {
 }
 
 .containerProject {
-    width: 300px;
-    height: 400px !important; /* Define a altura fixa solicitada */
-    border-radius: 10px;
-    box-sizing: border-box;
-    padding: 20px;
+    width: 90%;
+    max-width: 900px;
+    min-height: 350px;
+background: rgba(21, 27, 66, 0.7); /* Fundo escuro semi-transparente */
+    backdrop-filter: blur(12px); /* Efeito de desfoque de vidro */
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 5px; /* Bordas menos arredondadas ficam mais futuristas */
     position: relative;
+    padding: 40px;
     display: flex;
-    transition: 0.3s ease;
-
-    /* GLASSMORFISMO */
-    background-color: rgba(22, 27, 34, 0.5);
-    /* Fundo semi-transparente */
-    backdrop-filter: blur(10px);
-    /* Efeito de desfoque */
-
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    /* IMPORTANTE: Removemos o overflow:hidden daqui para o brilho não sumir */
-    /* Mas precisamos garantir que a borda não vaze */
+    margin: 20px auto;
+    transition: 0.4s ease;
+    overflow: hidden;
 }
 
 /* Criamos a borda como um elemento absoluto */
 .containerProject::before {
     content: '';
     position: absolute;
-    /* O "inset: 0" faz ele ocupar tudo, mas vamos usar um padding negativo para a borda */
-    inset: -2px;
-    padding: 2px;
-    /* Esta é a espessura da sua borda */
-
-    /* O segredo está aqui: o gradiente só aparece onde tem o padding */
-    background: conic-gradient(from var(--angle),
-            transparent 70%,
-            #00ffff 85%,
-            #00ffff 100%);
-
-    border-radius: 12px;
-    /* Ligeiramente maior que o container */
-
-    /* A MÁGICA: Esta máscara diz ao navegador: 
-       "Mostre o fundo apenas na área do padding e oculte o centro" */
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 2px solid transparent;
+    background: linear-gradient(90deg, #00ffff, #ff00ff) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
-
-    z-index: -1;
-    animation: 4s spin linear infinite;
+    opacity: 0.3;
 }
 
 /* Camada interna para criar o efeito de "linha" fina da borda */
@@ -1058,11 +1032,136 @@ strong.strongBlue {
 
 #alinhamentoContainer {
     display: flex;
-    flex-direction: column; /* Coloca um embaixo do outro */
-    gap: 40px;              /* Espaço vertical entre os projetos */
+    flex-direction: column;
+    gap: 50px; /* Espaço maior entre os cards */
+    align-items: center;
+}
+
+.project-content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
     width: 100%;
-    padding: 20px 0;
-    align-items: center;    /* Centraliza a estrutura da coluna */
+}
+
+/* Conteúdo interno dividido */
+.project-content {
+    position: relative; /* Essencial para o z-index funcionar */
+    z-index: 5; /* Fica acima das linhas de hologram */
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
+    width: 100%;
+}
+
+.project-image {
+    position: relative;
+    border: 1px solid #00ffff;
+    overflow: hidden;
+    background: #000;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+/* Detalhes de cantoneiras (Brackets) */
+/* Cantoneiras (As 4 pontas grossas) */
+.corner-detail {
+    position: absolute;
+    width: 30px; /* Tamanho da ponta */
+    height: 30px;
+    border: 4px solid #00ffff; /* Espessura maior para destacar */
+    z-index: 10;
+    filter: drop-shadow(0 0 8px #00ffff); /* Brilho neon nas pontas */
+}
+/* Posicionamento de cada ponta */
+.top-left { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+.top-right { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+.bottom-left { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+.bottom-right { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+
+/* Efeito Holográfico de TV Antiga */
+.hologram-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Linhas mais visíveis: alternando entre transparente e um azul ciano muito sutil */
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0) 1px,
+        rgba(0, 255, 255, 0.08) 2px, 
+        rgba(0, 0, 0, 0) 3px
+    );
+    pointer-events: none;
+    z-index: 2; /* Garante que fique acima do fundo do container */
+    animation: tv-flicker 0.15s infinite; /* Aumentei a velocidade do flicker */
+}
+
+/* Animação de interferência leve */
+@keyframes tv-flicker {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+
+/* Ajuste no botão para combinar com o pop-up */
+.btn-visit {
+    background: transparent;
+    border: 2px solid #ff00ff;
+    color: #fff;
+    padding: 10px 20px;
+    font-family: 'JetBrain Mono', monospace;
+    cursor: pointer;
+    box-shadow: inset 0 0 5px #ff00ff;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.btn-visit:hover {
+    background: #ff00ff;
+    box-shadow: 0 0 20px #ff00ff;
+    color: #000;
+}
+
+
+/* Efeito de Scanline animado na imagem */
+.scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 10px #00ffff;
+    animation: scanning 3s linear infinite;
+}
+
+@keyframes scanning {
+    0% { top: 0; }
+    100% { top: 100%; }
+}
+
+.project-info h3 {
+    font-family: "JetBrain Mono", monospace;
+    color: #fff;
+    font-size: 2em;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+.status-code {
+    color: #00ffff;
+    font-family: 'Consolas Mono', monospace;
+    font-size: 0.8em;
+    letter-spacing: 2px;
 }
 
 #contact {
