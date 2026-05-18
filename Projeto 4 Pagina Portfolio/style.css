@@ -417,6 +417,8 @@ strong.strongBlue {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: center;
+    text-align: center;
 }
 
 #containerSobre {
@@ -617,17 +619,144 @@ strong.strongBlue {
 }
 
 #asideSobre {
-    background-color: #FF1493;
-    width: 35%;
+    width: 45%;
     padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;   /* Alinha o avatar e a barra verticalmente */
+    align-items: center;       /* Centraliza horizontalmente no container */
+    justify-content: center;   /* Centraliza verticalmente no container */
+    gap: 25px;                 /* Cria um espaçamento seguro para não vazar do elemento */
+}
+
+
+
+#eu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Necessário para o brilho de fundo */
+    z-index: 1;
+}
+
+/* A imagem que vai flutuar */
+#eu img {
+    width: 500px;
+    height: auto;
+    /* Nome da animação | Duração (9s) | Suavidade | Infinita */
+    animation: flutuar 7s ease-in-out infinite;
+}
+
+/* Definição do movimento */
+@keyframes flutuar {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-25px); /* Sobe 25 pixels */
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+
+/* Brilho suave fixo atrás do avatar */
+#eu::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+    filter: blur(40px);
+    z-index: -1; /* Garante que fique atrás de você */
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza perfeitamente */
+}
+
+
+/* Container do Idioma Estilo Hacker */
+.info-idioma {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 350px;          /* DEIXA MAIS FECHADO: Reduzido de 400px para 290px */
+    position: relative;
+    padding: 20px 10px;        /* MAIS PERTO DO TEXTO: Diminuído para colar a borda nos elementos */
+    text-align: center;
+    background: transparent;
+    border: none;
+}
+
+/* CONFIGURAÇÃO DO SVG E DO BRILHO */
+.fundo-hud-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    filter: drop-shadow(0 0 12px rgba(0, 255, 0, 0.6)); /* Brilho neon reforçado */
+}
+
+/* O SEGREDO DA BORDA PERFEITA DE 3PX */
+.fundo-hud-svg polygon {
+    fill: rgba(0, 0, 0, 0.7);  /* Fundo escuro e semi-transparente como querias */
+    stroke: #00ff00;            /* Cor verde neon */
+    stroke-width: 3px;         /* ENGROSSADO PARA 3PX */
+    vector-effect: non-scaling-stroke; /* IMPEDE A DISTORÇÃO: A borda fica uniforme em toda a volta! */
+}
+
+/* Título com Fonte Monoespaçada e Brilho Neon */
+.info-idioma .idioma-titulo {
+    font-family: "JetBrain Mono", "Consolas Mono", monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #00ff00;            /* Verde Neon Puro */
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.8); /* Efeito Glow de tela */
+    margin: 0 0 12px 0;
+}
+
+/* GARANTIR QUE O TEXTO E OS BLOCOS FICAM À FRENTE */
+.info-idioma .idioma-titulo,
+.info-idioma .barra-blocos {
+    position: relative;
+    z-index: 1;                 /* Passa para a frente do SVG */
+}
+
+/* Alinhamento dos Quadradinhos */
+.barra-blocos {
+    padding: 5px 5px;
+    display: flex;
+    justify-content: center;
+    gap: 3px;                  /* Distância milimétrica entre os blocos */
+    width: 80%;
+    border: 4px solid #00ff00;
+    border-radius: 8px;
+}
+
+/* O formato base de cada quadrado */
+.barra-blocos .bloco {
+    width: 25px;
+    height: 40px;
+    background: rgba(0, 255, 0, 0.05); /* Quadrado vazio apagado */
+    border: 1px solid rgba(0, 255, 0, 0.25);
+    border-radius: 1px;
     box-sizing: border-box;
 }
 
-#waveOndas {
-    background-color: white;
-    width: 100%;
-    height: 60%;
+/* Quadrados Ativos (Preenchidos com Glow intenso) */
+.barra-blocos .bloco.preenchido {
+    background: #00ff00;       /* Preenchimento total em verde hacker */
+    border-color: #00ff00;
+    box-shadow: 0 0 6px #00ff00, 0 0 12px rgba(0, 255, 0, 0.6);
 }
+
+
 
 
 /* TECNOLOGIAS  */
@@ -1192,6 +1321,16 @@ background: rgba(21, 27, 66, 0.7); /* Fundo escuro semi-transparente */
     100% { top: 100%; }
 }
 
+.project-info p.tech-used-title {
+    color: white !important; /* O !important garante que nenhuma outra regra mude a cor */
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-family: 'JetBrain Mono', monospace;
+    text-shadow: 0px 0px 8px #fd90fd;
+}
+
 .project-info {
     display: flex;
     flex-direction: column;
@@ -1243,6 +1382,70 @@ font-family: "JetBrain Mono", monospace;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+}
+
+/* Título de tecnologias em Magenta Claro */
+/* Título "Tecnologias usadas" em Magenta Claro */
+.tech-used-title {
+    color: #ff77ff; 
+    margin-top: 20px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+/* Estilização das Tags (Spans) */
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.project-tags span {
+    color: #ff77ff; /* Cor da letra e do ícone em Magenta Claro */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 119, 255, 0.05); /* Fundo magenta bem transparente */
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 119, 255, 0.2); /* Borda magenta sutil */
+    transition: 0.3s;
+}
+
+/* Efeito ao passar o mouse nas tags */
+.project-tags span:hover {
+    background: rgba(255, 119, 255, 0.15);
+    box-shadow: 0 0 10px rgba(255, 119, 255, 0.3);
+}
+
+/* Ajuste fixo para as imagens (Sem distorção) */
+.project-image {
+    width: 100%;
+    height: 320px; /* Altura fixa padrão */
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    background: #000;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    /* O object-fit: cover garante que a imagem preencha o espaço sem esticar */
+    object-fit: cover; 
+    /* O object-position: top center garante que o topo do seu site apareça primeiro */
+    object-position: top center; 
+    opacity: 0.8;
+    transition: 0.5s ease;
+}
+
+.project-image:hover img {
+    opacity: 1;
+    transform: scale(1.03); /* Zoom leve e elegante */
 }
 
 /* ------------------ COLUNA ESQUERDA (CURRÍCULO) ------------------ */
@@ -1702,4 +1905,16 @@ position: absolute;
 /* Removendo a div de direitos autorais duplicada */
 .direitos-autorais {
     display: none;
+}
+
+
+#certificados {
+    border: 1px solid #ff00ff;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+#certificados:hover {
+    background: #ff00ff;
+    box-shadow: 0 0 20px #ff00ff;
+    color: #000;
 }
