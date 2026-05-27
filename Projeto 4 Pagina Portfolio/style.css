@@ -756,6 +756,68 @@ strong.strongBlue {
     box-shadow: 0 0 6px #00ff00, 0 0 12px rgba(0, 255, 0, 0.6);
 }
 
+/* ------------------ SEÇÃO SOFT SKILLS ------------------ */
+
+#softSkills {
+    margin: 60px auto;
+    padding: 30px 20px;
+    max-width: 1400px;
+    text-align: center;
+    color: #fff;
+    
+    /* FUNDO DA PRIMEIRA VERSÃO: Estilo HUD que dá destaque */
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(0, 255, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+    border-radius: 8px;
+}
+
+/* TÍTULO COM EFEITO NEON (Igualzinho ao Tech Skills) */
+#softSkills h1 {
+    font-family: "Futura", Arial, Helvetica, sans-serif;
+    font-size: 3rem; 
+    color: #fff; /* Verde Neon */
+    margin-bottom: 35px;
+    letter-spacing: 3px;
+    text-shadow: 1px 1px 4px rgb(194, 194, 194); /* Efeito Glow/Neon marcante */
+}
+
+/* CONTAINER DAS SKILLS */
+.container-soft {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* AUMENTADO: Mais espaçamento entre as divs */
+    padding: 15px;
+}
+
+/* DIVS DAS SKILLS AMPLIADAS */
+.soft-skill-div {
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #00ffff;
+    
+    /* TAMANHO AUMENTADO: Mais padding interno e fonte ligeiramente maior */
+    padding: 12px 24px; 
+    font-size: 1.05rem;
+    
+    border-radius: 6px;
+    font-family: 'JetBrain Mono', monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: default;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Efeito Hover mantendo a identidade visual */
+.soft-skill-div:hover {
+    background: rgba(255, 119, 255, 0.15);
+    box-shadow: 0 0 15px rgba(255, 119, 255, 0.4);
+    border-color: rgba(255, 119, 255, 0.6);
+    color: #ff77ff;
+    transform: translateY(-2px); /* Leve efeito de flutuação ao passar o mouse */
+}
 
 
 
