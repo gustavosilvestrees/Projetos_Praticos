@@ -1,4 +1,8 @@
 import customtkinter as ctk
+from PIL import Image
+import os
+# Conectando com o banco de dados dinamicamente
+from weather_db import IMAGENS_ESTADOS
 
 # Configuração de aparência - Cores Neon Customizadas
 NEON_BLUE = "#00D2FF"
@@ -69,62 +73,78 @@ class App(ctk.CTk):
         self.main_frame = ctk.CTkFrame(self, fg_color="transparent")
         self.main_frame.grid(row=0, column=1, padx=30, pady=20, sticky="nsew")
         self.main_frame.grid_columnconfigure(0, weight=1)
-        self.main_frame.grid_rowconfigure(3, weight=1) # Permite que a seção inferior expanda
+        self.main_frame.grid_rowconfigure(3, weight=1) 
 
         # --- TÍTULO ---
         self.title_label = ctk.CTkLabel(self.main_frame, text="Monitoramento Meteorológico em Tempo Real", 
                                         font=ctk.CTkFont(size=26, weight="bold"), text_color="white", anchor="w")
         self.title_label.grid(row=0, column=0, sticky="ew", pady=(10, 15))
 
-        # --- BARRA DE PESQUISA (Adicionada conforme o Mockup) ---
+        # --- BARRA DE PESQUISA ---
         self.search_entry = ctk.CTkEntry(self.main_frame, placeholder_text="Pesquisar cidade ou comando Gemini...", 
                                          height=40, border_color=NEON_BLUE, fg_color="#10141A")
         self.search_entry.grid(row=1, column=0, sticky="ew", pady=(0, 20))
 
-        # --- CONTAINER DOS CARDS (GRID UNIFORME) ---
+        # --- CONTAINER DOS CARDS ---
         self.cards_frame = ctk.CTkFrame(self.main_frame, fg_color="transparent")
         self.cards_frame.grid(row=2, column=0, sticky="ew", pady=(0, 10))
         self.cards_frame.grid_columnconfigure((0, 1, 2, 3), weight=1, uniform="group1")
 
-        # Renderização dos Cards com correção de posicionamento
         self.create_card(self.cards_frame, "🌡️ Temperatura", "26.5°C", NEON_RED, 0, "▲ +0.2°C/min")
         self.create_card(self.cards_frame, "💧 Umidade", "71.2%", NEON_BLUE, 1, "Está Chovendo?")
         self.create_card(self.cards_frame, "⏲️ Pressão", "1013.2 hPa", NEON_GREEN, 2, "Tendência: Estável")
         self.create_card(self.cards_frame, "🌧️ Status Chuva", "SIM", NEON_MAGENTA, 3, "Ativo há: 5 min")
 
-        # --- SEÇÃO CIDADE (Clima Local) ---
+        # ================= SEÇÃO CIDADE (REINDENTADO DENTRO DO __INIT__) =================
+        
+        # 1. Criamos um container base com a borda e o fundo escuro padrão (caso a imagem falhe)
         self.city_frame = ctk.CTkFrame(self.main_frame, border_width=2, border_color="#1E242C", fg_color="#10141A")
         self.city_frame.grid(row=3, column=0, pady=(20, 10), sticky="nsew")
         
-        self.city_info = ctk.CTkLabel(self.city_frame, text="São Paulo, Brasil\nCéu Parcialmente Nublado", 
-                                      font=ctk.CTkFont(size=24, weight="bold"), justify="left", anchor="w")
+        try:
+            bg_image_pil = Image.open("brasiliaIA.png")
+            # Ajustamos o tamanho para preencher adequadamente o container
+            self.bg_image = ctk.CTkImage(light_image=bg_image_pil, dark_image=bg_image_pil, size=(900, 250))
+            
+            # 2. Criamos o Label da imagem DIRETAMENTE ocupando o fundo inteiro do city_frame
+            self.bg_label = ctk.CTkLabel(self.city_frame, image=self.bg_image, text="")
+            self.bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
+            
+        except Exception as e:
+            print(f"Erro ao carregar a imagem de fundo: {e}")
+
+        # 3. Criamos um frame interno APENAS para os textos, posicionado por CIMA da imagem usando .place()
+        self.text_container = ctk.CTkFrame(self.city_frame, fg_color="transparent")
+        self.text_container.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+        # 4. Textos adicionados dentro do contêiner transparente sobreposto
+        self.city_info = ctk.CTkLabel(self.text_container, text="São Paulo, Brasil\nCéu Parcialmente Nublado", 
+                                      font=ctk.CTkFont(size=24, weight="bold"), justify="left", anchor="w",
+                                      fg_color="transparent")
         self.city_info.pack(padx=30, pady=(30, 10), fill="x")
         
-        self.city_data = ctk.CTkLabel(self.city_frame, text="Temp: 27°C (Sente-se 29°C) | Vento: 15 km/h SE | UV: 6 (Moderado)", 
-                                      font=ctk.CTkFont(size=15), text_color="gray", anchor="w")
+        self.city_data = ctk.CTkLabel(self.text_container, text="Temp: 27°C (Sente-se 29°C) | Vento: 15 km/h SE | UV: 6 (Moderado)", 
+                                      font=ctk.CTkFont(size=15), text_color="gray", anchor="w",
+                                      fg_color="transparent")
         self.city_data.pack(padx=30, pady=(0, 30), fill="x")
 
-    def create_card(self, master, title, value, color, col, extra_text):
-        # Card com Grid dinâmico interno para evitar quebras de texto
-        card = ctk.CTkFrame(master, border_width=2, border_color=color, fg_color="#161B22")
-        card.grid(row=0, column=col, padx=6, pady=10, sticky="nsew")
+    # === FUNÇÃO PARA CRIAR OS CARDS NEON ===
+    def create_card(self, parent, title, value, neon_color, column, subtext):
+        card = ctk.CTkFrame(parent, fg_color="#10141A", border_width=1, border_color="#1E242C")
+        card.grid(row=0, column=column, padx=5, pady=5, sticky="nsew")
         
-        # Título do Card
-        ctk.CTkLabel(card, text=title, font=ctk.CTkFont(size=14, weight="bold"), text_color="white").pack(pady=(15, 5))
+        # Indicador com a cor neon no topo do card para manter a identidade high-tech
+        line = ctk.CTkFrame(card, height=3, fg_color=neon_color)
+        line.pack(fill="x", side="top")
         
-        # Valor Central (Ajustado tamanho para não estourar a borda)
-        if "hPa" in value:
-            num = value.replace(" hPa", "")
-            ctk.CTkLabel(card, text=num, text_color=color, font=ctk.CTkFont(size=30, weight="bold")).pack()
-            ctk.CTkLabel(card, text="hPa", text_color=color, font=ctk.CTkFont(size=16, weight="bold")).pack(pady=(0, 5))
-        else:
-            ctk.CTkLabel(card, text=value, text_color=color, font=ctk.CTkFont(size=34, weight="bold")).pack(pady=15)
-
-        # Div de Status Inferior
-        info_div = ctk.CTkFrame(card, fg_color="transparent")
-        info_div.pack(fill="x", padx=10, pady=(0, 15))
+        lbl_title = ctk.CTkLabel(card, text=title, font=ctk.CTkFont(size=13), text_color="gray")
+        lbl_title.pack(anchor="w", padx=15, pady=(12, 5))
         
-        ctk.CTkLabel(info_div, text=extra_text, text_color="gray", font=ctk.CTkFont(size=12, weight="bold")).pack()
+        lbl_value = ctk.CTkLabel(card, text=value, font=ctk.CTkFont(size=22, weight="bold"), text_color="white")
+        lbl_value.pack(anchor="w", padx=15, pady=0)
+        
+        lbl_sub = ctk.CTkLabel(card, text=subtext, font=ctk.CTkFont(size=11), text_color=neon_color)
+        lbl_sub.pack(anchor="w", padx=15, pady=(5, 12))
 
 if __name__ == "__main__":
     app = App()
