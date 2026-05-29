@@ -199,7 +199,7 @@ class App(QWidget):
         
         # Resolução de caminhos absoluta para a imagem de fundo
         pasta_do_script = os.path.dirname(os.path.abspath(__file__))
-        caminho_imagem = os.path.join(pasta_do_script, "brasiliaIA.png").replace("\\", "/") 
+        caminho_imagem = os.path.join(pasta_do_script, "sergipeIA.png").replace("\\", "/") 
         
         if os.path.exists(caminho_imagem):
             self.city_frame.setStyleSheet(f"""
