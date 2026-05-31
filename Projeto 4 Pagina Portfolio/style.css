@@ -1538,7 +1538,6 @@ font-family: "JetBrain Mono", monospace;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    border: 1px solid #333;
     /* Apenas para visualização */
 }
 
@@ -1550,19 +1549,198 @@ font-family: "JetBrain Mono", monospace;
     padding: 10px;
 }
 
+.contactLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* GAP AUMENTADO: Adiciona mais espaço vertical entre o GitHub e o LinkedIn */
+    margin: 20px 0;
+}
+
 .bannerC {
-    height: 80px;
-    border: 2px solid #ff4500;
+    height: 200px;
+    border-top: 2px solid gray;
     /* Borda cor de destaque */
-    box-shadow: 0 0 10px #ff4500;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2em;
     text-align: center;
-    border-radius: 8px;
 }
 
+/* Alinhamento da linha (Círculo + Link) */
+.githubC, .linkedinC {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaço entre o círculo e o texto */
+}
+
+/* Estilização Geral dos Círculos dos Ícones (TAMANHO DIMINUÍDO) */
+.circulo-icone {
+    width: 36px;  /* Reduzido de 45px para 36px */
+    height: 36px; /* Reduzido de 45px para 36px */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem; /* Ícone levemente menor para acompanhar o círculo */
+    color: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+/* Cor Oficial do GitHub */
+.circulo-github {
+    background: #24292e;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Cor Oficial do LinkedIn */
+.circulo-linkedin {
+    background: #0077b5;
+    border: 1px solid rgba(0, 119, 181, 0.4);
+}
+/* Estilização dos Links de Texto */
+.link-contato {
+    font-family: 'JetBrain Mono', monospace;
+    font-size: 1rem;
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* EFFECT HOVER (Interações ao passar o mouse) */
+
+/* Hover no Bloco do GitHub */
+.githubC:hover .circulo-github {
+    background: #ffffff;
+    color: #24292e;
+    box-shadow: 0 0 15px rgba(255, 119, 255, 0.6); /* Brilho magenta sutil no círculo */
+    transform: scale(1.1);
+}
+
+/* TEXTO DO GITHUB EM MAGENTA NO HOVER */
+.githubC:hover .link-contato {
+    color: #ff77ff; /* Magenta / Rosa Cyberpunk */
+    text-shadow: 0 0 8px rgba(255, 119, 255, 0.6);
+    padding-left: 5px;
+}
+
+/* Hover no Bloco do LinkedIn */
+.linkedinC:hover .circulo-linkedin {
+    background: #ffffff;
+    color: #0077b5;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.6); /* Brilho aqua sutil no círculo */
+    transform: scale(1.1);
+}
+
+/* TEXTO DO LINKEDIN EM AQUA NO HOVER */
+.linkedinC:hover .link-contato {
+    color: #00ffff; /* Aqua / Ciano Neon */
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    padding-left: 5px;
+}
+
+/* ------------------ BANNER C - STATUS HUD ------------------ */
+
+.bannerC {
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 10px 20px;
+    margin-top: auto; /* Garante que é empurrado para o fundo do container pai se aplicável */
+}
+
+
+
+
+
+/* Formatação do texto idêntica ao print */
+.texto-banner-c {
+    font-family: 'JetBrain Mono', 'Consolas Mono', monospace;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 2px;
+    white-space: nowrap; /* Impede o texto de quebrar em duas linhas */
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Container do Gráfico de Ondas */
+.ondas-pulse-svg {
+    width: 260px;
+    height: 95px;
+    display: block;
+    margin: 0 auto;
+    align-self: center;
+}
+
+
+/* Base de todos os caminhos de áudio */
+.pico-audio {
+    fill: none;
+    stroke: #ff77ff;       /* Cor MAGENTA vibrante */
+    stroke-width: 2px;     /* Linha cirúrgica de 2px */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 8px rgba(255, 119, 255, 0.8));
+    
+    /* Define o centro vertical (Y: 50px do viewBox de 100) como a linha d'água da oscilação */
+    transform-origin: center;
+}
+
+/* ANIMAÇÕES INDIVIDUAIS COM RITMOS ASSIMÉTRICOS DE MÚSICA */
+
+/* Pico 1 - Oscilação de batida média */
+.pico-1 {
+    animation: somOndaMedia 1.2s ease-in-out infinite alternate;
+}
+
+/* Pico 2 - O pico mais alto (Grave/Subwoofer) - Oscila mais forte e profundo */
+.pico-2 {
+    animation: somOndaGrave 0.8s ease-in-out infinite alternate;
+    animation-delay: 0.1s; /* Descompassado para dar naturalidade */
+}
+
+/* Pico 3 - O pico menor (Agudo) - Vibração rápida de alta frequência */
+.pico-3 {
+    animation: somOndaAguda 0.5s ease-in-out infinite alternate;
+}
+
+/* KEYFRAMES: Controlando o volume vertical (Scale Y) de cada frequência */
+
+@keyframes somOndaMedia {
+    0% {
+        transform: scaleY(0.4); /* Quase plano/volume baixo */
+    }
+    100% {
+        transform: scaleY(1.1); /* Expansão média */
+    }
+}
+
+@keyframes somOndaGrave {
+    0% {
+        transform: scaleY(0.2); /* Sinal fraco */
+    }
+    50% {
+        transform: scaleY(1.3); /* Explosão máxima do pico */
+    }
+    100% {
+        transform: scaleY(0.5);
+    }
+}
+
+@keyframes somOndaAguda {
+    0% {
+        transform: scaleY(0.6);
+    }
+    100% {
+        transform: scaleY(1.2); /* Oscilação super rápida e curta */
+    }
+}
 /* ------------------ COLUNA DIREITA (FORMULÁRIO) ------------------ */
 
 .formContatos {
@@ -1587,6 +1765,16 @@ font-family: "JetBrain Mono", monospace;
     /* Empurra o botão 'ENVIAR' para baixo */
     ;
 }
+
+#computadorID{
+    width: 100%;
+    height: 200px;
+    background-image: url('https://i.imgur.com/9nXo7sP.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 
 .formC {
     display: flex;
