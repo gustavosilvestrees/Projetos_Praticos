@@ -122,19 +122,19 @@
             </section>
         </section>
 
-<section id="softSkills">
-    <h1>Soft Skills</h1>
-    <div class="container-soft">
-        <div class="soft-skill-div">Comunicação</div>
-        <div class="soft-skill-div">Trabalho em Equipe</div>
-        <div class="soft-skill-div">Adaptabilidade e Flexibilidade</div>
-        <div class="soft-skill-div">Proatividade</div>
-        <div class="soft-skill-div">Foco em Resolução de Problemas</div>
-        <div class="soft-skill-div">Inteligência Emocional</div>
-        <div class="soft-skill-div">Pensamento Crítico</div>
-        <div class="soft-skill-div">Aprendizagem Contínua</div>
-    </div>
-</section>
+        <section id="softSkills">
+            <h1>Soft Skills</h1>
+            <div class="container-soft">
+                <div class="soft-skill-div">Comunicação</div>
+                <div class="soft-skill-div">Trabalho em Equipe</div>
+                <div class="soft-skill-div">Adaptabilidade e Flexibilidade</div>
+                <div class="soft-skill-div">Proatividade</div>
+                <div class="soft-skill-div">Foco em Resolução de Problemas</div>
+                <div class="soft-skill-div">Inteligência Emocional</div>
+                <div class="soft-skill-div">Pensamento Crítico</div>
+                <div class="soft-skill-div">Aprendizagem Contínua</div>
+            </div>
+        </section>
 
         <section id="techSkills">
             <h1>Tech Skills</h1>
@@ -481,52 +481,84 @@
                         <img id="computadorID" src="imagens/computador.png" alt="">
                     </div>
 
-<div class="contactLinks">
-    <div class="githubC">
-        <div class="circulo-icone circulo-github">
-            <i class="fab fa-github"></i>
-        </div>
-        <a href="https://github.com/seu-usuario" target="_blank" class="link-contato">github.com/seu-usuario</a>
-    </div>
+                    <div class="contactLinks">
+                        <div class="githubC">
+                            <div class="circulo-icone circulo-github">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <a href="https://github.com/seu-usuario" target="_blank"
+                                class="link-contato">github.com/seu-usuario</a>
+                        </div>
 
-    <div class="linkedinC">
-        <div class="circulo-icone circulo-linkedin">
-            <i class="fab fa-linkedin-in"></i>
-        </div>
-        <a href="https://linkedin.com/in/seu-perfil" target="_blank" class="link-contato">linkedin.com/in/seu-perfil</a>
-    </div>
-</div>
-<div class="barra-cinza-bg"></div>
+                        <div class="linkedinC">
+                            <div class="circulo-icone circulo-linkedin">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <a href="https://linkedin.com/in/seu-perfil" target="_blank"
+                                class="link-contato">linkedin.com/in/seu-perfil</a>
+                        </div>
+                    </div>
+                    <div class="barra-cinza-bg"></div>
 
                     <div class="bannerC">
-                        
-    
-    <div class="status-pulse-wrapper">
-        <p class="texto-banner-c">DISPONÍVEL PARA NOVAS OPORTUNIDADES</p>
-        <svg class="ondas-pulse-svg" viewBox="0 0 200 100" preserveAspectRatio="none">
-    <path class="pico-audio pico-1" d="M 0,50 L 60,50 L 68,20 L 76,80 L 84,50" />
-    
-    <path class="pico-audio pico-2" d="M 84,50 L 90,50 L 97,10 L 105,90 L 113,50" />
-    
-    <path class="pico-audio pico-3" d="M 113,50 L 120,50 L 129,32 L 138,68 L 147,50 L 200,50" />
-</svg>
-        
-    </div>
+
+
+                        <div class="status-pulse-wrapper">
+                            <p class="texto-banner-c">DISPONÍVEL PARA NOVAS OPORTUNIDADES</p>
+                            <svg class="ondas-pulse-svg" viewBox="0 0 200 100" preserveAspectRatio="none">
+                                <path class="reta-lateral" d="M 0,50 L 60,50" />
+
+                                <path class="onda-som som-pico-1" d="M 60,50 L 68,20 L 76,80 L 84,50" />
+
+                                <path class="onda-som som-pico-2" d="M 84,50 L 90,50 L 97,10 L 105,90 L 113,50" />
+
+                                <path class="onda-som som-pico-3" d="M 113,50 L 120,50 L 129,32 L 138,68 L 147,50" />
+
+                                <path class="reta-lateral" d="M 147,50 L 200,50" />
+                            </svg>
+
+                        </div>
                     </div>
                 </div>
 
                 <div class="formContatos">
-                    <form>
+                    <form id="meuFormulario" action="https://formspree.io/f/SEU_ID_DO_FORMSPREE" method="POST"
+                        class="form-contato-hud">
+
                         <h1>Contato</h1>
+
+
+
                         <div class="formC">
-                            <input type="text" id="nome" placeholder="NOME">
+                            <div class="campo-grupo">
+                                <label for="nome">NOME</label>
+                                <input type="text" id="nome" name="nome"
+                                    placeholder="Seu nome ou como prefere ser chamado(a/u)" required>
+                            </div>
 
-                            <input type="email" id="email" placeholder="EMAIL">
+                            <div class="campo-grupo">
+                                <label for="email">E-MAIL</label>
+                                <input type="email" id="email" name="email" placeholder="seu-email@dominio.com"
+                                    required>
+                            </div>
 
-                            <textarea id="mensagem" placeholder="MENSAGEM"></textarea>
-                        </div>f
+                            <div class="campo-grupo">
+                                <label for="mensagem">MENSAGEM</label>
+                                <textarea id="mensagem" name="mensagem" placeholder="Me mande uma mensagem..."
+                                    required></textarea>
+                            </div>
+                            
+                            <div class="campo-grupo-anexo">
+            <label for="arquivo-anexo" class="label-anexo">
+                <i class="fa-solid fa-paperclip"></i> <span id="texto-anexo">Anexar imagem ou arquivo</span>
+            </label>
+            <input type="file" id="arquivo-anexo" accept="image/*,application/pdf">
+            <input type="hidden" id="link_do_anexo" name="link_do_anexo">
+        </div>
 
-                        <button type="submit" class="enviar">ENVIAR</button>
+                            <button type="submit" class="enviar">ENVIAR</button>
+
+                            
                     </form>
                 </div>
             </div>
