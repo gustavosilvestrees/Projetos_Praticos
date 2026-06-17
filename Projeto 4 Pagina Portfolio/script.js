@@ -6,54 +6,63 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnEnviar = document.getElementById("btnEnviar");
     const msgSucesso = document.getElementById("mensagemSucesso");
 
-    // LÓGICA 1: Monitorar o arquivo e fazer upload em segundo plano assim que selecionado
+    // Garantir que o script só corre se o formulário existir na página
+    if (!formulario) return;
+
+    // LÓGICA 1: Monitorizar o ficheiro e fazer upload via tmpfiles.org (Livre de CORS local)
     inputAnexo.addEventListener("change", async (e) => {
         const arquivo = e.target.files[0];
         if (!arquivo) return;
 
         textoAnexo.textContent = "PROCESSANDO ARQUIVO...";
-        textoAnexo.style.color = "#00ffff"; // Cor Aqua de processamento
+        textoAnexo.style.color = "#00ffff"; 
 
-        // Criando os dados para enviar ao servidor temporário gratuito (file.io)
         const formDataAnexo = new FormData();
         formDataAnexo.append("file", arquivo);
 
         try {
-            // Faz o upload anônimo e super rápido do arquivo
-            const respostaUpload = await fetch("https://file.io/?expires=1w", {
+            // Faz o upload para uma API que não bloqueia o teu Live Server local
+            const respostaUpload = await fetch("https://tmpfiles.org/api/v1/upload", {
                 method: "POST",
                 body: formDataAnexo
             });
             
+            if (!respostaUpload.ok) throw new Error();
+            
             const resultado = await respostaUpload.json();
 
-            if (resultado.success) {
-                // Guarda o link gerado no nosso input oculto do formulário
-                inputLinkOculto.value = resultado.link;
+            // Guarda o link web do arquivo gerado no input invisible
+            if (resultado.data && resultado.data.url) {
+                inputLinkOculto.value = resultado.data.url;
                 textoAnexo.textContent = `✔ ${arquivo.name} PRONTO!`;
                 textoAnexo.style.color = "#22c55e"; // Verde de sucesso
             } else {
                 throw new Error();
             }
         } catch (erro) {
+            console.error("Erro no upload:", erro);
             textoAnexo.textContent = "Erro ao processar anexo. Tente outro.";
             textoAnexo.style.color = "#ef4444";
-            inputAnexo.value = ""; // Limpa o campo
+            inputAnexo.value = ""; 
+            inputLinkOculto.value = "";
         }
     });
 
-    // LÓGICA 2: Interceptar o envio do Formspree, exibir sucesso e apagar dados locais
+    // LÓGICA 2: Envio para o Formspree e Destruição imediata dos dados locais
     formulario.addEventListener("submit", async (evento) => {
         evento.preventDefault();
 
-        // Variáveis temporárias na memória volátil (Serão limpas logo em seguida)
+        // Armazenamento estrito em variáveis voláteis (temporárias) na memória
         const nomeTemp = document.getElementById("nome").value;
         const emailTemp = document.getElementById("email").value;
         const msgTemp = document.getElementById("mensagem").value;
         const linkAnexoTemp = inputLinkOculto.value;
 
-        btnEnviar.disabled = true;
-        btnEnviar.textContent = "TRANSMITINDO DADOS...";
+        // Proteção: Desabilita o botão usando o ID correto para evitar o erro de 'properties of null'
+        if (btnEnviar) {
+            btnEnviar.disabled = true;
+            btnEnviar.textContent = "TRANSMITINDO DADOS...";
+        }
 
         const dadosFormspree = new FormData(formulario);
 
@@ -65,23 +74,29 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (respostaFormspree.ok) {
-                // LIMPEZA ABSOLUTA DE DADOS: Apaga tudo do site para não acumular memória
+                // SUCESSO: Apaga tudo instantaneamente para evitar acúmulo de dados na página
                 formulario.reset();
-                inputLinkOculto.value = "";
-                textoAnexo.textContent = "Anexar imagem ou arquivo";
-                textoAnexo.style.color = "#ff77ff";
+                if (inputLinkOculto) inputLinkOculto.value = "";
+                if (textoAnexo) {
+                    textoAnexo.textContent = "Anexar imagem ou arquivo";
+                    textoAnexo.style.color = "#ff77ff";
+                }
 
-                // Exibe feedback visual
-                msgSucesso.style.display = "block";
-                setTimeout(() => { msgSucesso.style.display = "none"; }, 6000);
+                // Alerta HUD de sucesso na tela
+                if (msgSucesso) {
+                    msgSucesso.style.display = "block";
+                    setTimeout(() => { msgSucesso.style.display = "none"; }, 6000);
+                }
             } else {
-                alert("Falha na transmissão do Formspree. Verifique o ID do formulário.");
+                alert("Falha no Formspree. Certifica-te que adicionaste o teu ID no 'action' do HTML.");
             }
         } catch (erro) {
-            alert("Erro de rede. Verifique sua conexão.");
+            alert("Erro de rede. Verifica a tua ligação.");
         } finally {
-            btnEnviar.disabled = false;
-            btnEnviar.textContent = "ENVIAR TRANSMISSÃO";
+            if (btnEnviar) {
+                btnEnviar.disabled = false;
+                btnEnviar.textContent = "ENVIAR TRANSMISSÃO";
+            }
         }
     });
 });

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio Gustavo - Estrutura Base</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
     <link href="icones/fontawesome/css/all.css" rel="stylesheet">
 </head>
 
@@ -21,7 +22,7 @@
                 <button class="botaoNav"><a href="#techSkills">SKILLS</a></button>
                 <button class="botaoNav"><a href="#projects">PROJETOS</a></button>
                 <button class="botaoNav"><a href="#contact">CONTATO</a></button>
-                <button class="botaoNav" id="CV">CV</button>
+                <button class="botaoNav" id="CV"><a href="meuCurriculo.pdf" download="meuCurriculo.pdf">CV</a></button>
                 <button class="botaoNav" id="certificados"><a href="certificacoes.html">CERTIFICAÇÕES</a></button>
                 <button class="botaoNav" id="whats">WHATS</button>
             </div>
@@ -30,7 +31,7 @@
 
     <main>
         <section id="Perfil">
-            <div id="Avatar"></div>
+            <div id="Avatar"><img src="minhafoto.png" alt=""></div>
 
             <div id="quadradoBG">
 
@@ -47,7 +48,7 @@
                     Proficiente em Design Responsivo, Git/GitHub, integração com ferramentas de IA (Google Gemini e
                     GitHub Copilot) para otimização de código e ganho de perfomance. Crio interfaces modernas,
                     acessíveis e performáticas.</h4>
-                <button class="Explorar">EXPLORE MEUS PROJETOS</button>
+                <button class="Explorar"><a href="#projects">EXPLORE MEUS PROJETOS</a></button>
                 <h5 class="legDiv5">Transformo problemas complexos em código limpo e soluções escaláveis</h5>
             </div>
         </section>
@@ -357,8 +358,8 @@
                                     <span><i class="fab fa-js-square"></i> JAVASCRIPT</span>
 
                                 </div>
-                                <button class="btn-visitmagenta">VER GITHUB</button>
-                                <button class="btn-visitaqua">VER SITE</button>
+                                <button class="btn-visitmagenta"><a href="https://github.com/gustavosilvestrees/Projetos_Praticos/tree/main/Projeto.1%20Pag%20de%20Noticias" target="_blank">VER GITHUB</a></button>
+                                <button class="btn-visitaqua"><a href="projects/Projeto.1 Pag de Noticias/index 2.0.html" target="_blank">VER SITE</a></button>
                             </div>
                         </div>
                     </div>
@@ -392,8 +393,8 @@
                                         <span class="pTags">JS</span>
                                         <span class="pTags">IA Gemini</span>
                                     </div>
-                                    <button class="btn-visitmagenta">VER GITHUB</button>
-                                    <button class="btn-visitaqua">VER SITE</button>
+                                    <button class="btn-visitmagenta"><a href="https://github.com/gustavosilvestrees/Projetos_Praticos/tree/main/Projeto.%203%20Cardapio%20Digital" target="_blank">VER GITHUB</a></button>
+                                    <button class="btn-visitaqua"><a href="projects/Projeto. 3 Cardapio Digital/1pedidos_principais.html" target="_blank">VER SITE</a></button>
                                 </div>
                             </div>
                         </div>
@@ -432,8 +433,8 @@
                                             <span class="pTags">JS</span>
                                             <span class="pTags">IA Gemini</span>
                                         </div>
-                                        <button class="btn-visitmagenta">VER GITHUB</button>
-                                        <button class="btn-visitaqua">VER SITE</button>
+                                        <button class="btn-visitmagenta"><a href="https://github.com/gustavosilvestrees/Projetos_Praticos/tree/main/Projeto%205%20Ponto%20Digital" target="_blank">VER GITHUB</a></button>
+                                        <button class="btn-visitaqua"><a href="projects/Projeto 5 Ponto Digital/index.html" target="_blank">VER SITE</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -467,8 +468,8 @@
                                                 <span class="pTags">CSS</span>
                                                 <span class="pTags">JS</span>
                                             </div>
-                                            <button class="btn-visitmagenta">VER GITHUB</button>
-                                            <button class="btn-visitaqua">VER SITE</button>
+                                            <button class="btn-visitmagenta"><a href="https://github.com/gustavosilvestrees/Projetos_Praticos/tree/main/Projeto.%202%20Pedidos%20Fitness/Projeto%20Secreto" target="_blank">VER GITHUB</a></button>
+                                            <button class="btn-visitaqua"><a href="projects/Projeto. 2 Pedidos Fitness/Projeto Secreto/index.html" target="_blank">VER SITE</a></button>
                                         </div>
                                     </div>
                                 </div>
@@ -486,16 +487,16 @@
                             <div class="circulo-icone circulo-github">
                                 <i class="fab fa-github"></i>
                             </div>
-                            <a href="https://github.com/seu-usuario" target="_blank"
-                                class="link-contato">github.com/seu-usuario</a>
+                            <a href="https://github.com/gustavosilvestrees" target="_blank"
+                                class="link-contato">https://github.com/gustavosilvestrees</a>
                         </div>
 
                         <div class="linkedinC">
                             <div class="circulo-icone circulo-linkedin">
                                 <i class="fab fa-linkedin-in"></i>
                             </div>
-                            <a href="https://linkedin.com/in/seu-perfil" target="_blank"
-                                class="link-contato">linkedin.com/in/seu-perfil</a>
+                            <a href="https://www.linkedin.com/in/gustavo-silvestre/" target="_blank"
+                                class="link-contato">https://www.linkedin.com/in/gustavo-silvestre/</a>
                         </div>
                     </div>
                     <div class="barra-cinza-bg"></div>
@@ -522,43 +523,45 @@
                 </div>
 
                 <div class="formContatos">
-                    <form id="meuFormulario" action="https://formspree.io/f/SEU_ID_DO_FORMSPREE" method="POST"
-                        class="form-contato-hud">
+                    <form id="meuFormulario" action="https://formspree.io/f/SEU_ID_DO_FORMSPREE" method="POST" class="form-contato-hud">
 
                         <h1>Contato</h1>
 
 
 
                         <div class="formC">
-                            <div class="campo-grupo">
-                                <label for="nome">NOME</label>
-                                <input type="text" id="nome" name="nome"
-                                    placeholder="Seu nome ou como prefere ser chamado(a/u)" required>
-                            </div>
+                           <div class="campo-grupo">
+                        <label for="nome">NOME</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu nome ou como prefere ser chamado(a/u)" required>
+                    </div>
+            
+                    <div class="campo-grupo">
+                        <label for="email">E-MAIL</label>
+                        <input type="email" id="email" name="email" placeholder="seu-email@dominio.com" required>
+                    </div>
+            
+                    <div class="campo-grupo">
+                        <label for="mensagem">MENSAGEM</label>
+                        <textarea id="mensagem" name="mensagem" placeholder="Me mande uma mensagem..." required></textarea>
+                    </div>
 
-                            <div class="campo-grupo">
-                                <label for="email">E-MAIL</label>
-                                <input type="email" id="email" name="email" placeholder="seu-email@dominio.com"
-                                    required>
-                            </div>
-
-                            <div class="campo-grupo">
-                                <label for="mensagem">MENSAGEM</label>
-                                <textarea id="mensagem" name="mensagem" placeholder="Me mande uma mensagem..."
-                                    required></textarea>
-                            </div>
-                            
                             <div class="campo-grupo-anexo">
-            <label for="arquivo-anexo" class="label-anexo">
-                <i class="fa-solid fa-paperclip"></i> <span id="texto-anexo">Anexar imagem ou arquivo</span>
-            </label>
-            <input type="file" id="arquivo-anexo" accept="image/*,application/pdf">
-            <input type="hidden" id="link_do_anexo" name="link_do_anexo">
-        </div>
+                        <label for="arquivo-anexo" class="label-anexo">
+                            <i class="fa-solid fa-paperclip"></i> <span id="texto-anexo">Anexar imagem ou arquivo</span>
+                        </label>
+                        <input type="file" id="arquivo-anexo" accept="image/*,application/pdf">
+                        <input type="hidden" id="link_do_anexo" name="link_do_anexo">
+                    </div>
 
-                            <button type="submit" class="enviar">ENVIAR</button>
+                            <button type="submit" class="btnEnviar" class="btn-enviar-hud">
+                        <span>ENVIAR TRANSMISSÃO</span>
 
-                            
+                        <div id="mensagemSucesso" class="feedback-sucesso">
+                    <i class="fa-solid fa-circle-check"></i> TRANSMISSÃO CONCLUÍDA COM SUCESSO! Dados apagados da memória.
+                </div>
+                    </button>
+
+
                     </form>
                 </div>
             </div>
@@ -567,7 +570,7 @@
         <footer>
             <div id="alinhaFooter">
                 <div id="f1">
-                    <p class="copyright">© 2024 Gabriel. Todos os direitos reservados.</p>
+                    <p class="copyright">© 2026 Gabriel. Todos os direitos reservados.</p>
                     <p class="tech-uiux">Tecnologia UI/UX</p>
                 </div>
 
@@ -576,16 +579,6 @@
 
                     <p class="feito-com">Feito com ❤️ e JavaScript - Veja o código</p>
                     <div class="social-icons">
-
-                        <svg class="tech-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
-                            <path class="line-1-2" d="M 10,30 L 15,30 L 15,60 L 10,60" />
-                        </svg>
-
-                        <div class="icon" data-side="left">icone1</div>
-                        <div class="icon" data-side="bottom-left">icone2</div>
-                        <div class="icon" data-side="right">icone3</div>
-                        <div class="icon" data-side="bottom-right">icone4</div>
-                        <div class="icon" data-side="bottom-center">icone4</div>
                     </div>
 
 
@@ -601,7 +594,7 @@
     </main>
 
     <div class="direitos-autorais">
-        <p>© 2024 GABRIEL. Todos os direitos reservados.</p>
+        <p>© 2026 Gustavo. Todos os direitos reservados.</p>
     </div>
     </footer>
 

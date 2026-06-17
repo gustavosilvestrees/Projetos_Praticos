@@ -1,0 +1,208 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   1. DIRETRIZES PARA TABLETS (Telas de até 1024px)
+   ========================================================================== */
+@media screen and (max-width: 1024px) {
+    /* Ajuste do Menu Nav e Espaçamento do Título */
+    nav#menu {
+        height: auto;
+        flex-direction: column;
+        padding: 15px 0;
+        gap: 20px; /* Espaçamento entre logo e botões */
+    }
+    #alinhamentoNav {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+    }
+    #alinhamentoB {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-right: 0;
+        gap: 8px;
+    }
+
+    /* Seção Home / Perfil - Ajuste do Avatar para o topo */
+    #Perfil {
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 10px;
+    }
+    #Avatar {
+        width: 100%;
+        height: auto;
+        order: 1; /* Garante que a foto venha antes do container de texto */
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    #Avatar img {
+        width: 100%;
+        max-width: 350px; /* Redimensionamento responsivo */
+        height: auto;
+        object-fit: contain;
+    }
+    #quadradoBG {
+        width: 95%;
+        height: auto;
+        position: relative;
+        left: 0;
+        top: 0;
+        padding: 25px;
+        order: 2; /* Texto abaixo do avatar */
+    }
+    .tituloDev {
+        font-size: 3.5em;
+        word-spacing: -10px;
+    }
+    .subDev {
+        font-size: 2.3em;
+        word-spacing: -5px;
+    }
+
+    /* Seção Sobre */
+    #alinhamentoAside {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    #alinhamentoSobre {
+        width: 100%;
+    }
+    #asideSobre {
+        width: 100%;
+    }
+    #eu img {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    /* Seção Projetos - Empilhamento da imagem sobre o texto */
+    .project-content {
+        grid-template-columns: 1fr; /* Converte para coluna única */
+        gap: 20px;
+    }
+    .project-image {
+        height: auto;
+        min-height: 250px;
+    }
+
+    /* Ajuste de Contatos - Empilhamento Vertical */
+    .alignEffect {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+    .formContatos, .curriculoCon {
+        width: 100%;
+        max-width: 600px;
+        height: auto; /* Crescimento dinâmico ativado */
+    }
+
+    /* Ajuste do Footer */
+    #alinhaFooter {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+    #f1 {
+        align-items: center;
+    }
+}
+
+/* ==========================================================================
+   2. DIRETRIZES PARA SMARTPHONES (Telas de até 480px)
+   ========================================================================== */
+@media screen and (max-width: 480px) {
+    /* Menu Mobile Simplificado */
+    .logoSite {
+        font-size: 1.6em;
+        margin-left: 0;
+    }
+    .botaoNav {
+        font-size: 0.95em;
+        min-width: 75px;
+        padding: 0 10px;
+    }
+
+    /* Redução de tipografia para Mobile */
+    .tituloDev {
+        font-size: 2.2em;
+        letter-spacing: -1px;
+        word-spacing: -5px;
+    }
+    .subDev {
+        font-size: 1.5em;
+        letter-spacing: -1px;
+        word-spacing: -3px;
+    }
+    .legDev1 {
+        font-size: 1.3em;
+    }
+    .legDev2 {
+        font-size: 0.85em;
+    }
+    .Explorar {
+        width: 100%;
+        max-width: 245px;
+        margin: 15px auto; 
+    }
+    .legDiv5 {
+        width: 100%;
+        font-size: 0.75em;
+        padding: 15px;
+    }
+
+    /* Textos com efeito de digitação simulada */
+    #pesquisaFake, #textoFake1, #textoFake2 {
+        font-size: 1.1em;
+    }
+
+    /* Ajuste fino dos elementos internos do Formulário */
+    .formContatos {
+        padding: 25px 20px;
+    }
+    
+    /* Redução proporcional dos hexágonos */
+    .hexagono-wrapper {
+        width: 120px;
+        height: 135px;
+    }
+    .hexagono-container {
+        width: 120px;
+        height: 130px;
+    }
+    .hex-content i {
+        font-size: 1.8rem;
+    }
+    .hex-content span {
+        font-size: 0.65rem;
+    }
+
+    /* Reset das margens escalonadas dos Projetos para mobile */
+    .containerProject, 
+    .containerProject:nth-child(1),
+    .containerProject:nth-child(2),
+    .containerProject:nth-child(3),
+    .containerProject:nth-child(4) {
+        padding: 25px;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    /* Footer Mobile */
+    footer {
+        padding: 30px 15px 15px 15px;
+    }
+    #f3 p {
+        font-size: 0.7em;
+        line-height: 1.5;
+        padding: 0 10px;
+    }
+    #f1 .copyright {
+        font-size: 0.8em;
+    }
+}

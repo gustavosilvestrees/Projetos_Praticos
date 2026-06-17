@@ -161,13 +161,22 @@ strong.strongBlue {
     height: 590px;
     display: flex;
     position: relative;
+    background-color: #0f132e;
 }
 
-#Avatar {
-    background-color: red;
-    height: 500px;
-    width: 40%;
-    margin-top: 20px;
+#Avatar {   
+    height: 550px;
+    width: 37%;
+
+}
+
+#Avatar img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: auto;
+        height: 580px;
 
 }
 
@@ -337,6 +346,11 @@ strong.strongBlue {
      position: relative;
     z-index: 3;
     transform-style: preserve-3d; /* Cria o contexto para camadas 3D */
+}
+
+.Explorar a{
+    color: white;
+    text-decoration: none;
 }
 
 /* Camada da borda neon (Branco para Transparente) */
@@ -1338,6 +1352,11 @@ background: rgba(21, 27, 66, 0.7); /* Fundo escuro semi-transparente */
     border-radius: 3px;
 }
 
+.btn-visitmagenta a{
+    color: #fff;
+    text-decoration: none;
+}
+
 .btn-visitaqua {
     background: transparent;
     border: 2px solid aqua;
@@ -1349,6 +1368,11 @@ background: rgba(21, 27, 66, 0.7); /* Fundo escuro semi-transparente */
     transition: 0.3s;
     text-transform: uppercase;
     border-radius: 3px;
+}
+
+.btn-visitaqua a{
+    color: #fff;
+    text-decoration: none;
 }
 
 
@@ -1515,7 +1539,7 @@ font-family: "JetBrain Mono", monospace;
 .curriculoCon {
     /* Largura e altura aproximadas da imagem de referência */
     width: 450px;
-    height: 600px;
+    height: 800px;
 
     /* Layout interno da coluna (elementos empilhados) */
     display: flex;
@@ -1657,6 +1681,8 @@ font-family: "JetBrain Mono", monospace;
 
 
 
+
+
 /* Formatação do texto idêntica ao print */
 .texto-banner-c {
     font-family: 'JetBrain Mono', 'Consolas Mono', monospace;
@@ -1753,7 +1779,7 @@ font-family: "JetBrain Mono", monospace;
 .formContatos {
     /* Largura e altura aproximadas da imagem de referência */
     width: 800px;
-    height: 600px;
+    height: 800px;
 
     /* Estilo de borda neon da referência */
     border: 3px solid #ff00ff;
@@ -1909,28 +1935,6 @@ font-family: "JetBrain Mono", monospace;
     border-color: #ff77ff;
 }
 
-/* Botão Enviar HUD */
-.btn-enviar-hud {
-    width: 100%;
-    padding: 12px;
-    background: transparent;
-    border: 1px solid #ff77ff;
-    color: #ff77ff;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-enviar-hud:hover {
-    background: #ff77ff;
-    color: #000000;
-    box-shadow: 0 0 15px rgba(255, 119, 255, 0.4);
-}
-
 /* Mensagem de Feedback */
 .feedback-sucesso {
     display: none;
@@ -1954,7 +1958,7 @@ font-family: "JetBrain Mono", monospace;
 
 
 /* Botão Enviar */
-.enviar {
+.btnEnviar {
     width: 100%;
     height: 50px;
     padding: 10px 20px;
@@ -1981,8 +1985,8 @@ font-family: "JetBrain Mono", monospace;
 
 
 
-.enviar::after,
-.enviar::before {
+.btnEnviar::after,
+.btnEnviar::before {
     content: '';
     position: absolute;
     top: -3px;
@@ -2030,7 +2034,7 @@ font-family: "JetBrain Mono", monospace;
     }
 }
 
-.enviar::before {
+.btnEnviar::before {
     /* Add brilho na borda */
     filter: blur(1.5rem);
     opacity: 1;
@@ -2055,14 +2059,14 @@ font-family: "JetBrain Mono", monospace;
 
 
 
-.enviar:hover {
+.btnEnviar:hover {
     border-color: #00ffff;
     transform: scale(1.02);
     background-color: transparent;
 }
 
 
-.enviar:hover::after {
+.btnEnviar:hover::after {
     opacity: 0.5;
     filter: blur(15px);
 
@@ -2072,7 +2076,7 @@ font-family: "JetBrain Mono", monospace;
     animation: animaNeon 3s linear infinite;
 }
 
-.enviar:hover::before {
+.btnEnviar:hover::before {
     filter: blur(2rem);
     /* Aumenta o brilho (glow) ao redor no hover */
     opacity: 1;
@@ -2082,48 +2086,47 @@ font-family: "JetBrain Mono", monospace;
 /* FOOTER */
 
 footer {
-    /* Fundo escuro (mesmo da seção de contato) */
     width: 100%;
-    /* Altura ajustada para o conteúdo */
-    padding: 30px 0 0 0;
-    box-sizing: border-box;
+    background-color: #0d1117; /* Fundo escuro profundo estilo GitHub/HUD */
+    border-top: 2px dashed #00ffff; /* Linha tracejada tecnológica aqua */
+    padding: 40px 20px 20px 20px;
+    font-family: "Consolas Mono", monospace;
+    position: relative;
+    box-shadow: inset 0 10px 20px rgba(0, 255, 255, 0.05);
 }
 
 /* alinhaFooter: Contêiner da linha superior (f1 e f2) */
 #alinhaFooter {
-    display: flex;
-    justify-content: space-around;
-    /* Distribui f1 e f2 */
-    align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
-    border-bottom: 2px solid #24292e;
-    /* Linha divisória fina */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
 }
 
 /* ------------------ f1: Direitos Autorais ------------------ */
 
 #f1 {
-    width: 300px;
-    height: 150px;
-    border: 1px solid #00ffff;
-    /* Borda azul clara */
-    box-shadow: 0 0 8px #00ffff;
-    padding: 15px;
-    background-color: #161b22;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 5px;
-    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    gap: 8px;
 }
 
-#f1 .copyright,
-#f1 .tech-uiux {
-    color: #fff;
+#f1 .copyright {
+    color: #8b949e;
     font-size: 0.9em;
-    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+#f1 .tech-uiux {
+    color: #ff00ff; /* Magenta Neon */
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
 }
 
 /* ------------------ f2: Feito com React e Redes Sociais ------------------ */
@@ -2258,34 +2261,46 @@ position: absolute;
 .icon:nth-child(5) { bottom: 30%; left: 106%; }
 
 
-/* ------------------ f3: Mensagem Final ------------------ */
-
+/* --- f3: Mensagem Final / Terminal State --- */
 #f3 {
-    background-color: #24292e;
-    /* Fundo mais escuro para a linha inferior */
-    width: 100%;
-    padding: 20px 0;
+    max-width: 1200px;
+    margin: 20px auto 0 auto;
     text-align: center;
-    border-top: 3px solid #ff4500;
-    /* Borda cor de destaque */
 }
 
 #f3 p {
-    color: #fff;
-    font-size: 1.1em;
-    font-weight: 500;
-    margin: 0;
+    color: #00ffff; /* Texto em Aqua Neon */
+    font-size: 0.8em;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    position: relative;
+    display: inline-block;
 }
 
-#f3 p span {
-    /* Para a palavra "incrível" em neon */
+/* Simulação de um cursor piscante de terminal no final da frase */
+#f3 p::after {
+    content: "█";
+    margin-left: 5px;
     color: #00ffff;
-    text-shadow: 0 0 5px #00ffff;
+    animation: piscaCursor 1s infinite;
 }
 
-/* Removendo a div de direitos autorais duplicada */
+@keyframes piscaCursor {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* --- Linha de Direitos Autorais Isolada (Ajuste de acabamento) --- */
 .direitos-autorais {
-    display: none;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    background-color: #090d13;
+    font-size: 0.7em;
+    color: #484f58;
+    letter-spacing: 1px;
+    border-top: 1px solid rgba(255, 0, 255, 0.05);
 }
 
 
